@@ -1,0 +1,19 @@
+2;bigGame;soham;another;basketball;20.00;big fat game;5
+2;bigGame;soham;another;basketball;20.00;big fat game;4
+2;bigGame;soham;another;basketball;20.00;big fat game;1
+2;basketball;soham;another;bigStore;20.00;awesome basketball ticket;5
+3;bigGame;soham;another;basketball;20.00;big fat game;3
+2;bigGame;soham;another;basketball;20.00;big fat game;3
+3;bigGame;soham;another;basketball;20.00;big fat game;1
+4;ticket3;soham;another;store;45.00;meh;5
+3;ticket2;soham;another;bigStore;20.00;yucky;10
+4;ticket3;soham;another;store;45.00;meh;3
+2;ticket;soham;another;bigStore;10.00;yummy;4
+4;ticket3;soham;another;store;45.00;meh;1
+4;ticket3;soham;another;store;45.00;meh;1
+4;ticket3;soham;another;store;45.00;meh;1
+3;ticket2;soham;another;bigStore;20.00;yucky;5
+4;ticket3;soham;zzz;store;45.00;meh;1
+4;ticket3;soham;zzz;store;45.00;meh;1
+4;ticket3;soham;zzz;store;45.00;meh;1
+3;ticket2;soham;zzz;bigStore;20.00;yucky;5
