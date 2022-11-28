@@ -38,23 +38,32 @@ class Main {
             System.out.print("Password: ");
             password = scan.nextLine();
             if (choice == 1) {
+                // send "sellerSignup" to the server
+                // then send name, email, and password respectively to the server
+                // server sends back either "true" or success or "false" otherwise
                 if (Seller.signUp(name, email, password)) {
                     System.out.println("Successfully Signed Up!");
                 } else {
                     System.out.println("An account with this email already exists or you are using semicolons");
                 }
             } else if (choice == 2) {
+                // send "userSignup" to the server
+                // then send name, email, and password respectively to the server
+                // server sends back either "true" or success or "false" otherwise
                 if (User.signUp(name, email, password)) {
                     System.out.println("Successfully Signed Up!");
                 } else {
                     System.out.println("An account with this email already exists or you are using semicolons");
                 }
             }
-        }
+        } // else : send "signin" to the server
         System.out.println("What would you like to do?");
         System.out.println("0. Quit\n1. Seller Sign-in\n2. Customer Sign-in");
         choice = getChoice(2, scan);
         if (choice == 1) {
+            // send "sellerSignin" to the server
+            // then send email and password respectively to the server
+            // server sends back either "true" or success or "false" otherwise
             String email;
             String password;
             System.out.print("Email: ");
@@ -75,12 +84,17 @@ class Main {
                         System.out.println("0. Go Back\n1. Change Name\n2. Change Password\n3. Delete Account");
                         choice2 = getChoice(3, scan);
                         if (choice2 == 1) {
+                            // send "changeName"
+                            // send the new name (input from the user)
                             System.out.println("What would you like to change your name to?");
                             seller.changeName(scan.nextLine());
                         } else if (choice2 == 2) {
+                            // send "changePassword"
+                            // send the new password (input from the user)
                             System.out.println("What would you like to change your password to?");
                             seller.changePassword(scan.nextLine());
                         } else if (choice2 == 3) {
+                            // send "deleteAccount"
                             System.out.println("Account Deleted");
                             seller.deleteAccount();
                             return;
@@ -88,20 +102,26 @@ class Main {
                     } while (choice2 != 0);
                 }
                 if (choice == 2) {
+                    // send "listStores"
                     ArrayList<Store> stores;
                     do {
                         stores = seller.getStores();
                         System.out.println("0. Go Back\n1. Create New Store");
+                        // here, the server will return each store name (one by one)
                         for (int i = 0; i < stores.size(); i++) {
                             System.out.println("" + (i + 2) + ". " + stores.get(i).getName());
                         }
                         choice2 = getChoice(3, scan);
                         if (choice2 == 1) {
+                            // send "createNewStore"
+                            // server sends back either "true" or "false"
                             System.out.println("What would you like to name your store?");
                             if (!seller.createStore(scan.nextLine())) {
                                 System.out.println("A store with this name already exists");
                             }
                         } else if (choice2 > 0) {
+                            // send "enterStore"
+                            // send choice2 (number)
                             int choice3;
                             Store store;
                             ArrayList<Ticket> storeProducts;
@@ -189,6 +209,9 @@ class Main {
                 }
             } while (choice != 0);
         } else if (choice == 2) {
+            // send "userSignin" to the server
+            // then send email and password respectively to the server
+            // server sends back either "true" or success or "false" otherwise
             String email;
             String password;
             System.out.print("Email: ");
