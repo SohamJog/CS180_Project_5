@@ -56,7 +56,7 @@ class Main {
                     System.out.println("An account with this email already exists or you are using semicolons");
                 }
             }
-        } // else : send "signin" to the server
+        }
         System.out.println("What would you like to do?");
         System.out.println("0. Quit\n1. Seller Sign-in\n2. Customer Sign-in");
         choice = getChoice(2, scan);
@@ -103,11 +103,11 @@ class Main {
                 }
                 if (choice == 2) {
                     // send "listStores"
+                    // then the server will return each store name (one by one)
                     ArrayList<Store> stores;
                     do {
                         stores = seller.getStores();
                         System.out.println("0. Go Back\n1. Create New Store");
-                        // here, the server will return each store name (one by one)
                         for (int i = 0; i < stores.size(); i++) {
                             System.out.println("" + (i + 2) + ". " + stores.get(i).getName());
                         }
@@ -121,7 +121,7 @@ class Main {
                             }
                         } else if (choice2 > 0) {
                             // send "enterStore"
-                            // send choice2 (number)
+                            // send choice2 (string number)
                             int choice3;
                             Store store;
                             ArrayList<Ticket> storeProducts;
@@ -130,10 +130,14 @@ class Main {
                                 store = seller.getStores().get(choice2 - 2);
                                 storeProducts = store.getTickets();
                                 for (int i = 0; i < storeProducts.size(); i++) {
+                                    // the server will send back each product, so just print the returned thing out using println
                                     System.out.println("" + (i + 2) + ". " + storeProducts.get(i) + "\n");
                                 }
                                 choice3 = getChoice(storeProducts.size() + 1, scan);
                                 if (choice3 == 1) {
+                                    // send "newTicket" to the server
+                                    // send ticketInfo[0], ticketInfo[1], ticketInfo[2], ticketInfo[3] to server respectively
+                                    // server returns true if succeeded, false otherwise (Improper Format)
                                     System.out.println("Please enter your ticket information in a comma separated list (name,price,description,quantity)");
                                     try {
                                         String[] ticketInfo = scan.nextLine().split(",");
@@ -142,32 +146,44 @@ class Main {
                                         System.out.println("Improper Format");
                                     }
                                 } else if (choice3 > 0) {
+                                    // send "accessTicket" to server
+                                    // send choice3 (string number)
                                     int choice4;
                                     Ticket t;
                                     do {
                                         t = store.getTickets().get(choice3 - 2);
+                                        // server returns t -> just print it out
                                         System.out.println(t);
                                         System.out.println("0. Go Back\n1. Delete Ticket\n2. Change Name\n3. Change Price\n4. Change Description\n5. Change Quantity");
                                         choice4 = getChoice(5, scan);
                                         if (choice4 == 1) {
+                                            // send "deleteTicket" to server
                                             store.deleteTickets(t.getId());
                                         } else if (choice4 == 2) {
+                                            // send "changeTicketName" to server
+                                            // send the new name to server
                                             System.out.print("New Name: ");
                                             t.changeInfo(scan.nextLine(), t.getPrice(), t.getDescription(), t.getQuantity());
                                         } else if (choice4 == 3) {
+                                            // send "changeTicketPrice" to server
+                                            // send new price to server
                                             System.out.print("New Price: ");
                                             t.changeInfo(t.getName(), scan.nextDouble(), t.getDescription(), t.getQuantity());
                                             scan.nextLine();
                                         } else if (choice4 == 4) {
+                                            // send "changeTicketDescription" to server
+                                            // send new description to server
                                             System.out.print("New Description: ");
                                             t.changeInfo(t.getName(), t.getPrice(), scan.nextLine(), t.getQuantity());
                                         } else if (choice4 == 5) {
+                                            // send "changeTicketQuantity" to server
+                                            // send new quantity
                                             System.out.print("New Quantity: ");
                                             t.changeInfo(t.getName(), t.getPrice(), t.getDescription(), scan.nextInt());
                                             scan.nextLine();
-                                        }
+                                        } // add: else if (choice4 == 0) -> send "goBack" to server (I need this info)
                                     } while (choice4 != 0);
-                                }
+                                } // add: else (when choice3 is 0) -> send "goBack" to server (I need this info)
                             } while (choice3 != 0);
                         }
                     } while (choice2 != 0);

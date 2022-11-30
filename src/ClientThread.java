@@ -22,9 +22,8 @@ public class ClientThread implements Runnable {
             pr = new PrintWriter(socket.getOutputStream());
 
             // 1 - what would you like to do? (sign in or sign up)
-            String signup = br.readLine();
-            // process the Sign-up
-            if (signup.equals("sellerSignup")) {
+            String signInUp = br.readLine();
+            if (signInUp.equals("sellerSignup")) {
                 String name = br.readLine();
                 String email = br.readLine();
                 String password = br.readLine();
@@ -33,7 +32,7 @@ public class ClientThread implements Runnable {
                 } else {
                     pr.println("false");
                 }
-            } else if (signup.equals("userSignup")) {
+            } else if (signInUp.equals("userSignup")) {
                 String name = br.readLine();
                 String email = br.readLine();
                 String password = br.readLine();
@@ -42,47 +41,12 @@ public class ClientThread implements Runnable {
                 } else {
                     pr.println("false");
                 }
-            }
-
-            // proceed to sign in
-            // 2 - what would you like to do? (seller or customer sign in)
-            String signin = br.readLine();
-            if (signin.equals("sellerSignin")) {
+            } else if (signInUp.equals("sellerSignin")) {
                 String email = br.readLine();
                 String password = br.readLine();
                 Seller seller = Seller.login(email, password);
                 if (seller != null) {
                     pr.println("true");
-//                    int choice;
-//                    do {
-//                        choice = Integer.parseInt(br.readLine());
-//                        if (choice == 1) {
-//                            int choice2;
-//                            do {
-//                                choice2 = Integer.parseInt(br.readLine());
-//                                if (choice2 == 1) {
-//                                    seller.changeName(br.readLine());
-//                                } else if (choice2 == 2) {
-//                                    seller.changePassword(br.readLine());
-//                                } else if (choice2 == 3) {
-//                                    seller.deleteAccount();
-//                                    choice = 0;
-//                                    break;
-//                                }
-//                            } while (choice2 != 0);
-//                        } else if (choice == 2) {
-//                            ArrayList<Store> stores;
-//                            int choice2;
-//                            do {
-//                                stores = seller.getStores();
-//                                for (Store s : stores) {
-//                                    pr.println(s.getName());
-//                                }
-//                                choice2 = Integer.parseInt(br.readLine());
-//                                // continues here
-//                            } while (choice2 != 0);
-//                        }
-//                    } while (choice != 0);
                     String action = br.readLine();
                     while (!action.equals("quit")) {
                         if (action.equals("changeName")) {
@@ -109,14 +73,49 @@ public class ClientThread implements Runnable {
                             int choice2 = Integer.parseInt(br.readLine());
                             Store store = seller.getStores().get(choice2 -2);
                             ArrayList<Ticket> storeProducts = store.getTickets();
-                            // continues here
+                            for (int i = 0; i < storeProducts.size(); i++) {
+                                pr.println((i + 2) + ". " + storeProducts.get(i));
+                            }
+                            String storeAction = br.readLine();
+                            if (storeAction.equals("newTicket")) {
+                                try {
+                                    String zero = br.readLine();
+                                    double one = Double.parseDouble(br.readLine());
+                                    String two = br.readLine();
+                                    int three = Integer.parseInt(br.readLine());
+                                    store.newTickets(zero, seller.getEmail(), one, two, three);
+                                    pr.println("true");
+                                } catch (Exception e) {
+                                    pr.println("false");
+                                }
+                            } else if (storeAction.equals("accessTicket")) {
+                                int ticketNumber = Integer.parseInt(br.readLine());
+                                Ticket t = store.getTickets().get(ticketNumber - 2);
+                                pr.println(t);
+                                String ticketAction = br.readLine();
+                                if (ticketAction.equals("deleteTicket")) {
+                                    store.deleteTickets(t.getId());
+                                } else if (ticketAction.equals("changeTicketName")) {
+                                    String newTicketName = br.readLine();
+                                    t.changeInfo(newTicketName, t.getPrice(), t.getDescription(), t.getQuantity());
+                                } else if (ticketAction.equals("changeTicketPrice")) {
+                                    double newTicketPrice = Double.parseDouble(br.readLine());
+                                    t.changeInfo(t.getName(), newTicketPrice, t.getDescription(), t.getQuantity());
+                                } else if (ticketAction.equals("changeTicketDescription")) {
+                                    String newTicketDescription = br.readLine();
+                                    t.changeInfo(t.getName(), t.getPrice(), newTicketDescription, t.getQuantity());
+                                } else if (ticketAction.equals("changeTicketQuantity")) {
+                                    int newTicketQuantity = Integer.parseInt(br.readLine());
+                                    t.changeInfo(t.getName(), t.getPrice(), t.getDescription(), newTicketQuantity);
+                                }
+                            }
                         }
                         action = br.readLine();
                     }
                 } else {
                     pr.println("false");
                 }
-            } else if (signin.equals("userSignin")) {
+            } else if (signInUp.equals("userSignin")) {
                 String email = br.readLine();
                 String password = br.readLine();
                 User user = User.login(email, password);

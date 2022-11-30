@@ -488,7 +488,7 @@ public class User {
             String line = br.readLine();
             while (line != null) {
                 ticketInfo = line.split(";");
-                if (ticketInfo[3].equals(name))
+                if (ticketInfo[3].equals(email))
                     stores.merge(ticketInfo[4], Integer.parseInt(ticketInfo[7]), Integer::sum);
                 line = br.readLine();
             }
