@@ -181,20 +181,22 @@ class Main {
                                             System.out.print("New Quantity: ");
                                             t.changeInfo(t.getName(), t.getPrice(), t.getDescription(), scan.nextInt());
                                             scan.nextLine();
-                                        } // add: else if (choice4 == 0) -> send "goBack" to server (I need this info)
+                                        } // add: else if (choice4 == 0) -> send "goBack" to server (I need this info. Thank you :))
                                     } while (choice4 != 0);
-                                } // add: else (when choice3 is 0) -> send "goBack" to server (I need this info)
+                                } // add: else (when choice3 is 0) -> send "goBack" to server (I need this info. Thank you :))
                             } while (choice3 != 0);
-                        }
+                        } // add: else if (choice2 == 0) -> send "goBack" to server (I need this info. Thank you :))
                     } while (choice2 != 0);
                 }
                 if (choice == 3) {
                     System.out.println("0. Go Back\n1. View Store Statistics\n2. View Customer Statistics\n3. View Product Statistics");
                     choice2 = getChoice(3, scan);
                     if (choice2 == 1) {
+                        // send "viewStoreStatistics" to server
+                        //
                         for (Store s : seller.getStores()) {
                             System.out.println(s.getName() + "\n____________\nRevenue: $" + s.getRevenue() + "\nCustomer List:");
-                            s.getCustomerList().forEach(System.out::println);
+                            s.getCustomerList().forEach(System.out::println); // ask Armanya what this is omg omg
                             System.out.println();
                         }
                         System.out.println();
