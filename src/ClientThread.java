@@ -6,6 +6,10 @@ import java.net.Inet4Address;
 import java.net.Socket;
 import java.util.ArrayList;
 
+// todo - think about loop problems (structures)
+// todo - when should the client send "quit"?
+// todo - wow so many to think about
+
 public class ClientThread implements Runnable {
     Socket socket = null;
     BufferedReader br = null;
@@ -109,7 +113,7 @@ public class ClientThread implements Runnable {
                                     t.changeInfo(t.getName(), t.getPrice(), t.getDescription(), newTicketQuantity);
                                 }
                             }
-                        }
+                        } // continues here??
                         action = br.readLine();
                     }
                 } else {
