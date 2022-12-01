@@ -480,7 +480,7 @@ public class User {
         return true;
     }
 
-    public void customerStoreDash(boolean sort) {
+    public void customerStoreDash(boolean sort, PrintWriter pr) {
         File f = new File("pastTransactions.txt");
         Map<String, Integer> stores = new HashMap<>();
         String[] ticketInfo;
@@ -499,10 +499,10 @@ public class User {
             stores.entrySet()
                     .stream()
                     .sorted(Map.Entry.comparingByValue())
-                    .forEach(System.out::println);
+                    .forEach(pr::println);
         } else {
             for (String key : stores.keySet()) {
-                System.out.println(key + "=" + stores.get(key));
+                pr.println(key + "=" + stores.get(key));
             }
         }
     }

@@ -88,9 +88,9 @@ class Seller {
                                     match += "---------------------\n" + "Customer: " + contents[0] + "\nItems:\n";
                                 }
                                 match += "Name: " + ticketInfo[1] + " Price: " + ticketInfo[4] + " Quantity: " + ticketInfo[6] + "\n";
-                                result.add(match);
                             }
                         }
+                        result.add(match);
                     }
                 }
                 line = br.readLine();

@@ -124,29 +124,29 @@ public class ClientThread implements Runnable {
                             } else if (action.equals("viewStoreStatistics")) {
                                 for (Store s : seller.getStores()) {
                                     pr.println(s.getName() + "\n____________\nRevenue: $" + s.getRevenue() + "\nCustomer List:");
-                                    for (String customer : s.getCustomerList()) {
-                                        pr.println(customer);
-                                    }
+                                    s.getCustomerList().forEach(pr::println);
                                     pr.println();
                                 }
+                                pr.println();
                             } else if (action.equals("viewCustomerStatics")) {
                                 String sort = br.readLine();
                                 if (sort.equals("y")) {
-                                    // ask Armanya about the code
+                                    customerStats(seller.getEmail(), true, pr);
                                 } else {
-
+                                    customerStats(seller.getEmail(), false, pr);
                                 }
                             } else if (action.equals("viewProductStatistics")) {
                                 String sort = br.readLine();
                                 if (sort.equals("y")) {
-                                    // ask Armanya about the code
+                                    productStats(seller.getEmail(), true, pr);
                                 } else {
-
+                                    productStats(seller.getEmail(), false, pr);
                                 }
                             } else if (action.equals("viewProductsInCustomerShoppingCarts")) {
                                 ArrayList<String> sCart = seller.shoppingCart();
-                                // ask Armanya about this:
-                                pr.println(sCart.get(sCart.size() - 1));
+                                for (String s : sCart) {
+                                    pr.println(s);
+                                }
                             }
                         } while (!action.equals("quit")); // when to send quit??
                     } else {
@@ -210,17 +210,22 @@ public class ClientThread implements Runnable {
                                 int choice3 = Integer.parseInt(br.readLine());
                                 user.removeFromCart(user.getShoppingCart().get(choice3 - 1));
                             } else if (action.equals("checkout")) {
-                                // ask Armanya about the checkout code
                                 while (user.getShoppingCart().size() > 0) {
                                     user.buyTicket(user.getShoppingCart().get(0));
                                 }
-                                // ask - should I send true back?
                             } else if (action.equals("statisticsForAllStores")) {
                                 String sort = br.readLine();
                                 if (sort.equals("y")) {
-                                    // ask Armanya about storeDash method
+                                    storeDash(true, pr);
                                 } else {
-
+                                    storeDash(false, pr);
+                                }
+                            } else if (action.equals("statisticsForStoresShopped")) {
+                                String sort = br.readLine();
+                                if (sort.equals("y")) {
+                                    user.customerStoreDash(true, pr);
+                                } else {
+                                    user.customerStoreDash(false, pr);
                                 }
                             }
                         } while (!action.equals("quit"));
@@ -264,7 +269,7 @@ public class ClientThread implements Runnable {
         return tickets;
     }
 
-    public static void storeDash(boolean sort) {
+    public static void storeDash(boolean sort, PrintWriter pr) {
         File f = new File("pastTransactions.txt");
         Map<String, Integer> stores = new HashMap<>();
         String[] ticketInfo;
@@ -282,15 +287,15 @@ public class ClientThread implements Runnable {
             stores.entrySet()
                     .stream()
                     .sorted(Map.Entry.comparingByValue())
-                    .forEach(System.out::println);
+                    .forEach(pr::println);
         } else {
             for (String key : stores.keySet()) {
-                System.out.println(key + "=" + stores.get(key));
+                pr.println(key + "=" + stores.get(key));
             }
         }
     }
 
-    public static void customerStats(String seller, boolean sort) {
+    public static void customerStats(String seller, boolean sort, PrintWriter pr) {
         File f = new File("pastTransactions.txt");
         Map<String, Integer> customers = new HashMap<>();
         String[] ticketInfo;
@@ -312,15 +317,15 @@ public class ClientThread implements Runnable {
             customers.entrySet()
                     .stream()
                     .sorted(Map.Entry.comparingByValue())
-                    .forEach(System.out::println);
+                    .forEach(pr::println);
         } else {
             for (String key : customers.keySet()) {
-                System.out.println(key + "=" + customers.get(key));
+                pr.println(key + "=" + customers.get(key));
             }
         }
     }
 
-    public static void productStats(String seller, boolean sort) {
+    public static void productStats(String seller, boolean sort, PrintWriter pr) {
         File f = new File("pastTransactions.txt");
         Map<String, Integer> products = new HashMap<>();
         String[] ticketInfo;
@@ -342,10 +347,10 @@ public class ClientThread implements Runnable {
             products.entrySet()
                     .stream()
                     .sorted(Map.Entry.comparingByValue())
-                    .forEach(System.out::println);
+                    .forEach(pr::println);
         } else {
             for (String key : products.keySet()) {
-                System.out.println(key + "=" + products.get(key));
+                pr.println(key + "=" + products.get(key));
             }
         }
     }

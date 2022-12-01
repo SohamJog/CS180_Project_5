@@ -198,25 +198,21 @@ class Main {
                     choice2 = getChoice(3, scan);
                     if (choice2 == 1) {
                         // send "viewStoreStatistics" to server
-                        // the server returns (similar to the code we had below):
-                        // store1 (name and revenue and stuff)
-                        // customer1 of store1 (customer name)
-                        // customer2 of store1
-                        // a new line (separates stores)
-                        // store2 (name and revenue and stuff)
-                        // customer1 of store2
-                        // customer2 of store2
+                        // the server returns the same thing as the original code returns (the code below)
+                        // just have System.out.println replaced with printWriter.println
                         for (Store s : seller.getStores()) {
                             System.out.println(s.getName() + "\n____________\nRevenue: $" + s.getRevenue() + "\nCustomer List:");
-                            s.getCustomerList().forEach(System.out::println); // ask Armanya what this is omg omg
+                            s.getCustomerList().forEach(System.out::println);
                             System.out.println();
                         }
                         System.out.println();
                     }
                     String yOrNo;
                     if (choice2 == 2) {
-                        // send "y" to server for sort, "n" for not sort
-                        // server returns XXXXXX
+                        // send "viewCustomerStatics" to server
+                        // then send "y" to server for sort, "n" for not sort
+                        // server returns the same thing that customerStats() prints - please refer to the customerStats() method
+                        // I changed the customerStats() in the ClientThread.java so that it does printWriter.println instead sout
                         System.out.println("Do you want these statistics sorted? (y/n)");
                         yOrNo = scan.nextLine();
                         while (!yOrNo.equals("y") && !yOrNo.equals("n")) {
@@ -226,6 +222,10 @@ class Main {
                         customerStats(seller.getEmail(), yOrNo.equals("y"));
                     }
                     if (choice2 == 3) {
+                        // send "viewProductStatistics" to server
+                        // then send "y" to server for sort, "n" for not sort
+                        // server returns the same thing that productStats() prints - please refer to the productStats() method
+                        // I changed the productStats() in the ClientThread.java so that it does printWriter.println instead sout
                         System.out.println("Do you want these statistics sorted? (y/n)");
                         yOrNo = scan.nextLine();
                         while (!yOrNo.equals("y") && !yOrNo.equals("n")) {
@@ -237,9 +237,11 @@ class Main {
                 }
                 if (choice == 4) {
                     // send "viewProductsInCustomerShoppingCarts" to the server
-                    // server returns this thing: sCart.get(sCart.size() - 1) -> ask Armanya what this is
+                    // server returns each item line by line -> so just print them
                     ArrayList<String> sCart = seller.shoppingCart();
-                    System.out.println(sCart.get(sCart.size() - 1));
+                    for (String s : sCart) {
+                        System.out.println(s);
+                    }
                 }
             } while (choice != 0);
         } else if (choice == 2) {
@@ -357,8 +359,9 @@ class Main {
                             user.removeFromCart(user.getShoppingCart().get(choice3 - 1));
                         }
                         if (choice2 == 2) {
+                            // send "checkout" to server
                             while (user.getShoppingCart().size() > 0) {
-                                user.buyTicket(user.getShoppingCart().get(0)); // ask Marmanya
+                                user.buyTicket(user.getShoppingCart().get(0));
                             }
                             System.out.println("Transaction successful!");
                         }
@@ -369,6 +372,7 @@ class Main {
                     choice2 = getChoice(2, scan);
                     if (choice2 == 1) {
                         // send "statisticsForAllStores" to server
+                        // returns what the storeDash() method returns -> refers to that method
                         System.out.println("Do you want these statistics sorted? (y/n)");
                         String yOrNo = scan.nextLine();
                         while (!yOrNo.equals("y") && !yOrNo.equals("n")) {
@@ -378,13 +382,16 @@ class Main {
                         storeDash(yOrNo.equals("y"));
                     }
                     if (choice2 == 2) {
+                        // send "statisticsForStoresShopped" to server
+                        // server returns whatever the customerStoreDash returns
                         System.out.println("Do you want these statistics sorted? (y/n)");
                         String yOrNo = scan.nextLine();
                         while (!yOrNo.equals("y") && !yOrNo.equals("n")) {
                             System.out.println("Please enter a valid answer");
                             yOrNo = scan.nextLine();
                         }
-                        user.customerStoreDash(yOrNo.equals("y"));
+                        // I commented this out cuz I changed the customerStoreDash() parameters, which will cause error here
+//                        user.customerStoreDash(yOrNo.equals("y"));
                     }
                 }
             } while (choice != 0);
