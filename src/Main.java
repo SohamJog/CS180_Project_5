@@ -14,6 +14,11 @@ import java.io.*;
  * @version November 14, 2022
  */
 
+// todo - IMPORTANT NOTE FOR SOHAM AND ARMANYA: WHEN YOU WANT TO PROCESS A DADA BY SENDING AN INSTRUCTION TO THE SERVER
+//    (FOR EXAMPLE, changeName), MAKE SURE YOU 'ONLY' SEND IT WHEN THE PROVIDED INPUT FROM THE USER IS 'VALID', THAT IS,
+//    VERIFY THE USER INPUT BEFORE SENDING THE REQUEST TO THE SERVER (SINCE THE SERVER ISN'T ABLE TO HANDLE
+//    INVALID INPUT. THANK YOU!! :)
+
 class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
@@ -193,7 +198,14 @@ class Main {
                     choice2 = getChoice(3, scan);
                     if (choice2 == 1) {
                         // send "viewStoreStatistics" to server
-                        //
+                        // the server returns (similar to the code we had below):
+                        // store1 (name and revenue and stuff)
+                        // customer1 of store1 (customer name)
+                        // customer2 of store1
+                        // a new line (separates stores)
+                        // store2 (name and revenue and stuff)
+                        // customer1 of store2
+                        // customer2 of store2
                         for (Store s : seller.getStores()) {
                             System.out.println(s.getName() + "\n____________\nRevenue: $" + s.getRevenue() + "\nCustomer List:");
                             s.getCustomerList().forEach(System.out::println); // ask Armanya what this is omg omg
@@ -203,6 +215,8 @@ class Main {
                     }
                     String yOrNo;
                     if (choice2 == 2) {
+                        // send "y" to server for sort, "n" for not sort
+                        // server returns XXXXXX
                         System.out.println("Do you want these statistics sorted? (y/n)");
                         yOrNo = scan.nextLine();
                         while (!yOrNo.equals("y") && !yOrNo.equals("n")) {
@@ -222,6 +236,8 @@ class Main {
                     }
                 }
                 if (choice == 4) {
+                    // send "viewProductsInCustomerShoppingCarts" to the server
+                    // server returns this thing: sCart.get(sCart.size() - 1) -> ask Armanya what this is
                     ArrayList<String> sCart = seller.shoppingCart();
                     System.out.println(sCart.get(sCart.size() - 1));
                 }
@@ -250,12 +266,17 @@ class Main {
                         System.out.println("0. Go Back\n1. Change Name\n2. Change Password\n3. Delete Account");
                         choice2 = getChoice(3, scan);
                         if (choice2 == 1) {
+                            // send "changeName"
+                            // send the new name (input from the user)
                             System.out.println("What would you like to change your name to?");
                             user.changeName(scan.nextLine());
                         } else if (choice2 == 2) {
+                            // send "changePassword"
+                            // send the new password (input from the user)
                             System.out.println("What would you like to change your password to?");
                             user.changePassword(scan.nextLine());
                         } else if (choice2 == 3) {
+                            // send "deleteAccount"
                             System.out.println("Account Deleted");
                             user.deleteAccount();
                             return;
@@ -263,30 +284,41 @@ class Main {
                     } while (choice2 != 0);
                 }
                 if (choice == 2) {
+                    // send "displayMarketplace"
                     ArrayList<Ticket> market;
                     String search = "";
                     Ticket product;
                     market = displayMarketplace(false, "");
                     do {
                         System.out.println("0. Go Back\n1. Sort Tickets by Price\n2. Search Tickets by term");
+                        // server will return these one by one, so just print out the return one by one
                         for (int i = 0; i < market.size(); i++) {
                             System.out.println("" + (i + 3) + ". " + market.get(i) + "\n");
                         }
                         choice2 = getChoice(market.size() + 2, scan);
                         if (choice2 == 1) {
+                            // send "sort" to server
                             market = displayMarketplace(true, search);
                         } else if (choice2 == 2) {
+                            // send "search" to server
+                            // send search word to server
                             System.out.println("What would you like to search?");
                             System.out.print("Search: ");
                             search = scan.nextLine();
                             market = displayMarketplace(false, search);
                         } else if (choice2 > 0) {
+                            // send "accessTicket" to server
+                            // send choice2 (as a string number) to server
                             int choice3 = -1;
                             product = market.get(choice2 - 3);
+                            // server returns product.toProduct -> just print it out
                             System.out.println(product.toProduct());
                             System.out.println("0. Go Back\n1. Add to Cart");
                             choice3 = getChoice(1, scan);
                             if (choice3 == 1) {
+                                // send "addToCart" to server (only if the quantity is valid)
+                                // send quantity to the server
+                                // server returns true or false
                                 int quantity = -1;
                                 System.out.print("How many would you like to buy: ");
                                 quantity = getChoice(product.getQuantity(), scan);
@@ -294,31 +326,39 @@ class Main {
                                     System.out.println("Added to cart");
                                 }
                                 market = displayMarketplace(false, search);
-                            }
+                            } // add: else if (choice3 == 0) -> send "goBack" to server
                         }
                     } while (choice2 != 0);
                 }
                 if (choice == 3) {
+                    // send "purchaseHistory" to server
+                    // server returns user.displayPastTransactions() -> so just print it out
                     System.out.println();
                     System.out.println("Your Purchase History: ");
                     System.out.println(user.displayPastTransactions());
                 }
                 if (choice == 4) {
+                    // send "displayShoppingCart" to server
                     do {
+                        // server returns user.displayShoppingCart here -> so just print it out
                         System.out.println(user.displayShoppingCart());
                         System.out.println("0. Go Back");
+                        // server then returns user.getShoppingCart().size() so that you can use it here:
+                        // remember to parse it to an int!
                         if (user.getShoppingCart().size() > 0) {
                             System.out.print("1. Remove item\n2. Check Out\n");
                         }
                         choice2 = getChoice(2, scan);
                         if (choice2 == 1) {
+                            // send "removeItem" to server
+                            // send choice3 to server only if it's valid
                             System.out.println("Which product do you want to remove? (Enter number of ticket from above)");
                             int choice3 = getChoice(user.getShoppingCart().size(), scan);
                             user.removeFromCart(user.getShoppingCart().get(choice3 - 1));
                         }
                         if (choice2 == 2) {
                             while (user.getShoppingCart().size() > 0) {
-                                user.buyTicket(user.getShoppingCart().get(0));
+                                user.buyTicket(user.getShoppingCart().get(0)); // ask Marmanya
                             }
                             System.out.println("Transaction successful!");
                         }
@@ -328,6 +368,7 @@ class Main {
                     System.out.println("0. Go back\n1. Statistics for all stores\n2. Statistics for stores you've shopped at");
                     choice2 = getChoice(2, scan);
                     if (choice2 == 1) {
+                        // send "statisticsForAllStores" to server
                         System.out.println("Do you want these statistics sorted? (y/n)");
                         String yOrNo = scan.nextLine();
                         while (!yOrNo.equals("y") && !yOrNo.equals("n")) {

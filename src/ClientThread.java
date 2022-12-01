@@ -1,10 +1,7 @@
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Inet4Address;
 import java.net.Socket;
-import java.util.ArrayList;
+import java.util.*;
 
 // todo - think about loop problems (structures)
 // todo - when should the client send "quit"?
@@ -125,11 +122,33 @@ public class ClientThread implements Runnable {
                                     }
                                 } while (!storeAction.equals("goBack"));
                             } else if (action.equals("viewStoreStatistics")) {
-                                // ask
+                                for (Store s : seller.getStores()) {
+                                    pr.println(s.getName() + "\n____________\nRevenue: $" + s.getRevenue() + "\nCustomer List:");
+                                    for (String customer : s.getCustomerList()) {
+                                        pr.println(customer);
+                                    }
+                                    pr.println();
+                                }
                             } else if (action.equals("viewCustomerStatics")) {
-                                // continues here
-                            } // continues here
-                        } while (!action.equals("quit"));
+                                String sort = br.readLine();
+                                if (sort.equals("y")) {
+                                    // ask Armanya about the code
+                                } else {
+
+                                }
+                            } else if (action.equals("viewProductStatistics")) {
+                                String sort = br.readLine();
+                                if (sort.equals("y")) {
+                                    // ask Armanya about the code
+                                } else {
+
+                                }
+                            } else if (action.equals("viewProductsInCustomerShoppingCarts")) {
+                                ArrayList<String> sCart = seller.shoppingCart();
+                                // ask Armanya about this:
+                                pr.println(sCart.get(sCart.size() - 1));
+                            }
+                        } while (!action.equals("quit")); // when to send quit??
                     } else {
                         pr.println("false");
                     }
@@ -139,15 +158,195 @@ public class ClientThread implements Runnable {
                     User user = User.login(email, password);
                     if (user != null) {
                         pr.println("true");
+                        String action;
+                        do {
+                            action = br.readLine();
+                            if (action.equals("changeName")) {
+                                String newName = br.readLine();
+                                user.changeName(newName);
+                            } else if (action.equals("changePassword")) {
+                                String newPassword = br.readLine();
+                                user.changePassword(newPassword);
+                            } else if (action.equals("deleteAccount")) {
+                                user.deleteAccount();
+                            } else if (action.equals("displayMarketplace")) {
+                                ArrayList<Ticket> market;
+                                String search = "";
+                                Ticket product;
+                                market = displayMarketplace(false, "");
+                                String choice2;
+                                do {
+                                    choice2 = br.readLine();
+                                    for (int i = 0; i < market.size(); i++) {
+                                        pr.println("" + (i + 3) + ". " + market.get(i) + "\n");
+                                    }
+                                    if (choice2.equals("sort")) {
+                                        market = displayMarketplace(true, search);
+                                    } else if (choice2.equals("search")) {
+                                        String searchWord = br.readLine();
+                                        market = displayMarketplace(false, searchWord);
+                                    } else if (choice2.equals("accessTicket")) {
+                                        int t = Integer.parseInt(br.readLine());
+                                        product = market.get(t - 3);
+                                        pr.println(product.toProduct());
+                                        String choice3 = br.readLine();
+                                        if (choice3.equals("addToCart")) {
+                                            int quantity = Integer.parseInt(br.readLine());
+                                            if (user.addToCart(product, quantity)) {
+                                                pr.println("true");
+                                            } else {
+                                                pr.println("false");
+                                            }
+                                            market = displayMarketplace(false, search);
+                                        }
+                                    }
+                                } while (!choice2.equals("goBack"));
+                            } else if (action.equals("purchaseHistory")) {
+                                pr.println(user.displayPastTransactions());
+                            } else if (action.equals("displayShoppingCart")) {
+                                pr.println(user.displayShoppingCart());
+                                pr.println(user.getShoppingCart().size());
+                            } else if (action.equals("removeItem")) {
+                                int choice3 = Integer.parseInt(br.readLine());
+                                user.removeFromCart(user.getShoppingCart().get(choice3 - 1));
+                            } else if (action.equals("checkout")) {
+                                // ask Armanya about the checkout code
+                                while (user.getShoppingCart().size() > 0) {
+                                    user.buyTicket(user.getShoppingCart().get(0));
+                                }
+                                // ask - should I send true back?
+                            } else if (action.equals("statisticsForAllStores")) {
+                                String sort = br.readLine();
+                                if (sort.equals("y")) {
+                                    // ask Armanya about storeDash method
+                                } else {
 
+                                }
+                            }
+                        } while (!action.equals("quit"));
                     } else {
                         pr.println("false");
                     }
                 }
             } while (!signInUp.equals("quit"));
-            // remember to close the reader and writer (and socket?)
+            pr.close();
+            br.close();
+            socket.close();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+    public static ArrayList<Ticket> displayMarketplace(boolean sort, String search) {
+        File f = new File("availableTickets.txt");
+        ArrayList<Ticket> tickets = new ArrayList<>();
+        String[] ticketInfo;
+        try (BufferedReader br = new BufferedReader(new FileReader(f))) {
+            String line = br.readLine();
+            while (line != null) {
+                if (!line.equals("")) {
+                    ticketInfo = line.split(";");
+                    tickets.add(new Ticket(Integer.parseInt(ticketInfo[0]), ticketInfo[1], ticketInfo[2], ticketInfo[3], Double.parseDouble(ticketInfo[4]), ticketInfo[5], Integer.parseInt(ticketInfo[6])));
+                }
+                line = br.readLine();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (!search.equals("")) {
+            for (int i = 0; i < tickets.size(); i++) {
+                if (!(tickets.get(i).getName().contains(search) || tickets.get(i).getStoreName().contains(search) || tickets.get(i).getDescription().contains(search)))
+                    tickets.remove(i);
+            }
+        }
+        if (sort) {
+            Collections.sort(tickets, Comparator.comparing(Ticket::getPrice));
+        }
+        return tickets;
+    }
+
+    public static void storeDash(boolean sort) {
+        File f = new File("pastTransactions.txt");
+        Map<String, Integer> stores = new HashMap<>();
+        String[] ticketInfo;
+        try (BufferedReader br = new BufferedReader(new FileReader(f))) {
+            String line = br.readLine();
+            while (line != null) {
+                ticketInfo = line.split(";");
+                stores.merge(ticketInfo[4], Integer.parseInt(ticketInfo[7]), Integer::sum);
+                line = br.readLine();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (sort) {
+            stores.entrySet()
+                    .stream()
+                    .sorted(Map.Entry.comparingByValue())
+                    .forEach(System.out::println);
+        } else {
+            for (String key : stores.keySet()) {
+                System.out.println(key + "=" + stores.get(key));
+            }
+        }
+    }
+
+    public static void customerStats(String seller, boolean sort) {
+        File f = new File("pastTransactions.txt");
+        Map<String, Integer> customers = new HashMap<>();
+        String[] ticketInfo;
+        try (BufferedReader br = new BufferedReader(new FileReader(f))) {
+            String line = br.readLine();
+            while (line != null) {
+                if (!line.equals("")) {
+                    ticketInfo = line.split(";");
+                    if (ticketInfo[2].equals(seller)) {
+                        customers.merge(ticketInfo[3], Integer.parseInt(ticketInfo[7]), Integer::sum);
+                    }
+                    line = br.readLine();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (sort) {
+            customers.entrySet()
+                    .stream()
+                    .sorted(Map.Entry.comparingByValue())
+                    .forEach(System.out::println);
+        } else {
+            for (String key : customers.keySet()) {
+                System.out.println(key + "=" + customers.get(key));
+            }
+        }
+    }
+
+    public static void productStats(String seller, boolean sort) {
+        File f = new File("pastTransactions.txt");
+        Map<String, Integer> products = new HashMap<>();
+        String[] ticketInfo;
+        try (BufferedReader br = new BufferedReader(new FileReader(f))) {
+            String line = br.readLine();
+            while (line != null) {
+                if (!line.equals("")) {
+                    ticketInfo = line.split(";");
+                    if (ticketInfo[2].equals(seller)) {
+                        products.merge(ticketInfo[1], Integer.parseInt(ticketInfo[7]), Integer::sum);
+                    }
+                    line = br.readLine();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (sort) {
+            products.entrySet()
+                    .stream()
+                    .sorted(Map.Entry.comparingByValue())
+                    .forEach(System.out::println);
+        } else {
+            for (String key : products.keySet()) {
+                System.out.println(key + "=" + products.get(key));
+            }
         }
     }
 }
