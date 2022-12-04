@@ -499,7 +499,10 @@ public class User {
             stores.entrySet()
                     .stream()
                     .sorted(Map.Entry.comparingByValue())
-                    .forEach(pr::println);
+                    .forEach((key) -> {
+                        pr.println(key);
+                        pr.flush();
+                    });
         } else {
             for (String key : stores.keySet()) {
                 pr.println(key + "=" + stores.get(key));

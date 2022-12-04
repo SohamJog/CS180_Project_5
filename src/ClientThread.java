@@ -139,8 +139,10 @@ public class ClientThread implements Runnable {
                                 for (Store s : seller.getStores()) {
                                     pr.println(s.getName() + "\n____________\nRevenue: $" + s.getRevenue() + "\nCustomer List:");
                                     pr.flush();
-                                    s.getCustomerList().forEach(pr::println);
-                                    pr.flush();
+                                    s.getCustomerList().forEach((key) -> {
+                                        pr.println(key);
+                                        pr.flush();
+                                    });
                                     pr.println();
                                     pr.flush();
                                 }
@@ -316,7 +318,10 @@ public class ClientThread implements Runnable {
             stores.entrySet()
                     .stream()
                     .sorted(Map.Entry.comparingByValue())
-                    .forEach(pr::println);
+                    .forEach((key) -> {
+                        pr.println(key);
+                        pr.flush();
+                    });
         } else {
             for (String key : stores.keySet()) {
                 pr.println(key + "=" + stores.get(key));
@@ -347,8 +352,10 @@ public class ClientThread implements Runnable {
             customers.entrySet()
                     .stream()
                     .sorted(Map.Entry.comparingByValue())
-                    .forEach(pr::println);
-            pr.flush();
+                    .forEach((key) -> {
+                        pr.println(key);
+                        pr.flush();
+                    });
         } else {
             for (String key : customers.keySet()) {
                 pr.println(key + "=" + customers.get(key));
@@ -379,8 +386,10 @@ public class ClientThread implements Runnable {
             products.entrySet()
                     .stream()
                     .sorted(Map.Entry.comparingByValue())
-                    .forEach(pr::println);
-            pr.flush();
+                    .forEach((key) -> {
+                        pr.println(key);
+                        pr.flush();
+                    });
         } else {
             for (String key : products.keySet()) {
                 pr.println(key + "=" + products.get(key));
