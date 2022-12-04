@@ -25,6 +25,8 @@ public class ClientThread implements Runnable {
             // 1 - what would you like to do? (sign in or sign up)
             String signInUp;
             do { // an option to quit - not sure if needed tho
+                pr.println("Connected");
+                pr.flush();
                 signInUp = br.readLine();
                 if (signInUp.equals("sellerSignup")) {
                     String name = br.readLine();
@@ -32,8 +34,10 @@ public class ClientThread implements Runnable {
                     String password = br.readLine();
                     if (Seller.signUp(name, email, password)) {
                         pr.println("true");
+                        pr.flush();
                     } else {
                         pr.println("false");
+                        pr.flush();
                     }
                 } else if (signInUp.equals("userSignup")) {
                     String name = br.readLine();
@@ -41,8 +45,10 @@ public class ClientThread implements Runnable {
                     String password = br.readLine();
                     if (User.signUp(name, email, password)) {
                         pr.println("true");
+                        pr.flush();
                     } else {
                         pr.println("false");
+                        pr.flush();
                     }
                 } else if (signInUp.equals("sellerSignin")) {
                     String email = br.readLine();
@@ -50,6 +56,7 @@ public class ClientThread implements Runnable {
                     Seller seller = Seller.login(email, password);
                     if (seller != null) {
                         pr.println("true");
+                        pr.flush();
                         String action;
                         do {
                             action = br.readLine();
@@ -65,13 +72,16 @@ public class ClientThread implements Runnable {
                                 ArrayList<Store> stores = seller.getStores();
                                 for (Store s : stores) {
                                     pr.println(s.getName());
+                                    pr.flush();
                                 }
                             } else if (action.equals("createNewStore")) {
                                 String storeName = br.readLine();
                                 if (seller.createStore(storeName)) {
                                     pr.println("true");
+                                    pr.flush();
                                 } else {
                                     pr.println("false");
+                                    pr.flush();
                                 }
                             } else if (action.equals("enterStore")) {
                                 int choice2 = Integer.parseInt(br.readLine());
@@ -79,6 +89,7 @@ public class ClientThread implements Runnable {
                                 ArrayList<Ticket> storeProducts = store.getTickets();
                                 for (int i = 0; i < storeProducts.size(); i++) {
                                     pr.println((i + 2) + ". " + storeProducts.get(i));
+                                    pr.flush();
                                 }
 
                                 String storeAction;
@@ -92,13 +103,16 @@ public class ClientThread implements Runnable {
                                             int three = Integer.parseInt(br.readLine());
                                             store.newTickets(zero, seller.getEmail(), one, two, three);
                                             pr.println("true");
+                                            pr.flush();
                                         } catch (Exception e) {
                                             pr.println("false");
+                                            pr.flush();
                                         }
                                     } else if (storeAction.equals("accessTicket")) {
                                         int ticketNumber = Integer.parseInt(br.readLine());
                                         Ticket t = store.getTickets().get(ticketNumber - 2);
                                         pr.println(t);
+                                        pr.flush();
 
                                         String ticketAction;
                                         do {
@@ -124,10 +138,14 @@ public class ClientThread implements Runnable {
                             } else if (action.equals("viewStoreStatistics")) {
                                 for (Store s : seller.getStores()) {
                                     pr.println(s.getName() + "\n____________\nRevenue: $" + s.getRevenue() + "\nCustomer List:");
+                                    pr.flush();
                                     s.getCustomerList().forEach(pr::println);
+                                    pr.flush();
                                     pr.println();
+                                    pr.flush();
                                 }
                                 pr.println();
+                                pr.flush();
                             } else if (action.equals("viewCustomerStatics")) {
                                 String sort = br.readLine();
                                 if (sort.equals("y")) {
@@ -146,11 +164,13 @@ public class ClientThread implements Runnable {
                                 ArrayList<String> sCart = seller.shoppingCart();
                                 for (String s : sCart) {
                                     pr.println(s);
+                                    pr.flush();
                                 }
                             }
                         } while (!action.equals("quit")); // when to send quit??
                     } else {
                         pr.println("false");
+                        pr.flush();
                     }
                 } else if (signInUp.equals("userSignin")) {
                     String email = br.readLine();
@@ -158,6 +178,7 @@ public class ClientThread implements Runnable {
                     User user = User.login(email, password);
                     if (user != null) {
                         pr.println("true");
+                        pr.flush();
                         String action;
                         do {
                             action = br.readLine();
@@ -179,6 +200,7 @@ public class ClientThread implements Runnable {
                                     choice2 = br.readLine();
                                     for (int i = 0; i < market.size(); i++) {
                                         pr.println("" + (i + 3) + ". " + market.get(i) + "\n");
+                                        pr.flush();
                                     }
                                     if (choice2.equals("sort")) {
                                         market = displayMarketplace(true, search);
@@ -189,13 +211,16 @@ public class ClientThread implements Runnable {
                                         int t = Integer.parseInt(br.readLine());
                                         product = market.get(t - 3);
                                         pr.println(product.toProduct());
+                                        pr.flush();
                                         String choice3 = br.readLine();
                                         if (choice3.equals("addToCart")) {
                                             int quantity = Integer.parseInt(br.readLine());
                                             if (user.addToCart(product, quantity)) {
                                                 pr.println("true");
+                                                pr.flush();
                                             } else {
                                                 pr.println("false");
+                                                pr.flush();
                                             }
                                             market = displayMarketplace(false, search);
                                         }
@@ -203,9 +228,12 @@ public class ClientThread implements Runnable {
                                 } while (!choice2.equals("goBack"));
                             } else if (action.equals("purchaseHistory")) {
                                 pr.println(user.displayPastTransactions());
+                                pr.flush();
                             } else if (action.equals("displayShoppingCart")) {
                                 pr.println(user.displayShoppingCart());
+                                pr.flush();
                                 pr.println(user.getShoppingCart().size());
+                                pr.flush();
                             } else if (action.equals("removeItem")) {
                                 int choice3 = Integer.parseInt(br.readLine());
                                 user.removeFromCart(user.getShoppingCart().get(choice3 - 1));
@@ -231,6 +259,7 @@ public class ClientThread implements Runnable {
                         } while (!action.equals("quit"));
                     } else {
                         pr.println("false");
+                        pr.flush();
                     }
                 }
             } while (!signInUp.equals("quit"));
@@ -291,6 +320,7 @@ public class ClientThread implements Runnable {
         } else {
             for (String key : stores.keySet()) {
                 pr.println(key + "=" + stores.get(key));
+                pr.flush();
             }
         }
     }
@@ -318,9 +348,11 @@ public class ClientThread implements Runnable {
                     .stream()
                     .sorted(Map.Entry.comparingByValue())
                     .forEach(pr::println);
+            pr.flush();
         } else {
             for (String key : customers.keySet()) {
                 pr.println(key + "=" + customers.get(key));
+                pr.flush();
             }
         }
     }
@@ -348,9 +380,11 @@ public class ClientThread implements Runnable {
                     .stream()
                     .sorted(Map.Entry.comparingByValue())
                     .forEach(pr::println);
+            pr.flush();
         } else {
             for (String key : products.keySet()) {
                 pr.println(key + "=" + products.get(key));
+                pr.flush();
             }
         }
     }
