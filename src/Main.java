@@ -211,7 +211,7 @@ class Main {
             do {
                 //System.out.println("What would you like to do, " + seller.getName() + "?");
                 //System.out.println("0. Quit\n1. Change Account Details\n2. Access Stores\n3. View Statistics\n4. View Products in Customer Shopping Carts");
-                String po = client.showSignupOptions();
+                String po = client.showSellerSignupOptions();
                 choice = getChoice(4, scan);
                 if (choice == 1) {
                     do {

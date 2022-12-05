@@ -27,7 +27,7 @@ public class Client {
         JOptionPane.showMessageDialog(null, "Wrong Credentials",
                 "Ticket Emporium", JOptionPane.INFORMATION_MESSAGE);
     }
-    public static String showSignupOptions() {
+    public static String showSellerSignupOptions() {
         String university;
         String[]  options1 = {"Change Account Details" , "Access Stores","View Statistics","View Products in Customer Shopping Carts"};
         university = (String) JOptionPane.showInputDialog(null, "Select your option",
@@ -35,7 +35,14 @@ public class Client {
                 options1[0]);
         return university;
     }
-
+    public static String showSignupOptions() {
+        String university;
+        String[]  options1 = {"Seller", "Customer"};
+        university = (String) JOptionPane.showInputDialog(null, "Select your option",
+                "Ticket Emporium", JOptionPane.QUESTION_MESSAGE, null,options1,
+                options1[0]);
+        return university;
+    }
     public static String enterName() {
         String search;
 
