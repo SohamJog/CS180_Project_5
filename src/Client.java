@@ -13,11 +13,18 @@ public class Client {
         String university;
        String[]  options1 = {"Sign in" , "Sign up"};
         university = (String) JOptionPane.showInputDialog(null, "Select your option",
-                "Browser", JOptionPane.QUESTION_MESSAGE, null,options1,
+                "Ticket Emporium", JOptionPane.QUESTION_MESSAGE, null,options1,
                 options1[0]);
         return university;
     }              // returns a String of "sign in" or "sign up"
-
+    public static String showSignupOptions() {
+        String university;
+        String[]  options1 = {"Seller" , "Customer"};
+        university = (String) JOptionPane.showInputDialog(null, "Select your option",
+                "Ticket Emporium", JOptionPane.QUESTION_MESSAGE, null,options1,
+                options1[0]);
+        return university;
+    }
     public static void main(String[] args) {
         showWelcomeMessageDialog();
         System.out.println(showSigninSignup());
