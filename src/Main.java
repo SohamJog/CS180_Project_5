@@ -84,7 +84,7 @@ class Main {
                 choice = getChoice(2, scan);
 
                  */
-
+              // hi this is a comment
             x = client.showSignupOptions();
             if(x.equals("Seller")) {
                 choice = 1;

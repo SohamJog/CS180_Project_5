@@ -22,6 +22,7 @@ public class Client {
         return university;
     }
     // returns a String of "sign in" or "sign up"
+
     public static void showSigninError() {
         JOptionPane.showMessageDialog(null, "Wrong Credentials",
                 "Ticket Emporium", JOptionPane.INFORMATION_MESSAGE);
