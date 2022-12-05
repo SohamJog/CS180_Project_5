@@ -31,7 +31,7 @@ public class Client {
     }
     public static String showSignupOptions() {
         String university;
-        String[]  options1 = {"Seller" , "Customer"};
+        String[]  options1 = {"Change Account Details" , "Access Stores","View Statistics","View Products in Customer Shopping Carts"};
         university = (String) JOptionPane.showInputDialog(null, "Select your option",
                 "Ticket Emporium", JOptionPane.QUESTION_MESSAGE, null,options1,
                 options1[0]);
