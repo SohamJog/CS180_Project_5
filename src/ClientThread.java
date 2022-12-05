@@ -181,7 +181,7 @@ public class ClientThread implements Runnable {
                         pr.println("true");
                         pr.flush();
                         String action;
-                        // hello
+                        // hello guys
                         do {
                             action = br.readLine();
                             if (action.equals("changeName")) {
