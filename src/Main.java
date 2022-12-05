@@ -71,98 +71,24 @@ class Main {
         client.showWelcomeMessageDialog();
 
         String x = client.showSigninSignup();
-        if(x.equals("log in")) {
+        if(x.equals("Sign in")) {
             choice = 1;
         }
         else {
             choice = 2;
         }
-            if (choice == 2) {
-                /*
-                System.out.println("What role would you like to sign up for?");
-                System.out.println("0. Quit\n1. Seller\n2. Customer");
-                choice = getChoice(2, scan);
+            if (choice == 2)
 
-                 */
 
+            //System.out.println("What would you like to do?");
+            //System.out.println("0. Quit\n1. Seller Sign-in\n2. Customer Sign-in");
                 x = client.showSignupOptions();
-                if(x.equals("Seller")) {
-                    choice = 1;
-                } else {
-                    choice = 2;
-                }
-
-                String name = client.enterName();
-                String email = client.enterEmail();
-                String password = client.enterPassword();
-                /*
-                System.out.print("Name: ");
-                name = scan.nextLine();
-                System.out.print("Email: ");
-                email = scan.nextLine();
-                System.out.print("Password: ");
-                password = scan.nextLine();
-                System.out.println(choice);
-
-                 */
-                if (choice == 1) {
-                    ////
-                    writer.println("sellerSignup");
-                    writer.flush();
-                    writer.println(name);
-                    writer.flush();
-                    writer.println(email);
-                    writer.flush();
-                    writer.println(password);
-                    writer.flush();
-                    String inp = "bananas";
-                    try {
-                        inp = reader.readLine();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    System.out.println(inp);
-                    // send "sellerSignup" to the server
-                    // then send name, email, and password respectively to the server
-                    // server sends back either "true" or success or "false" otherwise
-
-
-                    if (inp.equals("true")) {
-                        client.showSuccessfulSignUpDialog();
-                    } else {
-                        client.showMistakeDialog();
-                    }
-                } else if (choice == 2) {
-                    ////
-                    writer.println("userSignup");
-                    writer.flush();
-                    writer.println(name);
-                    writer.flush();
-                    writer.println(email);
-                    writer.flush();
-                    writer.println(password);
-                    writer.flush();
-                    String inp = "bananas";
-                    try {
-                        inp = reader.readLine();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    System.out.println(inp);
-                    // send "userSignup" to the server
-                    // then send name, email, and password respectively to the server
-                    // server sends back either "true" or success or "false" otherwise
-                    if (inp.equals("true")) {
-                        client.showSuccessfulSignUpDialog();
-                    } else {
-                        client.showMistakeDialog();
-                    }
-                }
+            if(x.equals("Seller")) {
+                choice = 1;
             }
-            System.out.println("What would you like to do?");
-            System.out.println("0. Quit\n1. Seller Sign-in\n2. Customer Sign-in");
+            else {
+                choice = 2;
+            }
             choice = getChoice(2, scan);
             if (choice == 1) {
 
