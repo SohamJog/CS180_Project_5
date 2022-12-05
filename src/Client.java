@@ -25,6 +25,28 @@ public class Client {
                 options1[0]);
         return university;
     }
+
+    public static String enterName() {
+        String search;
+
+        search = JOptionPane.showInputDialog(null, "Enter your Name",
+                "Ticket Emporium", JOptionPane.QUESTION_MESSAGE);
+        return search;
+    }
+    public static String enterEmail() {
+        String search;
+
+        search = JOptionPane.showInputDialog(null, "Enter your Email",
+                "Ticket Emporium", JOptionPane.QUESTION_MESSAGE);
+        return search;
+    }
+    public static String enterPassword() {
+        String search;
+
+        search = JOptionPane.showInputDialog(null, "Enter your Password",
+                "Ticket Emporium", JOptionPane.QUESTION_MESSAGE);
+        return search;
+    }
     public static void main(String[] args) {
         showWelcomeMessageDialog();
         System.out.println(showSigninSignup());
