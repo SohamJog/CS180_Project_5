@@ -5,7 +5,14 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 public class Client {
-
+    public static void showSuccessfullDialog() {
+        JOptionPane.showMessageDialog(null, "Connected Successfully",
+                "Ticket Emporium", JOptionPane.INFORMATION_MESSAGE);
+    }
+    public static void showMistakeDialog() {
+        JOptionPane.showMessageDialog(null, "Sorry , An account with this Email already exists or you have used semicolon",
+                "Ticket Emporium", JOptionPane.INFORMATION_MESSAGE);
+    }
     public static void showWelcomeMessageDialog() {
         JOptionPane.showMessageDialog(null, "Welcome to Ticket Emporium",
                 "Ticket Emporium", JOptionPane.INFORMATION_MESSAGE);
