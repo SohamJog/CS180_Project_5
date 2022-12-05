@@ -221,9 +221,9 @@ class Main {
                         if (choice2 == 1) {
                             // send "changeName"
                             // send the new name (input from the user)
-                            System.out.println("What would you like to change your name to?");
+                         //   System.out.println("What would you like to change your name to?");
                             // seller.changeName(scan.nextLine());
-
+                           String name = client.changeName();
                             //
                             writer.println("changeName");
                             writer.flush();

@@ -72,6 +72,13 @@ public class Client {
                 "Ticket Emporium", JOptionPane.QUESTION_MESSAGE);
         return search;
     }
+    public static String changeName(){
+        String search;
+
+        search = JOptionPane.showInputDialog(null, "What would you like to change your name to?",
+                "Ticket Emporium", JOptionPane.QUESTION_MESSAGE);
+        return search;
+    }
 
     public static void main(String[] args) {
         showWelcomeMessageDialog();
