@@ -161,9 +161,22 @@ class Main {
                 }
             }
         }
+
+
+        /*
         System.out.println("What would you like to do?");
         System.out.println("0. Quit\n1. Seller Sign-in\n2. Customer Sign-in");
-        choice = getChoice(2, scan);
+
+         */
+
+        x = client.showSignupOptions();
+        if(x.equals("Seller")) {
+            choice = 1;
+        }
+        else {
+            choice = 2;
+        }
+       // choice = getChoice(2, scan);
         if (choice == 1) {
 
             String email = client.enterEmail();
