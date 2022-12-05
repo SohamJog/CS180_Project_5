@@ -5,7 +5,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 public class Client {
-    public static void showSuccessfullDialog() {
+    public static void showSuccessfullSignUpDialog() {
         JOptionPane.showMessageDialog(null, "Connected Successfully",
                 "Ticket Emporium", JOptionPane.INFORMATION_MESSAGE);
     }
