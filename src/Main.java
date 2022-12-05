@@ -78,10 +78,20 @@ class Main {
             choice = 2;
         }
             if (choice == 2) {
+                /*
                 System.out.println("What role would you like to sign up for?");
                 System.out.println("0. Quit\n1. Seller\n2. Customer");
                 choice = getChoice(2, scan);
-                if (choice == 0) return;
+
+                 */
+
+                x = client.showSignupOptions();
+                if(x.equals("Seller")) {
+                    choice = 1;
+                } else {
+                    choice = 2;
+                }
+
                 String name;
                 String email;
                 String password;
