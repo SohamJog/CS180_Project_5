@@ -35,6 +35,14 @@ public class Client {
                 options1[0]);
         return university;
     }
+    public static String showBuyerSignupOptions() {
+        String university;
+        String[]  options1 = {"Go Back" , "Change Name","Change Password","Delete Account"};
+        university = (String) JOptionPane.showInputDialog(null, "Select your option",
+                "Ticket Emporium", JOptionPane.QUESTION_MESSAGE, null,options1,
+                options1[0]);
+        return university;
+    }
     public static String showSignupOptions() {
         String university;
         String[]  options1 = {"Seller", "Customer"};

@@ -215,7 +215,8 @@ class Main {
                 choice = getChoice(4, scan);
                 if (choice == 1) {
                     do {
-                        System.out.println("0. Go Back\n1. Change Name\n2. Change Password\n3. Delete Account");
+                       // System.out.println("0. Go Back\n1. Change Name\n2. Change Password\n3. Delete Account");
+                        String yrt = client.showBuyerSignupOptions();
                         choice2 = getChoice(3, scan);
                         if (choice2 == 1) {
                             // send "changeName"
