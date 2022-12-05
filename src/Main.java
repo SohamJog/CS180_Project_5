@@ -188,7 +188,7 @@ class Main {
             // then send email and password respectively to the server
             // server sends back either "true" or success or "false" otherwise
             if (seller == null) {
-                System.out.println("Incorrect email or password");
+                client.showSigninError();
                 return;
             }
             do {
