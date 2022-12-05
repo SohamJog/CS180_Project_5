@@ -49,14 +49,34 @@ class Main {
             }
 
             /////
-            Scanner scan = new Scanner(System.in);
+        Scanner scan = new Scanner(System.in);
+
+        /*
             System.out.println("Welcome to Ticket Emporium");
             System.out.println("What would you like to do?");
             System.out.println("0. Quit\n1. Sign-in\n2. Sign up");
 
+
+
+
             int choice = getChoice(2, scan);
             int choice2;
             if (choice == 0) return; // add: send "quit" to server before returning
+
+         */
+
+        int choice;
+        int choice2;
+        Client client = new Client();
+        client.showWelcomeMessageDialog();
+
+        String x = client.showSigninSignup();
+        if(x.equals("log in")) {
+            choice = 1;
+        }
+        else {
+            choice = 2;
+        }
             if (choice == 2) {
                 System.out.println("What role would you like to sign up for?");
                 System.out.println("0. Quit\n1. Seller\n2. Customer");

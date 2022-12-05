@@ -18,6 +18,13 @@ public class Client {
         return university;
     }              // returns a String of "sign in" or "sign up"
 
+    public static void main(String[] args) {
+        showWelcomeMessageDialog();
+        System.out.println(showSigninSignup());
+    }
+
+
+
 
 }
 
