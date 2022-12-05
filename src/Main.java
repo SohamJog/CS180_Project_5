@@ -1,10 +1,6 @@
-import javax.swing.*;
 import java.io.*;
-import java.util.*;
-import java.net.*;
-
-
 import java.net.Socket;
+import java.util.*;
 
 
 /**
@@ -85,7 +81,7 @@ class Main {
 
                  */
 
-            x = client.showSignupOptions();
+            x = client.showSignOptions();
             if(x.equals("Seller")) {
                 choice = 1;
             } else {

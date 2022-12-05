@@ -1,9 +1,4 @@
 import javax.swing.*;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.Socket;
 public class Client {
     public static void showSuccessfulSignUpDialog() {
         JOptionPane.showMessageDialog(null, "Signed Up Successfully",
@@ -16,7 +11,9 @@ public class Client {
     public static void showWelcomeMessageDialog() {
         JOptionPane.showMessageDialog(null, "Welcome to Ticket Emporium",
                 "Ticket Emporium", JOptionPane.INFORMATION_MESSAGE);
-    }public static String showSigninSignup() {
+    }
+
+    public static String showSigninSignup() {
         String university;
        String[]  options1 = {"Sign in" , "Sign up"};
         university = (String) JOptionPane.showInputDialog(null, "Select your option",
@@ -24,7 +21,7 @@ public class Client {
                 options1[0]);
         return university;
     }              // returns a String of "sign in" or "sign up"
-    public static String showSignupOptions() {
+    public static String showSignOptions() {
         String university;
         String[]  options1 = {"Seller" , "Customer"};
         university = (String) JOptionPane.showInputDialog(null, "Select your option",
