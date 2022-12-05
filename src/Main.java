@@ -92,9 +92,10 @@ class Main {
                     choice = 2;
                 }
 
-                String name;
-                String email;
-                String password;
+                String name = client.enterName();
+                String email = client.enterEmail();
+                String password = client.enterPassword();
+                /*
                 System.out.print("Name: ");
                 name = scan.nextLine();
                 System.out.print("Email: ");
@@ -102,6 +103,8 @@ class Main {
                 System.out.print("Password: ");
                 password = scan.nextLine();
                 System.out.println(choice);
+
+                 */
                 if (choice == 1) {
                     ////
                     writer.println("sellerSignup");
@@ -126,9 +129,9 @@ class Main {
 
 
                     if (inp.equals("true")) {
-                        System.out.println("Successfully Signed Up!");
+                        client.showSuccessfulSignUpDialog();
                     } else {
-                        System.out.println("An account with this email already exists or you are using semicolons");
+                        client.showMistakeDialog();
                     }
                 } else if (choice == 2) {
                     ////
@@ -152,9 +155,9 @@ class Main {
                     // then send name, email, and password respectively to the server
                     // server sends back either "true" or success or "false" otherwise
                     if (inp.equals("true")) {
-                        System.out.println("Successfully Signed Up!");
+                        client.showSuccessfulSignUpDialog();
                     } else {
-                        System.out.println("An account with this email already exists or you are using semicolons");
+                        client.showMistakeDialog();
                     }
                 }
             }

@@ -6,7 +6,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 public class Client {
     public static void showSuccessfulSignUpDialog() {
-        JOptionPane.showMessageDialog(null, "Connected Successfully",
+        JOptionPane.showMessageDialog(null, "Signed Up Successfully",
                 "Ticket Emporium", JOptionPane.INFORMATION_MESSAGE);
     }
     public static void showMistakeDialog() {
