@@ -235,9 +235,9 @@ class Main {
                         } else if (choice2 == 2) {
                             // send "changePassword"
                             // send the new password (input from the user)
-                            System.out.println("What would you like to change your password to?");
+                            //System.out.println("What would you like to change your password to?");
                             // seller.changePassword(scan.nextLine());
-                            //
+                            String pass = client.changePassword();
                             writer.println("changePassword");
                             writer.flush();
                             writer.println(scan.nextLine());
@@ -246,7 +246,7 @@ class Main {
                             //
                         } else if (choice2 == 3) {
                             // send "deleteAccount"
-                            System.out.println("Account Deleted");
+                            client.showAccountDeleteDialog();
                             //
                             writer.println("deleteAccount");
                             writer.flush();

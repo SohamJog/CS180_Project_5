@@ -4,6 +4,10 @@ public class Client {
         JOptionPane.showMessageDialog(null, "Signed Up Successfully",
                 "Ticket Emporium", JOptionPane.INFORMATION_MESSAGE);
     }
+    public static void showAccountDeleteDialog() {
+        JOptionPane.showMessageDialog(null, "Account Deleted",
+                "Ticket Emporium", JOptionPane.INFORMATION_MESSAGE);
+    }
     public static void showMistakeDialog() {
         JOptionPane.showMessageDialog(null, "Sorry , An account with this Email already exists or you have used semicolon",
                 "Ticket Emporium", JOptionPane.INFORMATION_MESSAGE);
@@ -76,6 +80,13 @@ public class Client {
         String search;
 
         search = JOptionPane.showInputDialog(null, "What would you like to change your name to?",
+                "Ticket Emporium", JOptionPane.QUESTION_MESSAGE);
+        return search;
+    }
+    public static String changePassword(){
+        String search;
+
+        search = JOptionPane.showInputDialog(null, "What would you like to change your password to?",
                 "Ticket Emporium", JOptionPane.QUESTION_MESSAGE);
         return search;
     }
