@@ -54,6 +54,7 @@ public class Client {
                 "Ticket Emporium", JOptionPane.QUESTION_MESSAGE);
         return search;
     }
+
     public static void main(String[] args) {
         showWelcomeMessageDialog();
         System.out.println(showSigninSignup());

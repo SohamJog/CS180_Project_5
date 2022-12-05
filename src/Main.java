@@ -166,12 +166,9 @@ class Main {
         choice = getChoice(2, scan);
         if (choice == 1) {
 
-            String email;
-            String password;
-            System.out.print("Email: ");
-            email = scan.nextLine();
-            System.out.print("Password: ");
-            password = scan.nextLine();
+            String email = client.enterEmail();
+            String password = client.enterPassword();
+
             Seller seller = Seller.login(email, password);
 
             /////
