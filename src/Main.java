@@ -1,10 +1,6 @@
-import javax.swing.*;
 import java.io.*;
-import java.util.*;
-import java.net.*;
-
-
 import java.net.Socket;
+import java.util.*;
 
 
 /**
@@ -71,7 +67,7 @@ class Main {
         client.showWelcomeMessageDialog();
 
         String x = client.showSigninSignup();
-        if(x.equals("log in")) {
+        if(x.equals("Sign in")) {
             choice = 1;
         }
         else {
