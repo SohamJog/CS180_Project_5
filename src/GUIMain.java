@@ -52,7 +52,7 @@ public class GUIMain extends JComponent implements Runnable {
 //        frame.setVisible(true);
 //        if(choice.equals("Sign up")) {
 //            frame.removeAll();
-            signIn(frame, writer, reader);
+            sellerDash(frame);
 //        }
         frame.setVisible(true);
     }
@@ -204,4 +204,19 @@ public class GUIMain extends JComponent implements Runnable {
         f.add(bPanel, BorderLayout.SOUTH);
         return true;
     }
+
+    public static void sellerDash(JFrame f) {
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(5, 1));
+        JButton change = new JButton("Change Account Details");
+        JButton stores = new JButton("Access Stores");
+        JButton cart = new JButton("View Products in Shopping Carts");
+        JButton stats = new JButton("View Statistics");
+        panel.add(change);
+        panel.add(stores);
+        panel.add(cart);
+        panel.add(stats);
+        f.add(panel, BorderLayout.CENTER);
+    }
+
 }
