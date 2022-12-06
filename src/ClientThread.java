@@ -1,5 +1,4 @@
 import java.io.*;
-import java.net.Inet4Address;
 import java.net.Socket;
 import java.util.*;
 
@@ -182,6 +181,7 @@ public class ClientThread implements Runnable {
                         pr.println("true");
                         pr.flush();
                         String action;
+                        // hello guys
                         do {
                             action = br.readLine();
                             if (action.equals("changeName")) {
