@@ -7,6 +7,8 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 public class GUIMain extends JComponent {
+    public static String choice;
+
     public static void main(String[] args) {
         Socket socket = null;
         BufferedReader reader = null;
@@ -42,31 +44,33 @@ public class GUIMain extends JComponent {
         frame.setLayout(new BorderLayout());
 
         // Create a new JPanel to hold the input fields
-        String option = signInUp(frame);
+        signInUp(frame);
         frame.setVisible(true);
+        if(choice.equals("Sign up")) {
+            frame.removeAll();
+            signUp(frame, writer, reader);
+        }
     }
 
-    public static String signInUp(JFrame f) {
+    public static void signInUp(JFrame f) {
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout());
         panel.add(new JLabel("What would you like to do"));
         String[] options = {"Sign in", "Sign up"};
         JComboBox comboBox = new JComboBox(options);
         panel.add(comboBox);
-        final String[] selectedItem = new String[1];
 
         comboBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Get the selected item from the JComboBox
-                selectedItem[0] = (String)comboBox.getSelectedItem();
+                choice = (String)comboBox.getSelectedItem();
 
             }
         });
         f.add(panel, BorderLayout.CENTER);
-        return selectedItem[0];
     }
 
-    public static boolean signUp(JFrame f) {
+    public static boolean signUp(JFrame f, PrintWriter pr, BufferedReader br) {
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(3,2));
         JTextField nameField = new JTextField();
@@ -91,13 +95,34 @@ public class GUIMain extends JComponent {
                 // Get the user's input from the fields
                 String name = nameField.getText();
                 String email = emailField.getText();
+                String password = passwordField.getText();
 
                 // Check if the user's input is valid
-                if (name.isEmpty() || email.isEmpty()) {
+                if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
                     // Show an error message if the input is invalid
-                    JOptionPane.showMessageDialog(f, "Please enter a valid name and email.");
+                    JOptionPane.showMessageDialog(f, "Please enter a valid name, email, and password.");
                 } else {
                     //Jenny - call server
+                    pr.println("sellerSignup");
+                    pr.flush();
+                    pr.println(name);
+                    pr.flush();
+                    pr.println(email);
+                    pr.flush();
+                    pr.println(password);
+                    pr.flush();
+                    String inp = "bananas";
+                    try {
+                        inp = br.readLine();
+                    } catch (Exception f) {
+                        f.printStackTrace();
+                    }
+
+                    System.out.println(inp);
+                    // send "sellerSignup" to the server
+                    // then send name, email, and password respectively to the server
+                    // server sends back either "true" or success or "false" otherwise
+
                     // Clear the input fields if the input is valid
                     nameField.setText("");
                     emailField.setText("");
@@ -107,7 +132,8 @@ public class GUIMain extends JComponent {
                 }
             }
         });
-        f.add(panel);
+        f.add(panel, BorderLayout.CENTER);
+        f.add(bPanel, BorderLayout.SOUTH);
         return true;
     }
 }
