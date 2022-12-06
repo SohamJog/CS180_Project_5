@@ -1,10 +1,6 @@
-import javax.swing.*;
 import java.io.*;
-import java.util.*;
-import java.net.*;
-
-
 import java.net.Socket;
+import java.util.*;
 
 
 /**
@@ -71,7 +67,7 @@ class Main {
         client.showWelcomeMessageDialog();
 
         String x = client.showSigninSignup();
-        if(x.equals("log in")) {
+        if(x.equals("Sign in")) {
             choice = 1;
         }
         else {
@@ -211,18 +207,19 @@ class Main {
             do {
                 //System.out.println("What would you like to do, " + seller.getName() + "?");
                 //System.out.println("0. Quit\n1. Change Account Details\n2. Access Stores\n3. View Statistics\n4. View Products in Customer Shopping Carts");
-                String po = client.showSignupOptions();
+                String po = client.showSellerSignupOptions();
                 choice = getChoice(4, scan);
                 if (choice == 1) {
                     do {
-                        System.out.println("0. Go Back\n1. Change Name\n2. Change Password\n3. Delete Account");
+                       // System.out.println("0. Go Back\n1. Change Name\n2. Change Password\n3. Delete Account");
+                        String yrt = client.showBuyerSignupOptions();
                         choice2 = getChoice(3, scan);
                         if (choice2 == 1) {
                             // send "changeName"
                             // send the new name (input from the user)
-                            System.out.println("What would you like to change your name to?");
+                         //   System.out.println("What would you like to change your name to?");
                             // seller.changeName(scan.nextLine());
-
+                           String name = client.changeName();
                             //
                             writer.println("changeName");
                             writer.flush();
@@ -234,9 +231,9 @@ class Main {
                         } else if (choice2 == 2) {
                             // send "changePassword"
                             // send the new password (input from the user)
-                            System.out.println("What would you like to change your password to?");
+                            //System.out.println("What would you like to change your password to?");
                             // seller.changePassword(scan.nextLine());
-                            //
+                            String pass = client.changePassword();
                             writer.println("changePassword");
                             writer.flush();
                             writer.println(scan.nextLine());
@@ -245,7 +242,7 @@ class Main {
                             //
                         } else if (choice2 == 3) {
                             // send "deleteAccount"
-                            System.out.println("Account Deleted");
+                            client.showAccountDeleteDialog();
                             //
                             writer.println("deleteAccount");
                             writer.flush();

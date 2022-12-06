@@ -1,7 +1,13 @@
 import javax.swing.*;
+import java.awt.*;
+
 public class Client {
     public static void showSuccessfulSignUpDialog() {
         JOptionPane.showMessageDialog(null, "Signed Up Successfully",
+                "Ticket Emporium", JOptionPane.INFORMATION_MESSAGE);
+    }
+    public static void showAccountDeleteDialog() {
+        JOptionPane.showMessageDialog(null, "Account Deleted",
                 "Ticket Emporium", JOptionPane.INFORMATION_MESSAGE);
     }
     public static void showMistakeDialog() {
@@ -27,7 +33,7 @@ public class Client {
         JOptionPane.showMessageDialog(null, "Wrong Credentials",
                 "Ticket Emporium", JOptionPane.INFORMATION_MESSAGE);
     }
-    public static String showSignupOptions() {
+    public static String showSellerSignupOptions() {
         String university;
         String[]  options1 = {"Change Account Details" , "Access Stores","View Statistics","View Products in Customer Shopping Carts"};
         university = (String) JOptionPane.showInputDialog(null, "Select your option",
@@ -35,7 +41,22 @@ public class Client {
                 options1[0]);
         return university;
     }
-
+    public static String showBuyerSignupOptions() {
+        String university;
+        String[]  options1 = {"Go Back" , "Change Name","Change Password","Delete Account"};
+        university = (String) JOptionPane.showInputDialog(null, "Select your option",
+                "Ticket Emporium", JOptionPane.QUESTION_MESSAGE, null,options1,
+                options1[0]);
+        return university;
+    }
+    public static String showSignupOptions() {
+        String university;
+        String[]  options1 = {"Seller", "Customer"};
+        university = (String) JOptionPane.showInputDialog(null, "Select your option",
+                "Ticket Emporium", JOptionPane.QUESTION_MESSAGE, null,options1,
+                options1[0]);
+        return university;
+    }
     public static String enterName() {
         String search;
 
@@ -54,6 +75,20 @@ public class Client {
         String search;
 
         search = JOptionPane.showInputDialog(null, "Enter your Password",
+                "Ticket Emporium", JOptionPane.QUESTION_MESSAGE);
+        return search;
+    }
+    public static String changeName(){
+        String search;
+
+        search = JOptionPane.showInputDialog(null, "What would you like to change your name to?",
+                "Ticket Emporium", JOptionPane.QUESTION_MESSAGE);
+        return search;
+    }
+    public static String changePassword(){
+        String search;
+
+        search = JOptionPane.showInputDialog(null, "What would you like to change your password to?",
                 "Ticket Emporium", JOptionPane.QUESTION_MESSAGE);
         return search;
     }
