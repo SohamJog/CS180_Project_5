@@ -69,46 +69,46 @@ class Ticket {
     }
 
 
-    public boolean changeInfo(String newName, double newPrice, String newDescription,
-                              int newQuantity) {
-        if (!newName.contains(";") && !newDescription.contains(";")) {
-            String describe = toFile();
-            setName(newName);
-            setDescription(newDescription);
-            setPrice(newPrice);
-            setQuantity(newQuantity);
-            ArrayList<String> templist = new ArrayList<String>();
-            try (BufferedReader br = new BufferedReader(new FileReader("availableTickets.txt"))) {
-                String line = br.readLine();
+    public boolean changeInfo(String newName, double newPrice, String newDescription, int newQuantity) {
+        synchronized (Seller.obj) {
+            if (!newName.contains(";") && !newDescription.contains(";")) {
+                String describe = toFile();
+                setName(newName);
+                setDescription(newDescription);
+                setPrice(newPrice);
+                setQuantity(newQuantity);
+                ArrayList<String> templist = new ArrayList<String>();
+                try (BufferedReader br = new BufferedReader(new FileReader("availableTickets.txt"))) {
+                    String line = br.readLine();
 
-                while (line != null) {
-                    if (!line.equals(describe)) {
-                        templist.add(line);
+                    while (line != null) {
+                        if (!line.equals(describe)) {
+                            templist.add(line);
+                        }
+                        line = br.readLine();
                     }
-                    line = br.readLine();
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
 
-            if (quantity != 0) {
-                templist.add(toFile());
-            }
-
-            try (PrintWriter pw = new PrintWriter(new FileWriter("availableTickets.txt"))) {
-
-                for (String s : templist) {
-                    pw.println(s);
+                if (quantity != 0) {
+                    templist.add(toFile());
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
+
+                try (PrintWriter pw = new PrintWriter(new FileWriter("availableTickets.txt"))) {
+
+                    for (String s : templist) {
+                        pw.println(s);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return true;
+            } else {
+                System.out.println("Semicolon is not allowed here.");
+                return false;
             }
-            return true;
-        } else {
-            System.out.println("Semicolon is not allowed here.");
-            return false;
-        }
-    }
+        } }
 
     public String toProduct() {
 
@@ -137,28 +137,29 @@ class Ticket {
 
 
     public void writeToFile(String fileName) {
-        ArrayList<String> templist = new ArrayList<String>();
-        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-            String line = br.readLine();
+        synchronized (Seller.obj) {
+            ArrayList<String> templist = new ArrayList<String>();
+            try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+                String line = br.readLine();
 
-            while (line != null) {
+                while (line != null) {
 
-                templist.add(line);
-                line = br.readLine();
+                    templist.add(line);
+                    line = br.readLine();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try (PrintWriter pw = new PrintWriter(new FileWriter(fileName))) {
+            try (PrintWriter pw = new PrintWriter(new FileWriter(fileName))) {
 
-            for (String s : templist) {
-                pw.println(s);
+                for (String s : templist) {
+                    pw.println(s);
+                }
+                pw.println(toFile());
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            pw.println(toFile());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+        } }
 
     public int getQuantity() {
         return quantity;

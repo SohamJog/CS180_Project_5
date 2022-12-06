@@ -28,7 +28,14 @@ public class Client {
         return university;
     }
     // returns a String of "sign in" or "sign up"
-
+    public static String showStoreOptions() {
+        String university;
+        String[]  options1 = {"Go Back" , "Create New Store"};
+        university = (String) JOptionPane.showInputDialog(null, "Select your option",
+                "Ticket Emporium", JOptionPane.QUESTION_MESSAGE, null,options1,
+                options1[0]);
+        return university;
+    }
     public static void showSigninError() {
         JOptionPane.showMessageDialog(null, "Wrong Credentials",
                 "Ticket Emporium", JOptionPane.INFORMATION_MESSAGE);
@@ -92,7 +99,13 @@ public class Client {
                 "Ticket Emporium", JOptionPane.QUESTION_MESSAGE);
         return search;
     }
+    public static String changeStoreName() {
+        String search;
 
+        search = JOptionPane.showInputDialog(null, "What would you like to change the name of the Store too?",
+                "Ticket Emporium", JOptionPane.QUESTION_MESSAGE);
+        return search;
+    }
     public static void main(String[] args) {
         showWelcomeMessageDialog();
         System.out.println(showSigninSignup());
