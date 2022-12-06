@@ -267,7 +267,7 @@ public class ClientThread implements Runnable {
             } while (!signInUp.equals("quit"));
             pr.close();
             br.close();
-            socket.close();
+            socket.close(); // put these into a finally?
         } catch (Exception e) {
             e.printStackTrace();
         }
