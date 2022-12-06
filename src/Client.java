@@ -1,4 +1,6 @@
 import javax.swing.*;
+import java.awt.*;
+
 public class Client {
     public static void showSuccessfulSignUpDialog() {
         JOptionPane.showMessageDialog(null, "Signed Up Successfully",
