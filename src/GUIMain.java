@@ -6,14 +6,18 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class GUIMain extends JComponent {
+public class GUIMain extends JComponent implements Runnable {
     public static String choice;
 
     public static void main(String[] args) {
+        SwingUtilities.invokeLater(new GUIMain());
+    }
+
+    @Override
+    public void run() {
         Socket socket = null;
         BufferedReader reader = null;
         PrintWriter writer = null;
-
 
         try {
             socket = new Socket("localhost", 4242);
@@ -59,14 +63,21 @@ public class GUIMain extends JComponent {
         String[] options = {"Sign in", "Sign up"};
         JComboBox comboBox = new JComboBox(options);
         panel.add(comboBox);
+        JPanel bPanel = new JPanel();
+        bPanel.setLayout(new FlowLayout());
 
-        comboBox.addActionListener(new ActionListener() {
+        // Create a submit button
+        JButton submitButton = new JButton("Submit");
+        bPanel.add(submitButton);
+        // Add an action listener to the submit button
+        submitButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
-                // Get the selected item from the JComboBox
-                choice = (String)comboBox.getSelectedItem();
-
+                choice = (String) comboBox.getSelectedItem();
             }
         });
+
+        f.add(bPanel, BorderLayout.SOUTH);
         f.add(panel, BorderLayout.CENTER);
     }
 

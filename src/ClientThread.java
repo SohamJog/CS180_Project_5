@@ -2,10 +2,6 @@ import java.io.*;
 import java.net.Socket;
 import java.util.*;
 
-// todo - think about loop problems (structures)
-// todo - when should the client send "quit"?
-// todo - wow so many to think about
-
 public class ClientThread implements Runnable {
     Socket socket = null;
     BufferedReader br = null;
