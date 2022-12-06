@@ -223,7 +223,7 @@ class Main {
                             //
                             writer.println("changeName");
                             writer.flush();
-                            writer.println(scan.nextLine());
+                            writer.println(name);
                             writer.flush();
 
                             //
@@ -246,10 +246,7 @@ class Main {
                             //
                             writer.println("deleteAccount");
                             writer.flush();
-                            // writer.println(scan.nextLine());
-                            // writer.flush();
 
-                            //
                             // seller.deleteAccount();
                             return;
                         }
@@ -258,7 +255,20 @@ class Main {
                 if (choice == 2) {
                     // send "listStores"
                     // then the server will return each store name (one by one)
+                    try {
+                        writer.println("listStores");
+                        writer.flush();
+                        int num = Integer.parseInt(reader.readLine());
+                        for (int i = 0; i < num; i++) {
+                            String storeName = reader.readLine();
+                            System.out.println(storeName);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
                     ArrayList<Store> stores;
+
                     do {
                         stores = seller.getStores();
                         //System.out.println("0. Go Back\n1. Create New Store");
@@ -269,6 +279,7 @@ class Main {
                         choice2 = getChoice(3, scan);
                         if (choice2 == 1) {
                             // send "createNewStore"
+                            // send the new store name (input from the user)
                             // server sends back either "true" or "false"
                             //System.out.println("What would you like to name your store?");
                             client.changeStoreName();
@@ -276,14 +287,12 @@ class Main {
                             writer.flush();
                             writer.println(scan.nextLine());
                             writer.flush();
-
                             inp = "bananas";
                             try {
                                 inp = reader.readLine();
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
-
                             System.out.println(inp);
 
                             if (inp.equals("false")) {
@@ -331,12 +340,7 @@ class Main {
                                         writer.println(ticketInfo[3]);
                                         writer.flush();
 
-                                        inp = "bananas";
-                                        try {
-                                            inp = reader.readLine();
-                                        } catch (Exception e) {
-                                            e.printStackTrace();
-                                        }
+                                        inp = reader.readLine();
 
                                         System.out.println(inp);
                                         //
@@ -347,39 +351,71 @@ class Main {
                                 } else if (choice3 > 0) {
                                     // send "accessTicket" to server
                                     // send choice3 (string number)
+                                    writer.println("accessTicket");
+                                    writer.flush();
+                                    writer.println(Integer.toString(choice3));
+                                    writer.flush();
+
                                     int choice4;
                                     Ticket t;
                                     do {
-                                        t = store.getTickets().get(choice3 - 2);
+                                       // t = store.getTickets().get(choice3 - 2);
                                         // server returns t -> just print it out
-                                        System.out.println(t);
+                                        try {
+                                            System.out.println(reader.readLine());
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                        //System.out.println(t);
                                         System.out.println("0. Go Back\n1. Delete Ticket\n2. Change Name\n3. Change Price\n4. Change Description\n5. Change Quantity");
                                         choice4 = getChoice(5, scan);
                                         if (choice4 == 1) {
                                             // send "deleteTicket" to server
-                                            store.deleteTickets(t.getId());
+                                            writer.println("deleteTicket");
+                                            writer.flush();
+                                           // store.deleteTickets(t.getId());
                                         } else if (choice4 == 2) {
                                             // send "changeTicketName" to server
                                             // send the new name to server
-                                            System.out.print("New Name: ");
-                                            t.changeInfo(scan.nextLine(), t.getPrice(), t.getDescription(), t.getQuantity());
+                                            //System.out.print("New Name: ");
+                                           // t.changeInfo(scan.nextLine(), t.getPrice(), t.getDescription(),t.getQuantity());
+                                            writer.println("changeTicketName");
+                                            writer.flush();
+                                            writer.println(scan.nextLine());
+                                            writer.flush();
                                         } else if (choice4 == 3) {
                                             // send "changeTicketPrice" to server
                                             // send new price to server
-                                            System.out.print("New Price: ");
-                                            t.changeInfo(t.getName(), scan.nextDouble(), t.getDescription(), t.getQuantity());
-                                            scan.nextLine();
+                                            //System.out.print("New Price: ");
+                                           // t.changeInfo(t.getName(), scan.nextDouble(), t.getDescription(),
+                                                  //  t.getQuantity());
+                                            //scan.nextLine();
+                                            writer.println("changeTicketPrice");
+                                            writer.flush();
+                                            writer.println(scan.nextLine());
+                                            writer.flush();
                                         } else if (choice4 == 4) {
                                             // send "changeTicketDescription" to server
                                             // send new description to server
-                                            System.out.print("New Description: ");
-                                            t.changeInfo(t.getName(), t.getPrice(), scan.nextLine(), t.getQuantity());
+                                            //System.out.print("New Description: ");
+                                            //t.changeInfo(t.getName(), t.getPrice(), scan.nextLine(), t.getQuantity());
+                                            writer.println("changeTicketDescription");
+                                            writer.flush();
+                                            writer.println(scan.nextLine());
+                                            writer.flush();
                                         } else if (choice4 == 5) {
                                             // send "changeTicketQuantity" to server
                                             // send new quantity
-                                            System.out.print("New Quantity: ");
-                                            t.changeInfo(t.getName(), t.getPrice(), t.getDescription(), scan.nextInt());
+                                            //System.out.print("New Quantity: ");
+                                            //t.changeInfo(t.getName(), t.getPrice(), t.getDescription(),
+                                                   // scan.nextInt());
+
+                                            writer.println("changeTicketQuantity");
+                                            writer.flush();
+                                            writer.println(scan.nextLine());
+                                            writer.flush();
                                             scan.nextLine();
+
                                         } // add: else if (choice4 == 0) -> send "goBack" to server (I need this info. Thank you :))
                                     } while (choice4 != 0);
                                 } // add: else (when choice3 is 0) -> send "goBack" to server (I need this info. Thank you :))
@@ -397,11 +433,13 @@ class Main {
                         try {
                             writer.println("viewStoreStatistics");
                             writer.flush();
-                            String input = reader.readLine();
-                            while(input!=null) {
-                                System.out.println(input);
-                                input = reader.readLine();
+
+                            int num = Integer.parseInt(reader.readLine());
+
+                            for(int i=0;i<num;i++) {
+                                System.out.println(reader.readLine());
                             }
+
 
                             //
                                 /*
@@ -428,11 +466,28 @@ class Main {
                         // I changed the customerStats() in the ClientThread.java so that it does printWriter.println instead sout
                         System.out.println("Do you want these statistics sorted? (y/n)");
                         yOrNo = scan.nextLine();
+
+                        writer.println("viewCustomerStatics");
+                        writer.flush();
+                        writer.println(yOrNo);
+                        writer.flush();
+
+                        try {
+                            int num = Integer.parseInt(reader.readLine());
+                            for(int i=0;i<num;i++) {
+                                System.out.println(reader.readLine());
+                            }
+                        }
+                        catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
                         while (!yOrNo.equals("y") && !yOrNo.equals("n")) {
                             System.out.println("Please enter a valid answer");
                             yOrNo = scan.nextLine();
                         }
-                        customerStats(seller.getEmail(), yOrNo.equals("y"));
+
+                        //customerStats(seller.getEmail(), yOrNo.equals("y"));
                     }
                     if (choice2 == 3) {
                         // send "viewProductStatistics" to server
@@ -441,11 +496,27 @@ class Main {
                         // I changed the productStats() in the ClientThread.java so that it does printWriter.println instead sout
                         System.out.println("Do you want these statistics sorted? (y/n)");
                         yOrNo = scan.nextLine();
+
+                        writer.println("viewProductStatistics");
+                        writer.flush();
+                        writer.println(yOrNo);
+                        writer.flush();
+
+                        try {
+                            int num = Integer.parseInt(reader.readLine());
+                            for(int i=0;i<num;i++) {
+                                System.out.println(reader.readLine());
+                            }
+                        }
+                        catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
                         while (!yOrNo.equals("y") && !yOrNo.equals("n")) {
                             System.out.println("Please enter a valid answer");
                             yOrNo = scan.nextLine();
                         }
-                        productStats(seller.getEmail(), yOrNo.equals("y"));
+                        //productStats(seller.getEmail(), yOrNo.equals("y"));
                     }
                 }
                 if (choice == 4) {
@@ -475,7 +546,7 @@ class Main {
             password = scan.nextLine();
 
             ////
-            writer.println("userSignup");
+            writer.println("userSignin");
             writer.flush();
             writer.println(email);
             writer.flush();
@@ -534,6 +605,19 @@ class Main {
                 }
                 if (choice == 2) {
                     // send "displayMarketplace"
+
+                    writer.println("displayMarketplace");
+                    writer.flush();
+                    try {
+                        int num = Integer.parseInt(reader.readLine());
+                        for(int i=0;i<num;i++) {
+                            System.out.println(reader.readLine());
+                        }
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
                     ArrayList<Ticket> market;
                     String search = "";
                     Ticket product;
@@ -547,21 +631,38 @@ class Main {
                         choice2 = getChoice(market.size() + 2, scan);
                         if (choice2 == 1) {
                             // send "sort" to server
-                            market = displayMarketplace(true, search);
+                            writer.println("sort");
+                            writer.flush();
+                            //market = displayMarketplace(true, search);
                         } else if (choice2 == 2) {
                             // send "search" to server
                             // send search word to server
+
                             System.out.println("What would you like to search?");
                             System.out.print("Search: ");
                             search = scan.nextLine();
-                            market = displayMarketplace(false, search);
+                            writer.println("search");
+                            writer.flush();
+                            writer.println(search);
+                            writer.flush();
+                           // market = displayMarketplace(false, search);
                         } else if (choice2 > 0) {
                             // send "accessTicket" to server
                             // send choice2 (as a string number) to server
+                            writer.println("accessTicket");
+                            writer.flush();
+                            writer.println(choice2);
+                            writer.flush();
                             int choice3 = -1;
-                            product = market.get(choice2 - 3);
+                            //product = market.get(choice2 - 3);
                             // server returns product.toProduct -> just print it out
-                            System.out.println(product.toProduct());
+                            try {
+                                System.out.println(reader.readLine());
+                            }
+                            catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            //System.out.println(product.toProduct());
                             System.out.println("0. Go Back\n1. Add to Cart");
                             choice3 = getChoice(1, scan);
                             if (choice3 == 1) {
@@ -570,11 +671,29 @@ class Main {
                                 // server returns true or false
                                 int quantity = -1;
                                 System.out.print("How many would you like to buy: ");
-                                quantity = getChoice(product.getQuantity(), scan);
-                                if (user.addToCart(product, quantity)) {
-                                    System.out.println("Added to cart");
+                                quantity = scan.nextInt();
+                                scan.nextLine();
+                                if (quantity > 0) {
+                                    writer.println("addToCart");
+                                    writer.flush();
+                                    writer.println(quantity);
+                                    writer.flush();
+                                    //user.addToCart(product, quantity);
+                                    try {
+                                        System.out.println(reader.readLine());
+                                    }
+                                    catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+
                                 }
-                                market = displayMarketplace(false, search);
+                               // quantity = getChoice(product.getQuantity(), scan);
+
+//                                if (user.addToCart(product, quantity)) {
+//                                    System.out.println("Added to cart");
+//                                }
+
+                                //market = displayMarketplace(false, search);
                             } // add: else if (choice3 == 0) -> send "goBack" to server
                         }
                     } while (choice2 != 0);
@@ -584,13 +703,36 @@ class Main {
                     // server returns user.displayPastTransactions() -> so just print it out
                     System.out.println();
                     System.out.println("Your Purchase History: ");
-                    System.out.println(user.displayPastTransactions());
+                    writer.println("purchaseHistory");
+                    writer.flush();
+                    try {
+                        int num = Integer.parseInt(reader.readLine());
+                        for(int i=0;i<num;i++) {
+                            System.out.println(reader.readLine());
+                        }
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    //System.out.println(user.displayPastTransactions());
                 }
                 if (choice == 4) {
                     // send "displayShoppingCart" to server
+                    writer.println("displayShoppingCart");
+                    writer.flush();
+                    // server returns user.displayShoppingCart() -> so just print it out
+                    try {
+                        int num = Integer.parseInt(reader.readLine());
+                        for(int i=0;i<num;i++) {
+                            System.out.println(reader.readLine());
+                        }
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     do {
                         // server returns user.displayShoppingCart here -> so just print it out
-                        System.out.println(user.displayShoppingCart());
+                       // System.out.println(user.displayShoppingCart());
                         System.out.println("0. Go Back");
                         // server then returns user.getShoppingCart().size() so that you can use it here:
                         // remember to parse it to an int!
@@ -603,13 +745,24 @@ class Main {
                             // send choice3 to server only if it's valid
                             System.out.println("Which product do you want to remove? (Enter number of ticket from above)");
                             int choice3 = getChoice(user.getShoppingCart().size(), scan);
-                            user.removeFromCart(user.getShoppingCart().get(choice3 - 1));
+                            if (choice3 > 0) {
+                                writer.println("removeItem");
+                                writer.flush();
+                                writer.println(choice3);
+                                writer.flush();
+                                //user.removeItem(choice3);
+                            }
+                           // user.removeFromCart(user.getShoppingCart().get(choice3 - 1));
                         }
                         if (choice2 == 2) {
                             // send "checkout" to server
-                            while (user.getShoppingCart().size() > 0) {
-                                user.buyTicket(user.getShoppingCart().get(0));
-                            }
+
+                            writer.println("checkout");
+                            writer.flush();
+
+//                            while (user.getShoppingCart().size() > 0) {
+//                                user.buyTicket(user.getShoppingCart().get(0));
+//                            }
                             System.out.println("Transaction successful!");
                         }
                     } while (choice2 != 0);
@@ -622,6 +775,21 @@ class Main {
                         // returns what the storeDash() method returns -> refers to that method
                         System.out.println("Do you want these statistics sorted? (y/n)");
                         String yOrNo = scan.nextLine();
+                        writer.println("statisticsForAllStores");
+                        writer.flush();
+                        writer.println(yOrNo);
+                        writer.flush();
+
+                        try {
+                            int num = Integer.parseInt(reader.readLine());
+                            for(int i=0;i<num;i++) {
+                                System.out.println(reader.readLine());
+                            }
+                        }
+                        catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
                         while (!yOrNo.equals("y") && !yOrNo.equals("n")) {
                             System.out.println("Please enter a valid answer");
                             yOrNo = scan.nextLine();
@@ -631,8 +799,25 @@ class Main {
                     if (choice2 == 2) {
                         // send "statisticsForStoresShopped" to server
                         // server returns whatever the customerStoreDash returns
+
                         System.out.println("Do you want these statistics sorted? (y/n)");
                         String yOrNo = scan.nextLine();
+
+                        writer.println("statisticsForStoresShopped");
+                        writer.flush();
+                        writer.println(yOrNo);
+                        writer.flush();
+
+                        try {
+                            int num = Integer.parseInt(reader.readLine());
+                            for(int i=0;i<num;i++) {
+                                System.out.println(reader.readLine());
+                            }
+                        }
+                        catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
                         while (!yOrNo.equals("y") && !yOrNo.equals("n")) {
                             System.out.println("Please enter a valid answer");
                             yOrNo = scan.nextLine();
