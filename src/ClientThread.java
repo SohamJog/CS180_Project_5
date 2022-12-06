@@ -69,6 +69,8 @@ public class ClientThread implements Runnable {
                                 seller.deleteAccount();
                             } else if (action.equals("listStores")) {
                                 ArrayList<Store> stores = seller.getStores();
+                                pr.println(stores.size());
+                                pr.flush();
                                 for (Store s : stores) {
                                     pr.println(s.getName());
                                     pr.flush();
@@ -86,6 +88,8 @@ public class ClientThread implements Runnable {
                                 int choice2 = Integer.parseInt(br.readLine());
                                 Store store = seller.getStores().get(choice2 - 2);
                                 ArrayList<Ticket> storeProducts = store.getTickets();
+                                pr.println(storeProducts.size());
+                                pr.flush();
                                 for (int i = 0; i < storeProducts.size(); i++) {
                                     pr.println((i + 2) + ". " + storeProducts.get(i));
                                     pr.flush();
@@ -163,6 +167,8 @@ public class ClientThread implements Runnable {
                                 }
                             } else if (action.equals("viewProductsInCustomerShoppingCarts")) {
                                 ArrayList<String> sCart = seller.shoppingCart();
+                                pr.println(sCart.size());
+                                pr.flush();
                                 for (String s : sCart) {
                                     pr.println(s);
                                     pr.flush();
@@ -200,6 +206,8 @@ public class ClientThread implements Runnable {
                                 String choice2;
                                 do {
                                     choice2 = br.readLine();
+                                    pr.println(market.size());
+                                    pr.flush();
                                     for (int i = 0; i < market.size(); i++) {
                                         pr.println("" + (i + 3) + ". " + market.get(i) + "\n");
                                         pr.flush();
@@ -267,7 +275,7 @@ public class ClientThread implements Runnable {
             } while (!signInUp.equals("quit"));
             pr.close();
             br.close();
-            socket.close();
+            socket.close(); // put these into a finally?
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -314,6 +322,8 @@ public class ClientThread implements Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        pr.println(stores.size());
+        pr.flush();
         if (sort) {
             stores.entrySet()
                     .stream()
@@ -348,6 +358,8 @@ public class ClientThread implements Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        pr.println(customers.size());
+        pr.flush();
         if (sort) {
             customers.entrySet()
                     .stream()
@@ -382,6 +394,8 @@ public class ClientThread implements Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        pr.println(products.size());
+        pr.flush();
         if (sort) {
             products.entrySet()
                     .stream()
