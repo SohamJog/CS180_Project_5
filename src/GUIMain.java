@@ -19,7 +19,6 @@ public class GUIMain extends JComponent implements Runnable {
         BufferedReader reader = null;
         PrintWriter writer = null;
 
-
         try {
             socket = new Socket("localhost", 4242);
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
