@@ -207,7 +207,21 @@ public class GUIMain extends JComponent implements Runnable {
 
     public static void sellerDash(JFrame f) {
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(5, 1));
+        panel.setLayout(new GridLayout(4, 1));
+        JButton change = new JButton("Change Account Details");
+        JButton stores = new JButton("Access Stores");
+        JButton cart = new JButton("View Products in Shopping Carts");
+        JButton stats = new JButton("View Statistics");
+        panel.add(change);
+        panel.add(stores);
+        panel.add(cart);
+        panel.add(stats);
+        f.add(panel, BorderLayout.CENTER);
+    }
+
+    public static void changeAccountMenu(JFrame f, PrintWriter pr, BufferedReader br) {
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(4, 1));
         JButton change = new JButton("Change Account Details");
         JButton stores = new JButton("Access Stores");
         JButton cart = new JButton("View Products in Shopping Carts");
