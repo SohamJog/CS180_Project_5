@@ -48,12 +48,13 @@ public class GUIMain extends JComponent implements Runnable {
         frame.setLayout(new BorderLayout());
 
         // Create a new JPanel to hold the input fields
-        signInUp(frame);
+//        signInUp(frame);
+//        frame.setVisible(true);
+//        if(choice.equals("Sign up")) {
+//            frame.removeAll();
+            signIn(frame, writer, reader);
+//        }
         frame.setVisible(true);
-        if(choice.equals("Sign up")) {
-            frame.removeAll();
-            signUp(frame, writer, reader);
-        }
     }
 
     public static void signInUp(JFrame f) {
@@ -90,7 +91,7 @@ public class GUIMain extends JComponent implements Runnable {
         panel.add(new JLabel("Name: "));
         panel.add(nameField);
         panel.add(new JLabel("Email: "));
-        panel.add(passwordField);
+        panel.add(emailField);
         panel.add(new JLabel("Password: "));
         panel.add(passwordField);
         JPanel bPanel = new JPanel();
@@ -98,7 +99,7 @@ public class GUIMain extends JComponent implements Runnable {
 
         // Create a submit button
         JButton submitButton = new JButton("Submit");
-
+        bPanel.add(submitButton);
         // Add an action listener to the submit button
         submitButton.addActionListener(new ActionListener() {
             @Override
@@ -137,9 +138,65 @@ public class GUIMain extends JComponent implements Runnable {
                     // Clear the input fields if the input is valid
                     nameField.setText("");
                     emailField.setText("");
+                    passwordField.setText("");
 
                     // Show a success message
                     JOptionPane.showMessageDialog(f, "Submitted successfully!");
+                }
+            }
+        });
+        f.add(panel, BorderLayout.CENTER);
+        f.add(bPanel, BorderLayout.SOUTH);
+        return true;
+    }
+
+    public static boolean signIn(JFrame f, PrintWriter pr, BufferedReader br) {
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(2,2));
+        JTextField emailField = new JTextField();
+        JTextField passwordField = new JTextField();
+        panel.add(new JLabel("Email: "));
+        panel.add(emailField);
+        panel.add(new JLabel("Password: "));
+        panel.add(passwordField);
+        JPanel bPanel = new JPanel();
+        bPanel.setLayout(new FlowLayout());
+
+        // Create a submit button
+        JButton submitButton = new JButton("Submit");
+        bPanel.add(submitButton);
+        // Add an action listener to the submit button
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Get the user's input from the fields
+                String email = emailField.getText();
+                String password = passwordField.getText();
+
+                // Check if the user's input is valid
+                if (email.isEmpty() || password.isEmpty()) {
+                    // Show an error message if the input is invalid
+                    JOptionPane.showMessageDialog(f, "Please enter a valid name, email, and password.");
+                } else {
+                    //Jenny - call server
+                    pr.println("sellerSignin");
+                    pr.flush();
+                    pr.println(email);
+                    pr.flush();
+                    pr.println(password);
+                    pr.flush();
+                    String inp = "bananas";
+                    try {
+                        inp = br.readLine();
+                    } catch (Exception f) {
+                        f.printStackTrace();
+                    }
+
+                    if(inp.equals("true")) {
+                        JOptionPane.showMessageDialog(f, "Signed in successfully!");
+                    } else {
+                        JOptionPane.showMessageDialog(f, "Incorrect email or password");
+                    }
                 }
             }
         });
