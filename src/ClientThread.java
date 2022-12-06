@@ -139,6 +139,8 @@ public class ClientThread implements Runnable {
                                     }
                                 } while (!storeAction.equals("goBack"));
                             } else if (action.equals("viewStoreStatistics")) {
+                                pr.println(seller.getStores().size());
+                                pr.flush();
                                 for (Store s : seller.getStores()) {
                                     pr.println(s.getName() + "\n____________\nRevenue: $" + s.getRevenue() + "\nCustomer List:");
                                     pr.flush();
