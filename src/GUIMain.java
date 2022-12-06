@@ -6,10 +6,15 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class GUIMain extends JComponent {
+public class GUIMain extends JComponent implements Runnable {
     public static String choice;
 
     public static void main(String[] args) {
+        SwingUtilities.invokeLater(new GUIMain());
+    }
+
+    @Override
+    public void run() {
         Socket socket = null;
         BufferedReader reader = null;
         PrintWriter writer = null;
