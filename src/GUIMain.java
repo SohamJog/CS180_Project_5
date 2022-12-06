@@ -10,11 +10,6 @@ public class GUIMain extends JComponent implements Runnable {
     public static String choice;
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new GUIMain());
-    }
-
-    @Override
-    public void run() {
         Socket socket = null;
         BufferedReader reader = null;
         PrintWriter writer = null;
@@ -36,7 +31,11 @@ public class GUIMain extends JComponent implements Runnable {
         }
 
         Client client = new Client();
+        SwingUtilities.invokeLater(new GUIMain());
+    }
 
+    @Override
+    public void run() {
         JFrame frame = new JFrame("Ticket Emporium");
 
         // Set the size of the frame
