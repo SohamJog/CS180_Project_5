@@ -261,16 +261,17 @@ class Main {
                     ArrayList<Store> stores;
                     do {
                         stores = seller.getStores();
-                        System.out.println("0. Go Back\n1. Create New Store");
+                        //System.out.println("0. Go Back\n1. Create New Store");
+                        String opti = client.showStoreOptions();
                         for (int i = 0; i < stores.size(); i++) {
-                            System.out.println("" + (i + 2) + ". " + stores.get(i).getName());
+                            System.out.println("" + (i + 2) + ". " + stores.get(i).getName());// work left**
                         }
                         choice2 = getChoice(3, scan);
                         if (choice2 == 1) {
                             // send "createNewStore"
                             // server sends back either "true" or "false"
-                            System.out.println("What would you like to name your store?");
-
+                            //System.out.println("What would you like to name your store?");
+                            client.changeStoreName();
                             writer.println("createNewStore");
                             writer.flush();
                             writer.println(scan.nextLine());
