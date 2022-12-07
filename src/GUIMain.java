@@ -250,6 +250,7 @@ public class GUIMain extends JComponent implements Runnable {
         JButton newStore = new JButton("Add new store");
         try {
             int numStores = Integer.parseInt(br.readLine());
+            System.out.println(numStores);
             panel.setLayout(new GridLayout(numStores+1, 1));
             panel.add(newStore);
             for(int i = 0; i < numStores; i++) {
