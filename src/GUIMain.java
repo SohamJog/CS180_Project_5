@@ -60,21 +60,13 @@ public class GUIMain extends JComponent implements Runnable {
         JPanel signInUp = signInUp();
         JPanel signUp = signUp(frame, writer, reader);
         JPanel signIn = signIn(frame, writer, reader);
-        JPanel sellerDash = sellerDash(frame);
-        JPanel changeAccountMenu = changeAccountMenu(writer, reader);
-        JPanel statisticsMenu = statisticsMenu(writer, reader);
-        JPanel customerDash = customerDash();
-        JPanel storesMenu = storesMenu(writer, reader);
-        JPanel market = market(writer, reader);
+//        JPanel customerDash = customerDash();
+//        JPanel market = market(writer, reader);
         mainPanel.add(signInUp, "signInUp");
         mainPanel.add(signUp, "signUp");
         mainPanel.add(signIn, "signIn");
-        mainPanel.add(sellerDash, "sellerDash");
-        mainPanel.add(changeAccountMenu, "changeAccountMenu");
-        mainPanel.add(statisticsMenu, "statisticsMenu");
-        mainPanel.add(customerDash, "customerDash");
-        mainPanel.add(storesMenu, "storesMenu");
-        mainPanel.add(market, "market");
+//        mainPanel.add(customerDash, "customerDash");
+//        mainPanel.add(market, "market");
         cardLayout.show(mainPanel, "signInUp");
         frame.add(mainPanel);
 
@@ -91,11 +83,11 @@ public class GUIMain extends JComponent implements Runnable {
 //        writer.flush();
 //        writer.println("soham");
 //        writer.flush();
-        try {
-            reader.readLine();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            reader.readLine();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 //        storesMenu(writer, reader);
         frame.setVisible(true);
     }
@@ -246,6 +238,14 @@ public class GUIMain extends JComponent implements Runnable {
 
                     if(inp.equals("true")) {
                         JOptionPane.showMessageDialog(f, "Signed in successfully!");
+                        JPanel sellerDash = sellerDash(f);
+                        JPanel storesMenu = storesMenu(writer, reader);
+                        JPanel statisticsMenu = statisticsMenu(writer, reader);
+                        JPanel changeAccountMenu = changeAccountMenu(writer, reader);
+                        mainPanel.add(sellerDash, "sellerDash");
+                        mainPanel.add(statisticsMenu, "statisticsMenu");
+                        mainPanel.add(storesMenu, "storesMenu");
+                        mainPanel.add(changeAccountMenu, "changeAccountMenu");
                     } else {
                         JOptionPane.showMessageDialog(f, "Incorrect email or password");
                     }
