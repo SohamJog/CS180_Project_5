@@ -392,16 +392,14 @@ public class GUIMain extends JComponent implements Runnable {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         System.out.println(fI);
-                        pr.println("enterStore");
+                        pr.println("accessTicket");
                         pr.flush();
                         pr.println(fI);
                         pr.flush();
                         try {
                             int inp = Integer.parseInt(br.readLine());
                             for(int i=0;i<inp;i++) {
-                                System.out.println(
-                                        br.readLine()
-                                );
+                                System.out.println(br.readLine());
                             }
                         }
                         catch (Exception f) {
