@@ -18,7 +18,12 @@ public class GUIMain extends JComponent implements Runnable {
         SwingUtilities.invokeLater(new GUIMain());
     }
 
-    public GUIMain() {
+//    public GUIMain() {
+//
+//    }
+
+    @Override
+    public void run() {
         Socket socket = null;
         BufferedReader reader = null;
         PrintWriter writer = null;
@@ -37,10 +42,7 @@ public class GUIMain extends JComponent implements Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
 
-    @Override
-    public void run() {
         Client client = new Client();
 
         JFrame frame = new JFrame("Ticket Emporium");
@@ -62,7 +64,7 @@ public class GUIMain extends JComponent implements Runnable {
         JPanel changeAccountMenu = changeAccountMenu(writer, reader);
         JPanel statisticsMenu = statisticsMenu(writer, reader);
         JPanel customerDash = customerDash();
-        JPanel storeMenu = storeMenu(writer, reader);
+        JPanel storesMenu = storesMenu(writer, reader);
         JPanel market = market(writer, reader);
         mainPanel.add(signInUp, "signInUp");
         mainPanel.add(signUp, "signUp");
@@ -71,7 +73,7 @@ public class GUIMain extends JComponent implements Runnable {
         mainPanel.add(changeAccountMenu, "changeAccountMenu");
         mainPanel.add(statisticsMenu, "statisticsMenu");
         mainPanel.add(customerDash, "customerDash");
-        mainPanel.add(storeMenu, "storeMenu");
+        mainPanel.add(storesMenu, "storesMenu");
         mainPanel.add(market, "market");
         cardLayout.show(mainPanel, "signInUp");
         frame.add(mainPanel);
@@ -83,18 +85,18 @@ public class GUIMain extends JComponent implements Runnable {
 //            frame.removeAll();
 //            sellerDash(frame);
 //        }
-        writer.println("sellerSignin");
-        writer.flush();
-        writer.println("soham");
-        writer.flush();
-        writer.println("soham");
-        writer.flush();
+//        writer.println("sellerSignin");
+//        writer.flush();
+//        writer.println("soham");
+//        writer.flush();
+//        writer.println("soham");
+//        writer.flush();
         try {
             reader.readLine();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        storeMenu(writer, reader);
+//        storesMenu(writer, reader);
         frame.setVisible(true);
     }
 
@@ -299,7 +301,7 @@ public class GUIMain extends JComponent implements Runnable {
         return result;
     }
 
-    public static JPanel storeMenu(PrintWriter pr, BufferedReader br) {
+    public static JPanel storesMenu(PrintWriter pr, BufferedReader br) {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
         pr.println("listStores");
