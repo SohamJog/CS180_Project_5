@@ -238,14 +238,15 @@ public class GUIMain extends JComponent implements Runnable {
 
                     if(inp.equals("true")) {
                         JOptionPane.showMessageDialog(f, "Signed in successfully!");
-                        JPanel sellerDash = sellerDash(f);
-                        JPanel storesMenu = storesMenu(writer, reader);
-                        JPanel statisticsMenu = statisticsMenu(writer, reader);
-                        JPanel changeAccountMenu = changeAccountMenu(writer, reader);
+                        JPanel sellerDash = sellerDash();
+                        JPanel storesMenu = storesMenu(pr, br);
+                        JPanel statisticsMenu = statisticsMenu(pr, br);
+                        JPanel changeAccountMenu = changeAccountMenu(pr, br);
                         mainPanel.add(sellerDash, "sellerDash");
                         mainPanel.add(statisticsMenu, "statisticsMenu");
                         mainPanel.add(storesMenu, "storesMenu");
                         mainPanel.add(changeAccountMenu, "changeAccountMenu");
+                        cardLayout.show(mainPanel, "sellerDash");
                     } else {
                         JOptionPane.showMessageDialog(f, "Incorrect email or password");
                     }
@@ -257,7 +258,7 @@ public class GUIMain extends JComponent implements Runnable {
         return result;
     }
 
-    public static JPanel sellerDash(JFrame f) {
+    public static JPanel sellerDash() {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
         panel.setLayout(new GridLayout(4, 1));
@@ -324,12 +325,18 @@ public class GUIMain extends JComponent implements Runnable {
                         pr.println(fI);
                         pr.flush();
                         try {
-                            int inp = Integer.parseInt(br.readLine());
-                            for(int i=0;i<inp;i++) {
-                                System.out.println(
-                                        br.readLine()
-                                );
-                            }
+                            //add store menu
+                            JPanel storeMenu = storeMenu(writer, reader);
+                            mainPanel.add(storeMenu, "storeMenu");
+                            cardLayout.show(mainPanel, "storeMenu");
+
+
+//                            int inp = Integer.parseInt(br.readLine());
+//                            for(int i=0;i<inp;i++) {
+//                                System.out.println(
+//                                        br.readLine()
+//                                );
+//                            }
                         }
                         catch (Exception f) {
                             f.printStackTrace();
@@ -387,10 +394,12 @@ public class GUIMain extends JComponent implements Runnable {
         return result;
     }
 
-    public static void storeMenu(JFrame f, PrintWriter pr, BufferedReader br, int numTickets) {
+    public static JPanel storeMenu(PrintWriter pr, BufferedReader br) {
         JPanel panel = new JPanel();
+        JPanel result = new JPanel(new BorderLayout());
         JButton newTix = new JButton("Add new Ticket");
         try {
+            int numTickets = Integer.parseInt(br.readLine());
             panel.setLayout(new GridLayout(numTickets+1, 1));
             panel.add(newTix);
             for(int i = 0; i < numTickets; i++) {
@@ -422,7 +431,8 @@ public class GUIMain extends JComponent implements Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        f.add(panel, BorderLayout.CENTER);
+        result.add(panel, BorderLayout.CENTER);
+        return result;
     }
 
 }
