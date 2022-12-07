@@ -82,9 +82,10 @@ public class ClientThread implements Runnable {
                                 }
                             } else if (action.equals("enterStore")) {
                                 int choice2 = Integer.parseInt(br.readLine());
-                                Store store = seller.getStores().get(choice2 - 2);
+                                Store store = seller.getStores().get(choice2);
                                 ArrayList<Ticket> storeProducts = store.getTickets();
                                 pr.println(storeProducts.size());
+                                System.out.println(store.getName());
                                 pr.flush();
                                 for (int i = 0; i < storeProducts.size(); i++) {
                                     pr.println((i + 2) + ". " + storeProducts.get(i));
