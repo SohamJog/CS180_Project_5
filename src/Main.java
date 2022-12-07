@@ -270,6 +270,8 @@ class Main {
                     ArrayList<Store> stores;
 
                     do {
+
+
                         stores = seller.getStores();
                         //System.out.println("0. Go Back\n1. Create New Store");
                         String opti = client.showStoreOptions();
