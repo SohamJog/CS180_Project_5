@@ -425,4 +425,9 @@ public class GUIMain extends JComponent implements Runnable {
         f.add(panel, BorderLayout.CENTER);
     }
 
+    public static void prodMenu(JFrame f, PrintWriter pr, BufferedReader br) {
+        JPanel panel = new JPanel();
+
+    }
+
 }
