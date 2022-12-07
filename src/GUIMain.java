@@ -247,7 +247,17 @@ public class GUIMain extends JComponent implements Runnable {
         JPanel panel = new JPanel();
         pr.println("listStores");
         pr.flush();
-        br.readLine();
+        try {
+            int numStores = Integer.parseInt(br.readLine());
+            for(int i = 0; i < numStores; i++) {
+                String storeName = br.readLine();
+                JButton store = new JButton(storeName);
+                panel.add(store);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     public static void customerDash(JFrame f) {
