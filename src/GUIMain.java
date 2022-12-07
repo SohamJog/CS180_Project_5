@@ -62,6 +62,8 @@ public class GUIMain extends JComponent implements Runnable {
         JPanel changeAccountMenu = changeAccountMenu(writer, reader);
         JPanel statisticsMenu = statisticsMenu(writer, reader);
         JPanel customerDash = customerDash();
+        JPanel storeMenu = storeMenu(writer, reader);
+        JPanel market = market(writer, reader);
         mainPanel.add(signInUp, "signInUp");
         mainPanel.add(signUp, "signUp");
         mainPanel.add(signIn, "signIn");
@@ -69,6 +71,8 @@ public class GUIMain extends JComponent implements Runnable {
         mainPanel.add(changeAccountMenu, "changeAccountMenu");
         mainPanel.add(statisticsMenu, "statisticsMenu");
         mainPanel.add(customerDash, "customerDash");
+        mainPanel.add(storeMenu, "storeMenu");
+        mainPanel.add(market, "market");
         cardLayout.show(mainPanel, "signInUp");
         frame.add(mainPanel);
 
@@ -90,7 +94,7 @@ public class GUIMain extends JComponent implements Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        storeMenu(frame, writer, reader);
+        storeMenu(writer, reader);
         frame.setVisible(true);
     }
 
@@ -295,8 +299,9 @@ public class GUIMain extends JComponent implements Runnable {
         return result;
     }
 
-    public static void storeMenu(JFrame f, PrintWriter pr, BufferedReader br) {
+    public static JPanel storeMenu(PrintWriter pr, BufferedReader br) {
         JPanel panel = new JPanel();
+        JPanel result = new JPanel(new BorderLayout());
         pr.println("listStores");
         pr.flush();
         JButton newStore = new JButton("Add new store");
@@ -322,7 +327,8 @@ public class GUIMain extends JComponent implements Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        f.add(panel, BorderLayout.CENTER);
+        result.add(panel, BorderLayout.CENTER);
+        return result;
     }
 
     public static JPanel customerDash() {
@@ -343,8 +349,9 @@ public class GUIMain extends JComponent implements Runnable {
         return result;
     }
 
-    public static void market(JFrame f, PrintWriter pr, BufferedReader br) {
+    public static JPanel market(PrintWriter pr, BufferedReader br) {
         JPanel panel = new JPanel();
+        JPanel result = new JPanel(new BorderLayout());
         pr.println("displayMarketplace");
         pr.flush();
         JButton newStore = new JButton("Add new store");
@@ -360,7 +367,8 @@ public class GUIMain extends JComponent implements Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        f.add(panel, BorderLayout.CENTER);
+        result.add(panel, BorderLayout.CENTER);
+        return result;
     }
 
 }
