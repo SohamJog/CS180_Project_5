@@ -52,7 +52,7 @@ public class GUIMain extends JComponent implements Runnable {
 //        frame.setVisible(true);
 //        if(choice.equals("Sign up")) {
 //            frame.removeAll();
-        sellerDash(frame);
+            sellerDash(frame);
 //        }
         frame.setVisible(true);
     }
@@ -244,7 +244,7 @@ public class GUIMain extends JComponent implements Runnable {
     }
 
     //public static void storeMenu(JFrame f, PrintWriter pr, BufferedReader br) {
-    //get stores
+       //get stores
     //}
 
     public static void customerDash(JFrame f) {
