@@ -262,12 +262,21 @@ public class GUIMain extends JComponent implements Runnable {
         JButton newStore = new JButton("Add new store");
         try {
             int numStores = Integer.parseInt(br.readLine());
-            System.out.println(numStores);
             panel.setLayout(new GridLayout(numStores+1, 1));
             panel.add(newStore);
             for(int i = 0; i < numStores; i++) {
                 String storeName = br.readLine();
                 JButton store = new JButton(storeName);
+                final int fI = i;
+                store.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        pr.println("enterStore");
+                        pr.flush();
+                        pr.println(fI);
+                        pr.flush();
+                    }
+                });
                 panel.add(store);
             }
         } catch (Exception e) {
@@ -304,13 +313,6 @@ public class GUIMain extends JComponent implements Runnable {
             for(int i = 0; i < numStores; i++) {
                 String storeName = br.readLine();
                 JButton store = new JButton(storeName);
-                store.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        pr.println(storeName);
-                        pr.flush();
-                    }
-                });
                 panel.add(store);
             }
         } catch (Exception e) {
