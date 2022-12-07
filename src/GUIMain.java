@@ -243,9 +243,12 @@ public class GUIMain extends JComponent implements Runnable {
         f.add(panel, BorderLayout.CENTER);
     }
 
-    //public static void storeMenu(JFrame f, PrintWriter pr, BufferedReader br) {
-       //get stores
-    //}
+    public static void storeMenu(JFrame f, PrintWriter pr, BufferedReader br) {
+        JPanel panel = new JPanel();
+        pr.println("listStores");
+        pr.flush();
+        br.readLine();
+    }
 
     public static void customerDash(JFrame f) {
         JPanel panel = new JPanel();
