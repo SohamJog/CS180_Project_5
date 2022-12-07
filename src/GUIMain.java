@@ -4,9 +4,7 @@ import java.awt.event.*;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.JarURLConnection;
 import java.net.Socket;
-import java.time.chrono.JapaneseChronology;
 
 public class GUIMain extends JComponent implements Runnable {
     private static String choice;
@@ -81,6 +79,18 @@ public class GUIMain extends JComponent implements Runnable {
 //            frame.removeAll();
 //            sellerDash(frame);
 //        }
+        writer.println("sellerSignin");
+        writer.flush();
+        writer.println("soham");
+        writer.flush();
+        writer.println("soham");
+        writer.flush();
+        try {
+            reader.readLine();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        storeMenu(frame, writer, reader);
         frame.setVisible(true);
     }
 
@@ -285,9 +295,26 @@ public class GUIMain extends JComponent implements Runnable {
         return result;
     }
 
-    //public static void storeMenu(JFrame f, PrintWriter pr, BufferedReader br) {
-       //get stores
-    //}
+    public static void storeMenu(JFrame f, PrintWriter pr, BufferedReader br) {
+        JPanel panel = new JPanel();
+        pr.println("listStores");
+        pr.flush();
+        JButton newStore = new JButton("Add new store");
+        try {
+            int numStores = Integer.parseInt(br.readLine());
+            System.out.println(numStores);
+            panel.setLayout(new GridLayout(numStores+1, 1));
+            panel.add(newStore);
+            for(int i = 0; i < numStores; i++) {
+                String storeName = br.readLine();
+                JButton store = new JButton(storeName);
+                panel.add(store);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        f.add(panel, BorderLayout.CENTER);
+    }
 
     public static JPanel customerDash() {
         JPanel panel = new JPanel();
@@ -305,6 +332,33 @@ public class GUIMain extends JComponent implements Runnable {
         panel.add(stats);
         result.add(panel, BorderLayout.CENTER);
         return result;
+    }
+
+    public static void market(JFrame f, PrintWriter pr, BufferedReader br) {
+        JPanel panel = new JPanel();
+        pr.println("displayMarketplace");
+        pr.flush();
+        JButton newStore = new JButton("Add new store");
+        try {
+            int numStores = Integer.parseInt(br.readLine());
+            panel.setLayout(new GridLayout(numStores+1, 1));
+            panel.add(newStore);
+            for(int i = 0; i < numStores; i++) {
+                String storeName = br.readLine();
+                JButton store = new JButton(storeName);
+                store.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        pr.println(storeName);
+                        pr.flush();
+                    }
+                });
+                panel.add(store);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        f.add(panel, BorderLayout.CENTER);
     }
 
 }

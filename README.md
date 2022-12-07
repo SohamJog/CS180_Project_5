@@ -1,8 +1,8 @@
 # CS180_Project_4
 
 ## Instructions - How to run and compile:
-- Step 1 - Clone or download the souce code from this repository
-- Step 2 - Run the main method in the Main.java using a IDE or terminal
+- Step 1 - Clone or download the source code from this repository
+- Step 2 - Run the main method in the Main.java using an IDE or terminal
 - Step 3 - You will see directions printed out on the console once you run the main method. Simply follow the directions and choose the options you want to proceed!
 
 ## Submissions:
@@ -11,8 +11,8 @@
 
 ## Class Explainations:
     
-### Main Class
-The main class contains the main method that interacts with the user by asking for input on the console, taking in the inputs, process the data (calling different methods), and prints out the results on the console.
+### GUIMain Class
+The main class contains the main method that interacts with the user by asking for input , taking in the inputs through GUI and processes the data (calling different methods), and gives the respective results through GUI.
 
 ### User Class
 The User class contains the information about the user, including name(String), email(String), password(String), and shoppingCart(ArrayList). It also contains the following functionalities:
@@ -34,7 +34,7 @@ The User class contains the information about the user, including name(String), 
   - Testing: tested in the main method + test cases in Testing class
   
 - buyTicket:
-  - Allows the user to buy a ticket. This method updates the user's shoopping cart (since they have bought it) and updates the related files.
+  - Allows the user to buy a ticket. This method updates the user's shopping cart (since they have bought it) and updates the related files.
   - Testing: tested in the main method + test cases in Testing class
 
 - displayPastTransactions:
@@ -154,5 +154,20 @@ The Ticket class contains the information about the Ticket, including ticket id(
   - Prints all the details about the product on the console.
   - Testing: tested in the main method + test cases in Testing class
 
-### Testing Class
-The Testing class allows to check if the application runs without errors and check various scenarios to ensure the application runs smoothly.
+### ClientThread Class
+Creates a Thread using Runnable , allowing multiple clients to access the application independently and concurrently.
+
+- displayMarketPlace:
+   - Displays the existing marketplace to the user and allows them to sort the data.
+   - ##Testing
+
+- storeDash:
+  - Displays Dashboard of past transactions and corresponding details to the seller and allows them to sort the data
+ 
+- customerStats:
+   - Displays information about customers and their data about previous information by store to the seller. Allows the seller
+      to sort the data
+
+- productStats:
+   - Displays information about products , how many were sold at what price and other details in a store to the seller. Allows seller
+     to sort the data.
