@@ -90,7 +90,7 @@ public class GUIMain extends JComponent implements Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        storeMenu(frame, writer, reader);
+        storesMenu(frame, writer, reader);
         frame.setVisible(true);
     }
 
@@ -296,7 +296,7 @@ public class GUIMain extends JComponent implements Runnable {
     }
 
 
-    public static void storeMenu(JFrame f, PrintWriter pr, BufferedReader br) {
+    public static void storesMenu(JFrame f, PrintWriter pr, BufferedReader br) {
         JPanel panel = new JPanel();
         pr.println("listStores");
         pr.flush();
@@ -371,6 +371,46 @@ public class GUIMain extends JComponent implements Runnable {
                 JButton store = new JButton(storeName);
 
                 panel.add(store);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        f.add(panel, BorderLayout.CENTER);
+    }
+
+    public static void storeMenu(JFrame f, PrintWriter pr, BufferedReader br, int numTickets) {
+        JPanel panel = new JPanel();
+        JButton newTix = new JButton("Add new Ticket");
+        try {
+            panel.setLayout(new GridLayout(numTickets+1, 1));
+            panel.add(newTix);
+            for(int i = 0; i < numTickets; i++) {
+                String tixName = br.readLine();
+                JButton tick = new JButton(tixName);
+                final int fI = i;
+                tick.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        System.out.println(fI);
+                        pr.println("enterStore");
+                        pr.flush();
+                        pr.println(fI);
+                        pr.flush();
+                        try {
+                            int inp = Integer.parseInt(br.readLine());
+                            for(int i=0;i<inp;i++) {
+                                System.out.println(
+                                        br.readLine()
+                                );
+                            }
+                        }
+                        catch (Exception f) {
+                            f.printStackTrace();
+                        }
+
+                    }
+                });
+                panel.add(tick);
             }
         } catch (Exception e) {
             e.printStackTrace();

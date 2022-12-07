@@ -88,7 +88,7 @@ public class ClientThread implements Runnable {
                                // System.out.println(store.getName());
                                 pr.flush();
                                 for (int i = 0; i < storeProducts.size(); i++) {
-                                    pr.println((i + 2) + ". " + storeProducts.get(i));
+                                    pr.println(storeProducts.get(i));
                                     pr.flush();
                                 }
 
