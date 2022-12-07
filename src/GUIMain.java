@@ -271,10 +271,23 @@ public class GUIMain extends JComponent implements Runnable {
                 store.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+                        System.out.println(fI);
                         pr.println("enterStore");
                         pr.flush();
                         pr.println(fI);
                         pr.flush();
+                        try {
+                            int inp = Integer.parseInt(br.readLine());
+                            for(int i=0;i<inp;i++) {
+                                System.out.println(
+                                        br.readLine()
+                                );
+                            }
+                        }
+                        catch (Exception f) {
+                            f.printStackTrace();
+                        }
+
                     }
                 });
                 panel.add(store);
@@ -313,6 +326,7 @@ public class GUIMain extends JComponent implements Runnable {
             for(int i = 0; i < numStores; i++) {
                 String storeName = br.readLine();
                 JButton store = new JButton(storeName);
+
                 panel.add(store);
             }
         } catch (Exception e) {
