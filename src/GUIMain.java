@@ -52,8 +52,20 @@ public class GUIMain extends JComponent implements Runnable {
 //        frame.setVisible(true);
 //        if(choice.equals("Sign up")) {
 //            frame.removeAll();
-            storeMenu(frame, writer, reader);
+
 //        }
+        writer.println("sellerSignin");
+        writer.flush();
+        writer.println("soham");
+        writer.flush();
+        writer.println("soham");
+        writer.flush();
+        try {
+            reader.readLine();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        storeMenu(frame, writer, reader);
         frame.setVisible(true);
     }
 
@@ -280,6 +292,24 @@ public class GUIMain extends JComponent implements Runnable {
         f.add(panel, BorderLayout.CENTER);
     }
 
-   // public static void market(JFrame f, PrintWriter pr, BufferedReader br)
+    public static void market(JFrame f, PrintWriter pr, BufferedReader br) {
+        JPanel panel = new JPanel();
+        pr.println("listStores");
+        pr.flush();
+        JButton newStore = new JButton("Add new store");
+        try {
+            int numStores = Integer.parseInt(br.readLine());
+            panel.setLayout(new GridLayout(numStores+1, 1));
+            panel.add(newStore);
+            for(int i = 0; i < numStores; i++) {
+                String storeName = br.readLine();
+                JButton store = new JButton(storeName);
+                panel.add(store);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        f.add(panel, BorderLayout.CENTER);
+    }
 
 }
