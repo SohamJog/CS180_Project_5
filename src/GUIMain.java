@@ -4,17 +4,23 @@ import java.awt.event.*;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.JarURLConnection;
 import java.net.Socket;
+import java.time.chrono.JapaneseChronology;
 
 public class GUIMain extends JComponent implements Runnable {
-    public static String choice;
+    private static String choice;
+    private static CardLayout cardLayout = new CardLayout();
+    private static JPanel mainPanel = new JPanel();
+    private static Socket socket;
+    private static BufferedReader reader;
+    private static PrintWriter writer;
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new GUIMain());
     }
 
-    @Override
-    public void run() {
+    public GUIMain() {
         Socket socket = null;
         BufferedReader reader = null;
         PrintWriter writer = null;
@@ -33,7 +39,10 @@ public class GUIMain extends JComponent implements Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
+    @Override
+    public void run() {
         Client client = new Client();
 
         JFrame frame = new JFrame("Ticket Emporium");
@@ -47,18 +56,37 @@ public class GUIMain extends JComponent implements Runnable {
         // Set the layout for the frame
         frame.setLayout(new BorderLayout());
 
+        mainPanel.setLayout(cardLayout);
+        JPanel signInUp = signInUp();
+        JPanel signUp = signUp(frame, writer, reader);
+        JPanel signIn = signIn(frame, writer, reader);
+        JPanel sellerDash = sellerDash(frame);
+        JPanel changeAccountMenu = changeAccountMenu(writer, reader);
+        JPanel statisticsMenu = statisticsMenu(writer, reader);
+        JPanel customerDash = customerDash();
+        mainPanel.add(signInUp, "signInUp");
+        mainPanel.add(signUp, "signUp");
+        mainPanel.add(signIn, "signIn");
+        mainPanel.add(sellerDash, "sellerDash");
+        mainPanel.add(changeAccountMenu, "changeAccountMenu");
+        mainPanel.add(statisticsMenu, "statisticsMenu");
+        mainPanel.add(customerDash, "customerDash");
+        cardLayout.show(mainPanel, "signInUp");
+        frame.add(mainPanel);
+
         // Create a new JPanel to hold the input fields
 //        signInUp(frame);
 //        frame.setVisible(true);
 //        if(choice.equals("Sign up")) {
 //            frame.removeAll();
-            sellerDash(frame);
+//            sellerDash(frame);
 //        }
         frame.setVisible(true);
     }
 
-    public static void signInUp(JFrame f) {
+    public static JPanel signInUp() {
         JPanel panel = new JPanel();
+        JPanel result = new JPanel(new BorderLayout());
         panel.setLayout(new FlowLayout());
         panel.add(new JLabel("What would you like to do"));
         String[] options = {"Sign in", "Sign up"};
@@ -75,15 +103,22 @@ public class GUIMain extends JComponent implements Runnable {
             @Override
             public void actionPerformed(ActionEvent e) {
                 choice = (String) comboBox.getSelectedItem();
+                if (choice.equals("Sign up")) {
+                    cardLayout.show(mainPanel, "signUp");
+                } else if (choice.equals("Sign in")) {
+                    cardLayout.show(mainPanel, "signIn");
+                }
             }
         });
 
-        f.add(bPanel, BorderLayout.SOUTH);
-        f.add(panel, BorderLayout.CENTER);
+        result.add(bPanel, BorderLayout.SOUTH);
+        result.add(panel, BorderLayout.CENTER);
+        return result;
     }
 
-    public static boolean signUp(JFrame f, PrintWriter pr, BufferedReader br) {
+    public static JPanel signUp(JFrame f, PrintWriter pr, BufferedReader br) {
         JPanel panel = new JPanel();
+        JPanel result = new JPanel(new BorderLayout());
         panel.setLayout(new GridLayout(3,2));
         JTextField nameField = new JTextField();
         JTextField emailField = new JTextField();
@@ -145,13 +180,14 @@ public class GUIMain extends JComponent implements Runnable {
                 }
             }
         });
-        f.add(panel, BorderLayout.CENTER);
-        f.add(bPanel, BorderLayout.SOUTH);
-        return true;
+        result.add(panel, BorderLayout.CENTER);
+        result.add(bPanel, BorderLayout.SOUTH);
+        return result;
     }
 
-    public static boolean signIn(JFrame f, PrintWriter pr, BufferedReader br) {
+    public static JPanel signIn(JFrame f, PrintWriter pr, BufferedReader br) {
         JPanel panel = new JPanel();
+        JPanel result = new JPanel(new BorderLayout());
         panel.setLayout(new GridLayout(2,2));
         JTextField emailField = new JTextField();
         JTextField passwordField = new JTextField();
@@ -200,13 +236,14 @@ public class GUIMain extends JComponent implements Runnable {
                 }
             }
         });
-        f.add(panel, BorderLayout.CENTER);
-        f.add(bPanel, BorderLayout.SOUTH);
-        return true;
+        result.add(panel, BorderLayout.CENTER);
+        result.add(bPanel, BorderLayout.SOUTH);
+        return result;
     }
 
-    public static void sellerDash(JFrame f) {
+    public static JPanel sellerDash(JFrame f) {
         JPanel panel = new JPanel();
+        JPanel result = new JPanel(new BorderLayout());
         panel.setLayout(new GridLayout(4, 1));
         JButton change = new JButton("Change Account Details");
         JButton stores = new JButton("Access Stores");
@@ -216,11 +253,13 @@ public class GUIMain extends JComponent implements Runnable {
         panel.add(cart);
         panel.add(change);
         panel.add(stats);
-        f.add(panel, BorderLayout.CENTER);
+        result.add(panel, BorderLayout.CENTER);
+        return result;
     }
 
-    public static void changeAccountMenu(JFrame f, PrintWriter pr, BufferedReader br) {
+    public static JPanel changeAccountMenu(PrintWriter pr, BufferedReader br) {
         JPanel panel = new JPanel();
+        JPanel result = new JPanel(new BorderLayout());
         panel.setLayout(new GridLayout(3, 1));
         JButton change = new JButton("Change Name");
         JButton stores = new JButton("Change Password");
@@ -228,11 +267,13 @@ public class GUIMain extends JComponent implements Runnable {
         panel.add(change);
         panel.add(stores);
         panel.add(cart);
-        f.add(panel, BorderLayout.CENTER);
+        result.add(panel, BorderLayout.CENTER);
+        return result;
     }
 
-    public static void statisticsMenu(JFrame f, PrintWriter pr, BufferedReader br) {
+    public static JPanel statisticsMenu(PrintWriter pr, BufferedReader br) {
         JPanel panel = new JPanel();
+        JPanel result = new JPanel(new BorderLayout());
         panel.setLayout(new GridLayout(3, 1));
         JButton change = new JButton("View Statistics by Store");
         JButton stores = new JButton("View Statistics by Product");
@@ -240,15 +281,17 @@ public class GUIMain extends JComponent implements Runnable {
         panel.add(change);
         panel.add(stores);
         panel.add(cart);
-        f.add(panel, BorderLayout.CENTER);
+        result.add(panel, BorderLayout.CENTER);
+        return result;
     }
 
     //public static void storeMenu(JFrame f, PrintWriter pr, BufferedReader br) {
        //get stores
     //}
 
-    public static void customerDash(JFrame f) {
+    public static JPanel customerDash() {
         JPanel panel = new JPanel();
+        JPanel result = new JPanel(new BorderLayout());
         panel.setLayout(new GridLayout(5, 1));
         JButton change = new JButton("Buy Tickets");
         JButton stores = new JButton("Shopping Cart");
@@ -260,7 +303,8 @@ public class GUIMain extends JComponent implements Runnable {
         panel.add(cart);
         panel.add(history);
         panel.add(stats);
-        f.add(panel, BorderLayout.CENTER);
+        result.add(panel, BorderLayout.CENTER);
+        return result;
     }
 
 }
