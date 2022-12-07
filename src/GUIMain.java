@@ -295,6 +295,7 @@ public class GUIMain extends JComponent implements Runnable {
         return result;
     }
 
+
     public static void storeMenu(JFrame f, PrintWriter pr, BufferedReader br) {
         JPanel panel = new JPanel();
         pr.println("listStores");
