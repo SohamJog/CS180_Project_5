@@ -294,7 +294,7 @@ public class GUIMain extends JComponent implements Runnable {
 
     public static void market(JFrame f, PrintWriter pr, BufferedReader br) {
         JPanel panel = new JPanel();
-        pr.println("listStores");
+        pr.println("displayMarketplace");
         pr.flush();
         JButton newStore = new JButton("Add new store");
         try {
@@ -304,6 +304,13 @@ public class GUIMain extends JComponent implements Runnable {
             for(int i = 0; i < numStores; i++) {
                 String storeName = br.readLine();
                 JButton store = new JButton(storeName);
+                store.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        pr.println(storeName);
+                        pr.flush();
+                    }
+                });
                 panel.add(store);
             }
         } catch (Exception e) {
