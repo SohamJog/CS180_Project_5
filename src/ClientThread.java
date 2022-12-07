@@ -88,7 +88,7 @@ public class ClientThread implements Runnable {
                                // System.out.println(store.getName());
                                 pr.flush();
                                 for (int i = 0; i < storeProducts.size(); i++) {
-                                    pr.println((i + 2) + ". " + storeProducts.get(i));
+                                    pr.println(storeProducts.get(i));
                                     pr.flush();
                                 }
 
@@ -111,7 +111,7 @@ public class ClientThread implements Runnable {
                                         }
                                     } else if (storeAction.equals("accessTicket")) {
                                         int ticketNumber = Integer.parseInt(br.readLine());
-                                        Ticket t = store.getTickets().get(ticketNumber - 2);
+                                        Ticket t = store.getTickets().get(ticketNumber);
                                         pr.println(t);
                                         pr.flush();
 
