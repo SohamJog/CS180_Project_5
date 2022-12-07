@@ -212,23 +212,53 @@ public class GUIMain extends JComponent implements Runnable {
         JButton stores = new JButton("Access Stores");
         JButton cart = new JButton("View Products in Shopping Carts");
         JButton stats = new JButton("View Statistics");
-        panel.add(change);
         panel.add(stores);
         panel.add(cart);
+        panel.add(change);
         panel.add(stats);
         f.add(panel, BorderLayout.CENTER);
     }
 
     public static void changeAccountMenu(JFrame f, PrintWriter pr, BufferedReader br) {
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(4, 1));
-        JButton change = new JButton("Change Account Details");
-        JButton stores = new JButton("Access Stores");
-        JButton cart = new JButton("View Products in Shopping Carts");
+        panel.setLayout(new GridLayout(3, 1));
+        JButton change = new JButton("Change Name");
+        JButton stores = new JButton("Change Password");
+        JButton cart = new JButton("Delete Account");
+        panel.add(change);
+        panel.add(stores);
+        panel.add(cart);
+        f.add(panel, BorderLayout.CENTER);
+    }
+
+    public static void statisticsMenu(JFrame f, PrintWriter pr, BufferedReader br) {
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(3, 1));
+        JButton change = new JButton("View Statistics by Store");
+        JButton stores = new JButton("View Statistics by Product");
+        JButton cart = new JButton("View Statistics by Customer");
+        panel.add(change);
+        panel.add(stores);
+        panel.add(cart);
+        f.add(panel, BorderLayout.CENTER);
+    }
+
+    //public static void storeMenu(JFrame f, PrintWriter pr, BufferedReader br) {
+       //get stores
+    //}
+
+    public static void customerDash(JFrame f) {
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(5, 1));
+        JButton change = new JButton("Buy Tickets");
+        JButton stores = new JButton("Shopping Cart");
+        JButton cart = new JButton("Change Account Info");
+        JButton history = new JButton("View Purchase History");
         JButton stats = new JButton("View Statistics");
         panel.add(change);
         panel.add(stores);
         panel.add(cart);
+        panel.add(history);
         panel.add(stats);
         f.add(panel, BorderLayout.CENTER);
     }
