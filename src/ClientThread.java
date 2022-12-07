@@ -16,12 +16,12 @@ public class ClientThread implements Runnable {
         try {
             br = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
             pr = new PrintWriter(socket.getOutputStream());
+            pr.println("Connected");
+            pr.flush();
 
             // 1 - what would you like to do? (sign in or sign up)
             String signInUp;
             do { // an option to quit - not sure if needed tho
-                pr.println("Connected");
-                pr.flush();
                 signInUp = br.readLine();
                 if (signInUp.equals("sellerSignup")) {
                     String name = br.readLine();
