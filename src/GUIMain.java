@@ -373,6 +373,7 @@ public class GUIMain extends JComponent implements Runnable {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
         pr.println("listStores");
+        pr.flush();
         JButton newStore = new JButton("Add new store");
         newStore.addActionListener(new ActionListener() {
             @Override
