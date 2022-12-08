@@ -874,7 +874,7 @@ public class GUIMain extends JComponent implements Runnable {
             System.out.println(numTix);
             panel.setLayout(new GridLayout(numTix, 1));
             for(int i = 0; i < numTix; i++) {
-                JButton tix = new JButton(br.readLine());
+                JButton tix = new JButton(br.readLine() +" "+ br.readLine() +" "+ br.readLine() + " " + br.readLine());
                 final int fI = i;
                 tix.addActionListener(new ActionListener() {
                     @Override

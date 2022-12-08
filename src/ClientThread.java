@@ -219,6 +219,8 @@ public class ClientThread implements Runnable {
                                         pr.flush();
                                     }
                                     if (choice2.equals("sort")) {
+                                        pr.println(market.size());
+                                        pr.flush();
                                         market = displayMarketplace(true, search);
                                     } else if (choice2.equals("search")) {
                                         String searchWord = br.readLine();
