@@ -13,6 +13,17 @@ public class GUIMain extends JComponent implements Runnable {
     private static Socket socket;
     private static BufferedReader reader;
     private static PrintWriter writer;
+    private static JPanel signInUp;
+    private static JPanel signUp;
+    private static JPanel signIn;
+    private static JPanel sellerDash;
+    private static JPanel storesMenu;
+    private static JPanel statisticsMenu;
+    private static JPanel changeAccountMenu;
+    private static JPanel prodStats;
+    private static JPanel storeMenu;
+    private static JPanel customerDash;
+    private static JPanel market;
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new GUIMain());
@@ -57,9 +68,9 @@ public class GUIMain extends JComponent implements Runnable {
         frame.setLayout(new BorderLayout());
 
         mainPanel.setLayout(cardLayout);
-        JPanel signInUp = signInUp();
-        JPanel signUp = signUp(frame, writer, reader);
-        JPanel signIn = signIn(frame, writer, reader);
+        signInUp = signInUp();
+        signUp = signUp(frame, writer, reader);
+        signIn = signIn(frame, writer, reader);
 //        JPanel customerDash = customerDash();
 //        JPanel market = market(writer, reader);
         mainPanel.add(signInUp, "signInUp");
@@ -288,10 +299,10 @@ public class GUIMain extends JComponent implements Runnable {
 
                     if(inp.equals("true")) {
                         JOptionPane.showMessageDialog(f, "Signed in successfully!");
-                        JPanel sellerDash = sellerDash(pr, br);
-                        JPanel storesMenu = storesMenu(pr, br);
-                        JPanel statisticsMenu = statisticsMenu(pr, br);
-                        JPanel changeAccountMenu = changeAccountMenu(pr, br);
+                        sellerDash = sellerDash(pr, br);
+                        storesMenu = storesMenu(pr, br);
+                        statisticsMenu = statisticsMenu(pr, br);
+                        changeAccountMenu = changeAccountMenu(pr, br);
                         mainPanel.add(sellerDash, "sellerDash");
                         mainPanel.add(statisticsMenu, "statisticsMenu");
                         mainPanel.add(storesMenu, "storesMenu");
@@ -432,7 +443,7 @@ public class GUIMain extends JComponent implements Runnable {
         product.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JPanel prodStats = prodStats(pr, br, "n");
+                prodStats = prodStats(pr, br, "n");
                 mainPanel.add(prodStats, "prodStats");
                 cardLayout.show(mainPanel, "prodStats");
             }
@@ -467,9 +478,9 @@ public class GUIMain extends JComponent implements Runnable {
                             JOptionPane.showMessageDialog(panel, "Store created successfully!");
                             pr.println("listStores");
                             pr.flush();
-                            JPanel newStoresPanel = storeMenu(pr, br);
-                            mainPanel.add(newStoresPanel, "newStoresPanel");
-                            cardLayout.show(mainPanel, "newStoresPanel");
+                            storesMenu = storesMenu(pr, br);
+                            mainPanel.add(storesMenu, "storesMenu");
+                            cardLayout.show(mainPanel, "storesMenu");
                         } else {
                             JOptionPane.showMessageDialog(panel, "Store with that name already exists!");
                         }
@@ -510,7 +521,7 @@ public class GUIMain extends JComponent implements Runnable {
                         pr.flush();
                         try {
                             //add store menu
-                            JPanel storeMenu = storeMenu(pr, br);
+                            storeMenu = storeMenu(pr, br);
                             mainPanel.add(storeMenu, "storeMenu");
                             cardLayout.show(mainPanel, "storeMenu");
 
@@ -553,11 +564,10 @@ public class GUIMain extends JComponent implements Runnable {
         reload.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JPanel newCustomerDash = customerDash(pr, br);
-                mainPanel.add(newCustomerDash, "newCustomerDash");
-                cardLayout.show(mainPanel, "newCustomerDash");
+                // todo - jenny
             }
         });
+        panel.add(reload);
         logOut.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -641,11 +651,12 @@ public class GUIMain extends JComponent implements Runnable {
         reload.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JPanel newStoreMenu = storeMenu(pr, br);
-                mainPanel.add(newStoreMenu, "newStoreMenu");
-                cardLayout.show(mainPanel, "newStoreMenu");
+                storeMenu = storeMenu(pr, br);
+                mainPanel.add(storeMenu, "storeMenu");
+                cardLayout.show(mainPanel, "storeMenu");
             }
         });
+        panel.add(reload);
 
         try {
             int numTickets = Integer.parseInt(br.readLine());
@@ -750,13 +761,11 @@ public class GUIMain extends JComponent implements Runnable {
         reload.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               // pr.println("reload");
-               // pr.flush();
-                JPanel newCartMenu = cartMenu(pr, br);
-                mainPanel.add(newCartMenu, "newCartMenu");
-                cardLayout.show(mainPanel, "newCartMenu");
+                // todo - jenny
             }
         });
+        panel.add(reload);
+
         try {
             panel.setLayout(new GridLayout(Integer.parseInt(br.readLine()), 1));
         } catch (Exception e) {
@@ -796,9 +805,9 @@ public class GUIMain extends JComponent implements Runnable {
         sort.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JPanel newProdStats = prodStats(pr, br, "y");
-                mainPanel.add(newProdStats, "newProdStats");
-                cardLayout.show(mainPanel, "newProdStats");
+                prodStats = prodStats(pr, br, "n");
+                mainPanel.add(prodStats, "prodStats");
+                cardLayout.show(mainPanel, "prodStats");
             }
         });
         buttons.add(goBack);
