@@ -209,7 +209,13 @@ public class ClientThread implements Runnable {
                                     pr.println(market.size());
                                     pr.flush();
                                     for (int i = 0; i < market.size(); i++) {
-                                        pr.println(market.get(i));
+                                        pr.println(market.get(i).getName());
+                                        pr.flush();
+                                        pr.println(market.get(i).getSellerEmail());
+                                        pr.flush();
+                                        pr.println(market.get(i).getStoreName());
+                                        pr.flush();
+                                        pr.println(market.get(i).getPrice());
                                         pr.flush();
                                     }
                                     if (choice2.equals("sort")) {

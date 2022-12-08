@@ -498,13 +498,8 @@ public class GUIMain extends JComponent implements Runnable {
                     if(inp.equals("true")) {
                         JOptionPane.showMessageDialog(f, "Signed in successfully!");
                         customerDash = customerDash(pr, br);
-                        System.out.println("one");
-//                        market = market(pr, br);
                         mainPanel.add(customerDash, "customerDash");
-                        System.out.println("two");
-//                        mainPanel.add(market, "market");
                         cardLayout.show(mainPanel, "customerDash");
-                        System.out.println("three");
                     } else {
                         JOptionPane.showMessageDialog(f, "Incorrect email or password");
                     }
@@ -623,56 +618,6 @@ public class GUIMain extends JComponent implements Runnable {
         return result;
     }
 
-    public static JPanel ticketMenu(PrintWriter pr, BufferedReader br, int index) {
-        pr.println(index);
-        pr.flush();
-        JPanel panel = new JPanel();
-        JPanel result = new JPanel(new BorderLayout());
-        panel.setLayout(new GridLayout(3, 1));
-        try {
-            panel.add(new JLabel(br.readLine()));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        JTextField quantity = new JTextField("Number of Tickets", 20);
-        JButton add = new JButton("Add to Cart");
-        add.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                pr.println("addToCart");
-                pr.flush();
-                pr.println(quantity.getText());
-                pr.flush();
-                try {
-                    String inp = br.readLine();
-                    if(inp.equals("true")) {
-                        JOptionPane.showMessageDialog(null, "Added to cart!");
-                    }
-                    else {
-                        JOptionPane.showMessageDialog(null, "Not enough tickets");
-                    }
-                } catch (Exception f) {
-                    f.printStackTrace();
-                }
-            }
-        });
-        JButton goBack = new JButton("Go Back");
-        goBack.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                pr.println("goBack");
-                pr.flush();
-                cardLayout.show(mainPanel, "market");
-            }
-        });
-        panel.add(add);
-        JPanel buttonPanel = new JPanel(new FlowLayout());
-        buttonPanel.add(goBack);
-        result.add(panel, BorderLayout.CENTER);
-        result.add(buttonPanel, BorderLayout.SOUTH);
-        return result;
-    }
-
     public static JPanel statisticsMenu(PrintWriter pr, BufferedReader br) {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
@@ -766,6 +711,7 @@ public class GUIMain extends JComponent implements Runnable {
             }
         });
 
+
         try {
             int numStores = Integer.parseInt(br.readLine());
             System.out.println(numStores);
@@ -824,6 +770,15 @@ public class GUIMain extends JComponent implements Runnable {
         JButton logOut = new JButton("Log Out");
         panel.add(logOut);
 
+        change.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                market = market(pr, br);
+                mainPanel.add(market, "market");
+                cardLayout.show(mainPanel, "market");
+            }
+        });
+
         JButton reload = new JButton("Reload");
         reload.addActionListener(new ActionListener() {
             @Override
@@ -852,78 +807,23 @@ public class GUIMain extends JComponent implements Runnable {
     public static JPanel market(PrintWriter pr, BufferedReader br) {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
+
         pr.println("displayMarketplace");
         pr.flush();
+        JButton newStore = new JButton("Add new store");
         try {
-            pr.println("");
-            pr.flush();
-            int numTix = Integer.parseInt(br.readLine());
-            panel.setLayout(new GridLayout(numTix, 1));
-            for(int i = 0; i < numTix; i++) {
-                JButton tix = new JButton(br.readLine());
-                final int fI = i;
-                tix.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        pr.println("accessTicket");
-                        pr.flush();
-                        JPanel ticket = ticketMenu(pr, br, fI);
-                    }
-                });
+            int numStores = Integer.parseInt(br.readLine());
+            panel.setLayout(new GridLayout(numStores+1, 1));
+            panel.add(newStore);
+            for(int i = 0; i < numStores; i++) {
+                String storeName = br.readLine();
+                JButton store = new JButton(storeName);
 
+                panel.add(store);
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-        JPanel buttonPanel = new JPanel(new FlowLayout());
-        JButton goBack = new JButton("Go Back");
-        goBack.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                pr.println("goBack");
-                pr.flush();
-                cardLayout.show(mainPanel, "customerDash");
-            }
-        });
-        buttonPanel.add(goBack);
-        JButton sort = new JButton("Sort");
-        sort.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                pr.println("sort");
-                pr.flush();
-                try {
-                    JPanel newMarket = market(pr, br);
-                    mainPanel.add(newMarket, "newMarket");
-                    cardLayout.show(mainPanel, "newMarket");
-                } catch (Exception f) {
-                    f.printStackTrace();
-                }
-            }
-        });
-        JTextField search = new JTextField(20);
-        JButton searchButton = new JButton("Search");
-        searchButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                pr.println("search");
-                pr.flush();
-                pr.println(search.getText());
-                pr.flush();
-                try {
-                    JPanel newMarket = market(pr, br);
-                    mainPanel.add(newMarket, "newMarket");
-                    cardLayout.show(mainPanel, "newMarket");
-                } catch (Exception f) {
-                    f.printStackTrace();
-                }
-            }
-        });
-        buttonPanel.add(sort);
-        buttonPanel.add(search);
-        buttonPanel.add(searchButton);
-        result.add(buttonPanel, BorderLayout.SOUTH);
         result.add(panel, BorderLayout.CENTER);
         return result;
     }
