@@ -21,6 +21,7 @@ public class GUIMain extends JComponent implements Runnable {
 //    public GUIMain() {
 //
 //    }
+
     @Override
     public void run() {
         Socket socket = null;
@@ -102,6 +103,11 @@ public class GUIMain extends JComponent implements Runnable {
         JPanel bPanel = new JPanel();
         bPanel.setLayout(new FlowLayout());
 
+        //create a jbutton to go back to seller or buyer
+
+
+
+
         // Create a submit button
         JButton submitButton = new JButton("Submit");
         bPanel.add(submitButton);
@@ -154,6 +160,18 @@ public class GUIMain extends JComponent implements Runnable {
         panel.add(passwordField);
         JPanel bPanel = new JPanel();
         bPanel.setLayout(new FlowLayout());
+
+        JButton goBack = new JButton("Go back");
+        bPanel.add(goBack);
+        goBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(mainPanel, "signInUp");
+               // pr.println("quit");
+               // pr.flush();
+            }
+
+        });
 
         // Create a submit button
         JButton submitButton = new JButton("Submit");
@@ -223,6 +241,18 @@ public class GUIMain extends JComponent implements Runnable {
         panel.add(passwordField);
         JPanel bPanel = new JPanel();
         bPanel.setLayout(new FlowLayout());
+
+        JButton goBack = new JButton("Go back");
+        bPanel.add(goBack);
+        goBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(mainPanel, "signInUp");
+                //pr.println("quit");
+                //pr.flush();
+            }
+
+        });
 
         // Create a submit button
         JButton submitButton = new JButton("Submit");
