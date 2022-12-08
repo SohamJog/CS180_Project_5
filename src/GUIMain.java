@@ -543,6 +543,7 @@ public class GUIMain extends JComponent implements Runnable {
         JButton logOut = new JButton("Log Out");
         panel.add(logOut);
 
+        //TODO jenny work on this
         JButton reload = new JButton("Reload");
         reload.addActionListener(new ActionListener() {
             @Override
@@ -737,6 +738,15 @@ public class GUIMain extends JComponent implements Runnable {
 
     public static void cartMenu(PrintWriter pr, BufferedReader br) {
         JPanel panel = new JPanel();
+        //TODO: jenny work on this
+        JButton reload = new JButton("Reload");
+        reload.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               // pr.println("reload");
+               // pr.flush();
+            }
+        });
         try {
             panel.setLayout(new GridLayout(Integer.parseInt(br.readLine()), 1));
         } catch (Exception e) {
