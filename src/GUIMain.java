@@ -455,6 +455,11 @@ public class GUIMain extends JComponent implements Runnable {
                 try {
                     if (br.readLine().equals("true")) {
                         JOptionPane.showMessageDialog(panel, "Store created successfully!");
+                        pr.println("listStores");
+                        pr.flush();
+                        JPanel newStoresPanel = storeMenu(pr, br);
+                        mainPanel.add(newStoresPanel, "newStoresPanel");
+                        cardLayout.show(mainPanel, "newStoresPanel");
                     } else {
                         JOptionPane.showMessageDialog(panel, "Store creation failed");
                     }
