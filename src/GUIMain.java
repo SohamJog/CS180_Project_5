@@ -14,8 +14,10 @@ public class GUIMain extends JComponent implements Runnable {
     private static BufferedReader reader;
     private static PrintWriter writer;
     private static JPanel signInUp;
-    private static JPanel signUp;
-    private static JPanel signIn;
+    private static JPanel sellerSignUp;
+    private static JPanel userSignUp;
+    private static JPanel sellerSignIn;
+    private static JPanel userSignIn;
     private static JPanel sellerDash;
     private static JPanel storesMenu;
     private static JPanel statisticsMenu;
@@ -73,14 +75,18 @@ public class GUIMain extends JComponent implements Runnable {
 
         mainPanel.setLayout(cardLayout);
         signInUp = signInUp();
-        signUp = signUp(frame, writer, reader);
-        signIn = signIn(frame, writer, reader);
+        sellerSignUp = sellerSignUp(frame, writer, reader);
+        userSignUp = userSignUp(frame, writer, reader);
+        sellerSignIn = sellerSignIn(frame, writer, reader);
+        userSignIn = userSignIn(frame, writer, reader);
 
 //        JPanel customerDash = customerDash();
 //        JPanel market = market(writer, reader);
         mainPanel.add(signInUp, "signInUp");
-        mainPanel.add(signUp, "signUp");
-        mainPanel.add(signIn, "signIn");
+        mainPanel.add(sellerSignUp, "sellerSignUp");
+        mainPanel.add(userSignUp, "userSignUp");
+        mainPanel.add(sellerSignIn, "sellerSignIn");
+        mainPanel.add(userSignIn, "userSignIn");
         mainPanel.add(sellerOrBuyer, "sellerOrBuyer");
 //        mainPanel.add(customerDash, "customerDash");
 //        mainPanel.add(market, "market");
@@ -159,26 +165,22 @@ public class GUIMain extends JComponent implements Runnable {
             public void actionPerformed(ActionEvent e) {
 
                 if (choice.equals("Sign up")) {
-                    cardLayout.show(mainPanel, "signUp");
-                    pr.println("sellerSignup");
-                    pr.flush();
-                } else if (choice.equals("Sign in")) {
-                    cardLayout.show(mainPanel, "signIn");
-                    pr.println("sellerSignin");
-                    pr.flush();
-                }            }
+                    cardLayout.show(mainPanel, "sellerSignUp");
+                }
+                else if (choice.equals("Sign in")) {
+                    cardLayout.show(mainPanel, "sellerSignIn");
+                }
+            }
         });
         buyer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (choice.equals("Sign up")) {
-                    cardLayout.show(mainPanel, "signUp");
-                    pr.println("userSignup");
-                    pr.flush();
-                } else if (choice.equals("Sign in")) {
-                    cardLayout.show(mainPanel, "signIn");
-                    pr.println("userSignin");
-                    pr.flush();
+                if (choice.equals("Sign up"))
+                {
+                    cardLayout.show(mainPanel, "userSignUp");
+                }
+                else if (choice.equals("Sign in")) {
+                    cardLayout.show(mainPanel, "userSignIn");
                 }
             }
         });
@@ -186,7 +188,7 @@ public class GUIMain extends JComponent implements Runnable {
         return result;
     }
 
-    public static JPanel signUp(JFrame f, PrintWriter pr, BufferedReader br) {
+    public static JPanel sellerSignUp(JFrame f, PrintWriter pr, BufferedReader br) {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
 
@@ -271,8 +273,94 @@ public class GUIMain extends JComponent implements Runnable {
         return result;
     }
 
+    public static JPanel userSignUp(JFrame f, PrintWriter pr, BufferedReader br) {
+        JPanel panel = new JPanel();
+        JPanel result = new JPanel(new BorderLayout());
 
-    public static JPanel signIn(JFrame f, PrintWriter pr, BufferedReader br) {
+        panel.setLayout(new GridLayout(3,2));
+        JTextField nameField = new JTextField();
+        JTextField emailField = new JTextField();
+        JTextField passwordField = new JTextField();
+        panel.add(new JLabel("Name: "));
+        panel.add(nameField);
+        panel.add(new JLabel("Email: "));
+        panel.add(emailField);
+        panel.add(new JLabel("Password: "));
+        panel.add(passwordField);
+        JPanel bPanel = new JPanel();
+        bPanel.setLayout(new FlowLayout());
+
+        JButton goBack = new JButton("Go back");
+        bPanel.add(goBack);
+        goBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(mainPanel, "signInUp");
+                // pr.println("quit");
+                // pr.flush();
+            }
+
+        });
+
+        // Create a submit button
+        JButton submitButton = new JButton("Submit");
+        bPanel.add(submitButton);
+        // Add an action listener to the submit button
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Get the user's input from the fields
+                String name = nameField.getText();
+                String email = emailField.getText();
+                String password = passwordField.getText();
+
+                // Check if the user's input is valid
+                if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
+                    // Show an error message if the input is invalid
+                    JOptionPane.showMessageDialog(f, "Please enter a valid name, email, and password.");
+                } else {
+                    //Jenny - call server
+                    pr.println("userSignup");
+                    pr.flush();
+                    pr.println(name);
+                    pr.flush();
+                    pr.println(email);
+                    pr.flush();
+                    pr.println(password);
+                    pr.flush();
+                    String inp = "bananas";
+                    try {
+                        inp = br.readLine();
+                        if (inp.equals("true")) {
+                            // Show a success message
+                            JOptionPane.showMessageDialog(f, "Submitted successfully!");
+                        } else {
+                            JOptionPane.showMessageDialog(f, "Account already exists!");
+                        }
+                        cardLayout.show(mainPanel, "signInUp");
+                        // Clear the input fields if the input is valid
+                        nameField.setText("");
+                        emailField.setText("");
+                        passwordField.setText("");
+                    } catch (Exception f) {
+                        f.printStackTrace();
+                    }
+
+                    System.out.println(inp);
+                    // send "userSignup" to the server
+                    // then send name, email, and password respectively to the server
+                    // server sends back either "true" or success or "false" otherwise
+                }
+            }
+        });
+        result.add(panel, BorderLayout.CENTER);
+        result.add(bPanel, BorderLayout.SOUTH);
+        return result;
+    }
+
+
+
+    public static JPanel sellerSignIn(JFrame f, PrintWriter pr, BufferedReader br) {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
         panel.setLayout(new GridLayout(2,2));
@@ -349,6 +437,88 @@ public class GUIMain extends JComponent implements Runnable {
         result.add(bPanel, BorderLayout.SOUTH);
         return result;
     }
+
+
+    ///
+    public static JPanel userSignIn(JFrame f, PrintWriter pr, BufferedReader br) {
+        JPanel panel = new JPanel();
+        JPanel result = new JPanel(new BorderLayout());
+        panel.setLayout(new GridLayout(2,2));
+        JTextField emailField = new JTextField();
+        JTextField passwordField = new JTextField();
+        panel.add(new JLabel("Email: "));
+        panel.add(emailField);
+        panel.add(new JLabel("Password: "));
+        panel.add(passwordField);
+        JPanel bPanel = new JPanel();
+        bPanel.setLayout(new FlowLayout());
+
+        JButton goBack = new JButton("Go back");
+        bPanel.add(goBack);
+        goBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(mainPanel, "signInUp");
+                //pr.println("quit");
+                //pr.flush();
+            }
+
+        });
+
+        // Create a submit button
+        JButton submitButton = new JButton("Submit");
+        bPanel.add(submitButton);
+        // Add an action listener to the submit button
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Get the user's input from the fields
+                String email = emailField.getText();
+                String password = passwordField.getText();
+                emailField.setText("");
+                passwordField.setText("");
+                // Check if the user's input is valid
+                if (email.isEmpty() || password.isEmpty()) {
+                    // Show an error message if the input is invalid
+                    JOptionPane.showMessageDialog(f, "Please enter a valid name, email, and password.");
+                } else {
+                    //Jenny - call server
+                    pr.println("userSignin");
+                    pr.flush();
+                    pr.println(email);
+                    pr.flush();
+                    pr.println(password);
+                    pr.flush();
+                    String inp = "bananas";
+                    try {
+                        inp = br.readLine();
+                    } catch (Exception f) {
+                        f.printStackTrace();
+                    }
+
+                    if(inp.equals("true")) {
+                        JOptionPane.showMessageDialog(f, "Signed in successfully!");
+                        sellerDash = sellerDash(pr, br);
+                        storesMenu = storesMenu(pr, br);
+                        statisticsMenu = statisticsMenu(pr, br);
+                        changeAccountMenu = changeAccountMenu(pr, br);
+                        mainPanel.add(sellerDash, "sellerDash");
+                        mainPanel.add(statisticsMenu, "statisticsMenu");
+                        mainPanel.add(storesMenu, "storesMenu");
+                        mainPanel.add(changeAccountMenu, "changeAccountMenu");
+                        cardLayout.show(mainPanel, "sellerDash");
+                    } else {
+                        JOptionPane.showMessageDialog(f, "Incorrect email or password");
+                    }
+                }
+            }
+        });
+        result.add(panel, BorderLayout.CENTER);
+        result.add(bPanel, BorderLayout.SOUTH);
+        return result;
+    }
+
+
 
     public static JPanel sellerDash(PrintWriter pr, BufferedReader br) {
         JPanel panel = new JPanel();
