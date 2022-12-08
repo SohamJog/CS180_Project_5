@@ -271,6 +271,12 @@ public class GUIMain extends JComponent implements Runnable {
         panel.add(change);
         panel.add(stats);
         result.add(panel, BorderLayout.CENTER);
+        stores.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(mainPanel, "storesMenu");
+            }
+        });
         return result;
     }
 
@@ -326,7 +332,7 @@ public class GUIMain extends JComponent implements Runnable {
                         pr.flush();
                         try {
                             //add store menu
-                            JPanel storeMenu = storeMenu(writer, reader);
+                            JPanel storeMenu = storeMenu(pr, br);
                             mainPanel.add(storeMenu, "storeMenu");
                             cardLayout.show(mainPanel, "storeMenu");
 
