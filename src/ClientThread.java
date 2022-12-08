@@ -151,7 +151,7 @@ public class ClientThread implements Runnable {
                                 }
                                 pr.println();
                                 pr.flush();
-                            } else if (action.equals("viewCustomerStatics")) {
+                            } else if (action.equals("viewCustomerStatistics")) {
                                 String sort = br.readLine();
                                 if (sort.equals("y")) {
                                     customerStats(seller.getEmail(), true, pr);
@@ -209,7 +209,7 @@ public class ClientThread implements Runnable {
                                     pr.println(market.size());
                                     pr.flush();
                                     for (int i = 0; i < market.size(); i++) {
-                                        pr.println("" + (i + 3) + ". " + market.get(i) + "\n");
+                                        pr.println(market.get(i));
                                         pr.flush();
                                     }
                                     if (choice2.equals("sort")) {
@@ -219,7 +219,7 @@ public class ClientThread implements Runnable {
                                         market = displayMarketplace(false, searchWord);
                                     } else if (choice2.equals("accessTicket")) {
                                         int t = Integer.parseInt(br.readLine());
-                                        product = market.get(t - 3);
+                                        product = market.get(t);
                                         pr.println(product.toProduct());
                                         pr.flush();
                                         String choice3 = br.readLine();
