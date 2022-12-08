@@ -141,6 +141,7 @@ public class GUIMain extends JComponent implements Runnable {
     public static JPanel signUp(JFrame f, PrintWriter pr, BufferedReader br) {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
+
         panel.setLayout(new GridLayout(3,2));
         JTextField nameField = new JTextField();
         JTextField emailField = new JTextField();
@@ -255,7 +256,7 @@ public class GUIMain extends JComponent implements Runnable {
 
                     if(inp.equals("true")) {
                         JOptionPane.showMessageDialog(f, "Signed in successfully!");
-                        JPanel sellerDash = sellerDash();
+                        JPanel sellerDash = sellerDash(pr, br);
                         JPanel storesMenu = storesMenu(pr, br);
                         JPanel statisticsMenu = statisticsMenu(pr, br);
                         JPanel changeAccountMenu = changeAccountMenu(pr, br);
@@ -275,7 +276,7 @@ public class GUIMain extends JComponent implements Runnable {
         return result;
     }
 
-    public static JPanel sellerDash() {
+    public static JPanel sellerDash(PrintWriter pr, BufferedReader br) {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
         panel.setLayout(new GridLayout(4, 1));
@@ -283,15 +284,28 @@ public class GUIMain extends JComponent implements Runnable {
         JButton stores = new JButton("Access Stores");
         JButton cart = new JButton("View Products in Shopping Carts");
         JButton stats = new JButton("View Statistics");
+
+        JButton logOut = new JButton("Log Out");
+
+
         panel.add(stores);
         panel.add(cart);
         panel.add(change);
         panel.add(stats);
+        panel.add(logOut);
         result.add(panel, BorderLayout.CENTER);
         stores.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(mainPanel, "storesMenu");
+            }
+        });
+        logOut.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(mainPanel, "signInUp");
+                pr.println("quit");
+                pr.flush();
             }
         });
         return result;
@@ -304,6 +318,16 @@ public class GUIMain extends JComponent implements Runnable {
         JButton change = new JButton("Change Name");
         JButton stores = new JButton("Change Password");
         JButton cart = new JButton("Delete Account");
+        JButton goBack = new JButton("Go Back");
+        panel.add(goBack);
+        goBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pr.println("goBack");
+                pr.flush();
+                cardLayout.show(mainPanel, "sellerDash");
+            }
+        });
         panel.add(change);
         panel.add(stores);
         panel.add(cart);
@@ -318,6 +342,16 @@ public class GUIMain extends JComponent implements Runnable {
         JButton change = new JButton("View Statistics by Store");
         JButton stores = new JButton("View Statistics by Product");
         JButton cart = new JButton("View Statistics by Customer");
+        JButton goBack = new JButton("Go Back");
+        goBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pr.println("goBack");
+                pr.flush();
+                cardLayout.show(mainPanel, "sellerDash");
+            }
+        });
+        panel.add(goBack);
         panel.add(change);
         panel.add(stores);
         panel.add(cart);
@@ -331,6 +365,16 @@ public class GUIMain extends JComponent implements Runnable {
         pr.println("listStores");
         pr.flush();
         JButton newStore = new JButton("Add new store");
+        JButton goBack = new JButton("Go Back");
+        panel.add(goBack);
+        goBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pr.println("goBack");
+                pr.flush();
+                cardLayout.show(mainPanel, "sellerDash");
+            }
+        });
         try {
             int numStores = Integer.parseInt(br.readLine());
             panel.setLayout(new GridLayout(numStores+1, 1));
@@ -376,7 +420,7 @@ public class GUIMain extends JComponent implements Runnable {
         return result;
     }
 
-    public static JPanel customerDash() {
+    public static JPanel customerDash(PrintWriter pr, BufferedReader br) {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
         panel.setLayout(new GridLayout(5, 1));
@@ -385,6 +429,16 @@ public class GUIMain extends JComponent implements Runnable {
         JButton cart = new JButton("Change Account Info");
         JButton history = new JButton("View Purchase History");
         JButton stats = new JButton("View Statistics");
+        JButton logOut = new JButton("Log Out");
+        panel.add(logOut);
+        logOut.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pr.println("quit");
+                pr.flush();
+                cardLayout.show(mainPanel, "signInUp");
+            }
+        });
         panel.add(change);
         panel.add(stores);
         panel.add(cart);
@@ -421,6 +475,16 @@ public class GUIMain extends JComponent implements Runnable {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
         JButton newTix = new JButton("Add new Ticket");
+        JButton goBack = new JButton("Go Back");
+        panel.add(goBack);
+        goBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pr.println("goBack");
+                pr.flush();
+                cardLayout.show(mainPanel, "storesMenu");
+            }
+        });
         try {
             int numTickets = Integer.parseInt(br.readLine());
             panel.setLayout(new GridLayout(numTickets+1, 1));
