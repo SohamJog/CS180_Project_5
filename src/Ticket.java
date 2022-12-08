@@ -57,7 +57,7 @@ class Ticket {
         return ret;
     }
 
-    //change the price and/ or description
+    //the price and/ or description
 
 
     public String getName() {

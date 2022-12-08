@@ -625,11 +625,12 @@ public class GUIMain extends JComponent implements Runnable {
         JPanel result = new JPanel(new BorderLayout());
         panel.setLayout(new GridLayout(3, 1));
         try {
-            panel.add(new JLabel(br.readLine()));
+            panel.add(new JLabel(br.readLine() + " " + br.readLine() + " " + br.readLine() + " " + br.readLine() + " " + br.readLine() + " " + br.readLine()));
         } catch (Exception e) {
             e.printStackTrace();
         }
         JTextField quantity = new JTextField("Number of Tickets", 20);
+        panel.add(quantity);
         JButton add = new JButton("Add to Cart");
         add.addActionListener(new ActionListener() {
             @Override
@@ -820,8 +821,22 @@ public class GUIMain extends JComponent implements Runnable {
                 cardLayout.show(mainPanel, "market");
             }
         });
-        JButton stores = new JButton("Shopping Cart");
-        JButton cart = new JButton("Change Account Info");
+        JButton cart = new JButton("Shopping Cart");
+        cart.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JPanel cart = cartMenu(pr, br);
+                mainPanel.add(cart, "cart");
+                cardLayout.show(mainPanel, "cart");
+            }
+        });
+        JButton account = new JButton("Change Account Info");
+        account.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(mainPanel, "changeAccountMenu");
+            }
+        });
         JButton history = new JButton("View Purchase History");
         JButton stats = new JButton("View Statistics");
         JButton logOut = new JButton("Log Out");
@@ -853,8 +868,8 @@ public class GUIMain extends JComponent implements Runnable {
             }
         });
         panel.add(change);
-        panel.add(stores);
         panel.add(cart);
+        panel.add(account);
         panel.add(history);
         panel.add(stats);
         result.add(panel, BorderLayout.CENTER);
@@ -866,7 +881,6 @@ public class GUIMain extends JComponent implements Runnable {
         JPanel result = new JPanel(new BorderLayout());
         pr.println("displayMarketplace");
         pr.flush();
-        System.out.println("Test");
         try {
             pr.println("");
             pr.flush();
@@ -874,7 +888,7 @@ public class GUIMain extends JComponent implements Runnable {
             System.out.println(numTix);
             panel.setLayout(new GridLayout(numTix, 1));
             for(int i = 0; i < numTix; i++) {
-                JButton tix = new JButton(br.readLine() +" "+ br.readLine() +" "+ br.readLine() + " " + br.readLine());
+                JButton tix = new JButton(br.readLine()+" "+br.readLine()+" "+br.readLine()+" "+br.readLine());
                 final int fI = i;
                 tix.addActionListener(new ActionListener() {
                     @Override
