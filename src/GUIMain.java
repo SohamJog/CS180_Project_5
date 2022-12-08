@@ -759,7 +759,8 @@ public class GUIMain extends JComponent implements Runnable {
         }
     }
 
-    public static void cartMenu(PrintWriter pr, BufferedReader br) {
+    public static JPanel cartMenu(PrintWriter pr, BufferedReader br) {
+        JPanel result = new JPanel(new BorderLayout());
         JPanel panel = new JPanel();
         JButton reload = new JButton("Reload");
         reload.addActionListener(new ActionListener() {
@@ -767,6 +768,9 @@ public class GUIMain extends JComponent implements Runnable {
             public void actionPerformed(ActionEvent e) {
                // pr.println("reload");
                // pr.flush();
+                JPanel newCartMenu = cartMenu(pr, br);
+                mainPanel.add(newCartMenu, "newCartMenu");
+                cardLayout.show(mainPanel, "newCartMenu");
             }
         });
         try {
@@ -774,6 +778,7 @@ public class GUIMain extends JComponent implements Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return result;
     }
 
     public static JPanel prodStats(PrintWriter pr, BufferedReader br, String sortOrNot) {
