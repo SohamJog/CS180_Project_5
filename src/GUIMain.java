@@ -631,10 +631,11 @@ public class GUIMain extends JComponent implements Runnable {
 
         JButton reload = new JButton("Reload");
         reload.addActionListener(new ActionListener() {
-            //TODO: jenny work on this
-
             @Override
             public void actionPerformed(ActionEvent e) {
+                JPanel newStoreMenu = storeMenu(pr, br);
+                mainPanel.add(newStoreMenu, "newStoreMenu");
+                cardLayout.show(mainPanel, "newStoreMenu");
             }
         });
 
