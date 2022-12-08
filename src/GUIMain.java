@@ -265,7 +265,8 @@ public class GUIMain extends JComponent implements Runnable {
                 // Get the user's input from the fields
                 String email = emailField.getText();
                 String password = passwordField.getText();
-
+                emailField.setText("");
+                passwordField.setText("");
                 // Check if the user's input is valid
                 if (email.isEmpty() || password.isEmpty()) {
                     // Show an error message if the input is invalid
@@ -448,23 +449,27 @@ public class GUIMain extends JComponent implements Runnable {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String name = JOptionPane.showInputDialog("Enter the name of the new store");
-                pr.println("createNewStore");
-                pr.flush();
-                pr.println(name);
-                pr.flush();
-                try {
-                    if (br.readLine().equals("true")) {
-                        JOptionPane.showMessageDialog(panel, "Store created successfully!");
-                        pr.println("listStores");
-                        pr.flush();
-                        JPanel newStoresPanel = storeMenu(pr, br);
-                        mainPanel.add(newStoresPanel, "newStoresPanel");
-                        cardLayout.show(mainPanel, "newStoresPanel");
-                    } else {
-                        JOptionPane.showMessageDialog(panel, "Store creation failed");
+                if(name.isEmpty()) {
+                    JOptionPane.showMessageDialog(panel, "Store name cannot be empty");
+                } else {
+                    pr.println("createNewStore");
+                    pr.flush();
+                    pr.println(name);
+                    pr.flush();
+                    try {
+                        if (br.readLine().equals("true")) {
+                            JOptionPane.showMessageDialog(panel, "Store created successfully!");
+                            pr.println("listStores");
+                            pr.flush();
+                            JPanel newStoresPanel = storeMenu(pr, br);
+                            mainPanel.add(newStoresPanel, "newStoresPanel");
+                            cardLayout.show(mainPanel, "newStoresPanel");
+                        } else {
+                            JOptionPane.showMessageDialog(panel, "Store with that name already exists!");
+                        }
+                    } catch (Exception f) {
+                        f.printStackTrace();
                     }
-                } catch (Exception f) {
-                    f.printStackTrace();
                 }
             }
         });

@@ -7,4 +7,4 @@ lala;lala@gmail.com;crondon
 soham;soham@gmail.com;soham
 jenny;jenny0503@gmail.com;jenny
 abhay;abhaybestra@gmail.com;igotomit
-jenny2;jenny2@gmail.com;helloiamjenny;newStore,newStore2,jennyStore
+jenny2;jenny2@gmail.com;helloiamjenny;asdfasdfas
