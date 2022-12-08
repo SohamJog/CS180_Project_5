@@ -1,5 +1,5 @@
 armaan;arm@gmail.com;crondon;bananas
-soham;soham;soham;bigStore,store
+armanya;soham;soham2
 a;a;a;asdf
 a;adf;asdf;bball tickets
 a;b;c

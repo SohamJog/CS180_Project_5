@@ -478,8 +478,11 @@ public class GUIMain extends JComponent implements Runnable {
                 cardLayout.show(mainPanel, "sellerDash");
             }
         });
+
+
         try {
             int numStores = Integer.parseInt(br.readLine());
+            System.out.println(numStores);
             panel.setLayout(new GridLayout(numStores+1, 1));
             panel.add(newStore);
             for(int i = 0; i < numStores; i++) {
@@ -489,7 +492,7 @@ public class GUIMain extends JComponent implements Runnable {
                 store.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        System.out.println(fI);
+                        //System.out.println(fI);
                         pr.println("enterStore");
                         pr.flush();
                         pr.println(fI);
@@ -534,6 +537,14 @@ public class GUIMain extends JComponent implements Runnable {
         JButton stats = new JButton("View Statistics");
         JButton logOut = new JButton("Log Out");
         panel.add(logOut);
+
+        JButton reload = new JButton("Reload");
+        reload.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //cardLayout.show(mainPanel, "customerDash");
+            }
+        });
         logOut.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -554,6 +565,7 @@ public class GUIMain extends JComponent implements Runnable {
     public static JPanel market(PrintWriter pr, BufferedReader br) {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
+
         pr.println("displayMarketplace");
         pr.flush();
         JButton newStore = new JButton("Add new store");
@@ -611,6 +623,15 @@ public class GUIMain extends JComponent implements Runnable {
                 }
             }
         });
+
+        JButton reload = new JButton("Reload");
+        reload.addActionListener(new ActionListener() {
+            //TODO: jenny work on this
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            }
+        });
+
         try {
             int numTickets = Integer.parseInt(br.readLine());
             panel.setLayout(new GridLayout(numTickets+1, 1));
