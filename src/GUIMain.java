@@ -428,7 +428,6 @@ public class GUIMain extends JComponent implements Runnable {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
         panel.setLayout(new GridLayout(3, 1));
-        JButton store = new JButton("View Statistics by Store");
         JButton goBack = new JButton("Go Back");
         goBack.addActionListener(new ActionListener() {
             @Override
@@ -439,6 +438,15 @@ public class GUIMain extends JComponent implements Runnable {
             }
         });
         panel.add(goBack);
+        JButton store = new JButton("View Statistics by Store");
+        store.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JPanel storeStats = storeStats(pr, br, "n");
+                mainPanel.add(storeStats, "storeStats");
+                cardLayout.show(mainPanel, "storeStats");
+            }
+        });
         JButton product = new JButton("View Statistics by Product");
         product.addActionListener(new ActionListener() {
             @Override
@@ -449,6 +457,14 @@ public class GUIMain extends JComponent implements Runnable {
             }
         });
         JButton customer = new JButton("View Statistics by Customer");
+        customer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JPanel custStats = custStats(pr, br, "n");
+                mainPanel.add(custStats, "custStats");
+                cardLayout.show(mainPanel, "custStats");
+            }
+        });
         panel.add(store);
         panel.add(product);
         panel.add(customer);
@@ -816,4 +832,87 @@ public class GUIMain extends JComponent implements Runnable {
         return result;
     }
 
+    public static JPanel custStats(PrintWriter pr, BufferedReader br, String sortOrNot) {
+        JPanel result = new JPanel(new BorderLayout());
+        JPanel panel = new JPanel();
+        pr.println("viewCustomerStatistics");
+        pr.flush();
+        pr.println(sortOrNot);
+        pr.flush();
+        try {
+            int rows = Integer.parseInt(br.readLine());
+            panel.setLayout(new GridLayout(rows, 1));
+            for(int i = 0; i < rows; i++) {
+                panel.add(new JLabel(br.readLine()));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        result.add(panel, BorderLayout.CENTER);
+        JPanel buttons = new JPanel(new FlowLayout());
+        JButton goBack = new JButton("Go Back");
+        goBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pr.println("goBack");
+                pr.flush();
+                cardLayout.show(mainPanel, "statisticsMenu");
+            }
+        });
+        JButton sort = new JButton("Sort");
+        sort.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JPanel newCustStats = custStats(pr, br, "y");
+                mainPanel.add(newCustStats, "newCustStats");
+                cardLayout.show(mainPanel, "newCustStats");
+            }
+        });
+        buttons.add(goBack);
+        buttons.add(sort);
+        result.add(buttons, BorderLayout.SOUTH);
+        return result;
+    }
+
+    public static JPanel storeStats(PrintWriter pr, BufferedReader br, String sortOrNot) {
+        JPanel result = new JPanel(new BorderLayout());
+        JPanel panel = new JPanel();
+        pr.println("viewStoreStatistics");
+        pr.flush();
+        pr.println(sortOrNot);
+        pr.flush();
+        try {
+            int rows = Integer.parseInt(br.readLine());
+            panel.setLayout(new GridLayout(rows, 1));
+            for(int i = 0; i < rows; i++) {
+                panel.add(new JLabel(br.readLine()));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        result.add(panel, BorderLayout.CENTER);
+        JPanel buttons = new JPanel(new FlowLayout());
+        JButton goBack = new JButton("Go Back");
+        goBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pr.println("goBack");
+                pr.flush();
+                cardLayout.show(mainPanel, "statisticsMenu");
+            }
+        });
+        JButton sort = new JButton("Sort");
+        sort.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JPanel newStoreStats = custStats(pr, br, "y");
+                mainPanel.add(newStoreStats, "newStoreStats");
+                cardLayout.show(mainPanel, "newStoreStats");
+            }
+        });
+        buttons.add(goBack);
+        buttons.add(sort);
+        result.add(buttons, BorderLayout.SOUTH);
+        return result;
+    }
 }
