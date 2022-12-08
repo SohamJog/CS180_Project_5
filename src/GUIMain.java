@@ -294,6 +294,24 @@ public class GUIMain extends JComponent implements Runnable {
                 cardLayout.show(mainPanel, "storesMenu");
             }
         });
+        change.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(mainPanel, "changeAccountMenu");
+            }
+        });
+        stats.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(mainPanel, "statisticsMenu");
+            }
+        });
+        cart.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(mainPanel, "cartMenu");
+            }
+        });
         return result;
     }
 
@@ -302,11 +320,37 @@ public class GUIMain extends JComponent implements Runnable {
         JPanel result = new JPanel(new BorderLayout());
         panel.setLayout(new GridLayout(3, 1));
         JButton change = new JButton("Change Name");
-        JButton stores = new JButton("Change Password");
-        JButton cart = new JButton("Delete Account");
+        JButton pswd = new JButton("Change Password");
+        JButton dlt = new JButton("Delete Account");
+        change.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String name = JOptionPane.showInputDialog("Enter your new name");
+                pr.println("changeName");
+                pr.flush();
+                pr.println(name);
+            }
+        });
+        pswd.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String pswd = JOptionPane.showInputDialog("Enter your new password");
+                pr.println("changePassword");
+                pr.flush();
+                pr.println(pswd);
+            }
+        });
+        dlt.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pr.println("deleteAccount");
+                pr.flush();
+                cardLayout.show(mainPanel, "loginMenu");
+            }
+        });
         panel.add(change);
-        panel.add(stores);
-        panel.add(cart);
+        panel.add(pswd);
+        panel.add(dlt);
         result.add(panel, BorderLayout.CENTER);
         return result;
     }
@@ -316,11 +360,11 @@ public class GUIMain extends JComponent implements Runnable {
         JPanel result = new JPanel(new BorderLayout());
         panel.setLayout(new GridLayout(3, 1));
         JButton change = new JButton("View Statistics by Store");
-        JButton stores = new JButton("View Statistics by Product");
-        JButton cart = new JButton("View Statistics by Customer");
+        JButton pswd = new JButton("View Statistics by Product");
+        JButton dlt = new JButton("View Statistics by Customer");
         panel.add(change);
-        panel.add(stores);
-        panel.add(cart);
+        panel.add(pswd);
+        panel.add(dlt);
         result.add(panel, BorderLayout.CENTER);
         return result;
     }
@@ -329,8 +373,26 @@ public class GUIMain extends JComponent implements Runnable {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
         pr.println("listStores");
-        pr.flush();
         JButton newStore = new JButton("Add new store");
+        newStore.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String name = JOptionPane.showInputDialog("Enter the name of the new store");
+                pr.println("createNewStore");
+                pr.flush();
+                pr.println(name);
+                pr.flush();
+                try {
+                    if (br.readLine().equals("true")) {
+                        JOptionPane.showMessageDialog(panel, "Store created successfully!");
+                    } else {
+                        JOptionPane.showMessageDialog(panel, "Store creation failed");
+                    }
+                } catch (Exception f) {
+                    f.printStackTrace();
+                }
+            }
+        });
         try {
             int numStores = Integer.parseInt(br.readLine());
             panel.setLayout(new GridLayout(numStores+1, 1));
@@ -421,6 +483,29 @@ public class GUIMain extends JComponent implements Runnable {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
         JButton newTix = new JButton("Add new Ticket");
+        newTix.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pr.println("addTicket");
+                pr.flush();
+                try {
+                    String name = JOptionPane.showInputDialog("Enter the name of the ticket");
+                    String price = JOptionPane.showInputDialog("Enter the price of the ticket");
+                    String quantity = JOptionPane.showInputDialog("Enter the quantity of the ticket");
+                    String description = JOptionPane.showInputDialog("Enter the description of the ticket");
+                    pr.println(name);
+                    pr.flush();
+                    pr.println(price);
+                    pr.flush();
+                    pr.println(quantity);
+                    pr.flush();
+                    pr.println(description);
+                    pr.flush();
+                } catch (Exception f) {
+                    f.printStackTrace();
+                }
+            }
+        });
         try {
             int numTickets = Integer.parseInt(br.readLine());
             panel.setLayout(new GridLayout(numTickets+1, 1));
@@ -460,7 +545,70 @@ public class GUIMain extends JComponent implements Runnable {
 
     public static void prodMenu(JFrame f, PrintWriter pr, BufferedReader br) {
         JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(6, 1));
+        try {
+            panel.add(new JLabel(br.readLine()));
+            JButton dTicket = new JButton("Delete Ticket");
+            dTicket.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    pr.println("deleteTicket");
+                    pr.flush();
+                }
+            });
+            JButton tName = new JButton("Change Ticket Name");
+            tName.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    pr.println("changeTicketName");
+                    pr.flush();
+                    pr.println(JOptionPane.showInputDialog(panel, "Enter new name",
+                            "Ticket Emporium", JOptionPane.QUESTION_MESSAGE));
+                }
+            });
+            JButton tPrice = new JButton("Change Ticket Price");
+            tPrice.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    pr.println("changeTicketPrice");
+                    pr.flush();
 
+                    pr.println(JOptionPane.showInputDialog(panel, "Enter new price",
+                            "Ticket Emporium", JOptionPane.QUESTION_MESSAGE));
+                }
+            });
+            JButton tDesc = new JButton("Change Ticket Description");
+            tDesc.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    pr.println("changeTicketDescription");
+                    pr.flush();
+                    pr.println(JOptionPane.showInputDialog(panel, "Enter new description",
+                            "Ticket Emporium", JOptionPane.QUESTION_MESSAGE));
+                }
+            });
+            JButton tQuant = new JButton("Change Ticket Quantity");
+            tQuant.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    pr.println("changeTicketQuantity");
+                    pr.flush();
+                    pr.println(JOptionPane.showInputDialog(panel, "Enter new quantity",
+                            "Ticket Emporium", JOptionPane.QUESTION_MESSAGE));
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void cartMenu(PrintWriter pr, BufferedReader br) {
+        JPanel panel = new JPanel();
+        try {
+            panel.setLayout(new GridLayout(Integer.parseInt(br.readLine()), 1));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
