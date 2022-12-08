@@ -172,11 +172,10 @@ public class GUIMain extends JComponent implements Runnable {
                         if (inp.equals("true")) {
                             // Show a success message
                             JOptionPane.showMessageDialog(f, "Submitted successfully!");
-
-                            cardLayout.show(mainPanel, "signInUp");
                         } else {
                             JOptionPane.showMessageDialog(f, "Account already exists!");
                         }
+                        cardLayout.show(mainPanel, "signInUp");
                         // Clear the input fields if the input is valid
                         nameField.setText("");
                         emailField.setText("");
