@@ -22,6 +22,8 @@ public class GUIMain extends JComponent implements Runnable {
     private static JPanel changeAccountMenu;
     private static JPanel prodStats;
     private static JPanel storeMenu;
+
+    private static JPanel sellerOrBuyer;
     private static JPanel customerDash;
     private static JPanel market;
 
@@ -67,15 +69,19 @@ public class GUIMain extends JComponent implements Runnable {
         // Set the layout for the frame
         frame.setLayout(new BorderLayout());
 
+        sellerOrBuyer = sellerOrBuyer(frame, writer, reader);
+
         mainPanel.setLayout(cardLayout);
         signInUp = signInUp();
         signUp = signUp(frame, writer, reader);
         signIn = signIn(frame, writer, reader);
+
 //        JPanel customerDash = customerDash();
 //        JPanel market = market(writer, reader);
         mainPanel.add(signInUp, "signInUp");
         mainPanel.add(signUp, "signUp");
         mainPanel.add(signIn, "signIn");
+        mainPanel.add(sellerOrBuyer, "sellerOrBuyer");
 //        mainPanel.add(customerDash, "customerDash");
 //        mainPanel.add(market, "market");
         cardLayout.show(mainPanel, "signInUp");
@@ -127,11 +133,7 @@ public class GUIMain extends JComponent implements Runnable {
             @Override
             public void actionPerformed(ActionEvent e) {
                 choice = (String) comboBox.getSelectedItem();
-                if (choice.equals("Sign up")) {
-                    cardLayout.show(mainPanel, "signUp");
-                } else if (choice.equals("Sign in")) {
-                    cardLayout.show(mainPanel, "signIn");
-                }
+                cardLayout.show(mainPanel, "sellerOrBuyer");
             }
         });
 
@@ -139,18 +141,38 @@ public class GUIMain extends JComponent implements Runnable {
         result.add(panel, BorderLayout.CENTER);
         return result;
     }
-    public static JPanel sellerOrBuyer() {
+    public static JPanel sellerOrBuyer(JFrame f, PrintWriter pr, BufferedReader br) {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
-        panel.setLayout(new GridLayout(2, 1));
-        JButton change = new JButton("Seller");
-        JButton stores = new JButton("Buyer");
+        panel.setLayout(new GridLayout(4, 1));
 
-        panel.add(stores);
+        JButton seller = new JButton("Seller");
+        JButton buyer = new JButton("Buyer");
 
-        panel.add(change);
+        panel.add(seller);
+
+        panel.add(buyer);
 
         result.add(panel, BorderLayout.CENTER);
+        seller.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (choice.equals("Sign up")) {
+                    cardLayout.show(mainPanel, "signUp");
+                } else if (choice.equals("Sign in")) {
+                    cardLayout.show(mainPanel, "signIn");
+                }            }
+        });
+        buyer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (choice.equals("Sign up")) {
+                    cardLayout.show(mainPanel, "signUp");
+                } else if (choice.equals("Sign in")) {
+                    cardLayout.show(mainPanel, "signIn");
+                }
+            }
+        });
 
         return result;
     }
