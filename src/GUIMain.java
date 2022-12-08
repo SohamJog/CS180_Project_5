@@ -157,10 +157,15 @@ public class GUIMain extends JComponent implements Runnable {
         seller.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 if (choice.equals("Sign up")) {
                     cardLayout.show(mainPanel, "signUp");
+                    pr.println("sellerSignup");
+                    pr.flush();
                 } else if (choice.equals("Sign in")) {
                     cardLayout.show(mainPanel, "signIn");
+                    pr.println("sellerSignin");
+                    pr.flush();
                 }            }
         });
         buyer.addActionListener(new ActionListener() {
@@ -168,8 +173,12 @@ public class GUIMain extends JComponent implements Runnable {
             public void actionPerformed(ActionEvent e) {
                 if (choice.equals("Sign up")) {
                     cardLayout.show(mainPanel, "signUp");
+                    pr.println("userSignup");
+                    pr.flush();
                 } else if (choice.equals("Sign in")) {
                     cardLayout.show(mainPanel, "signIn");
+                    pr.println("userSignin");
+                    pr.flush();
                 }
             }
         });
