@@ -1,13 +1,13 @@
-# CS180_Project_4
+# CS180_Project_5
 
 ## Instructions - How to run and compile:
 - Step 1 - Clone or download the source code from this repository
-- Step 2 - Run the main method in the Main.java using an IDE or terminal
-- Step 3 - You will see directions printed out on the console once you run the main method. Simply follow the directions and choose the options you want to proceed!
+- Step 2 - Run the GUIMain method using corresponding GUI.
+- Step 3 - You will see directions printed out on the GUI once you run the GUIMain method. Simply follow the directions and choose the options you want to proceed!
 
 ## Submissions:
-- [Code]: Armanya Maheshwari submitted on Vocareum
-- [Report]: Ajay Bestrapalli submitted on BrightSpace
+- [Code]: 
+- [Report]: 
 
 ## Class Explainations:
     
