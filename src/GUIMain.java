@@ -21,7 +21,6 @@ public class GUIMain extends JComponent implements Runnable {
 //    public GUIMain() {
 //
 //    }
-
     @Override
     public void run() {
         Socket socket = null;
@@ -121,6 +120,21 @@ public class GUIMain extends JComponent implements Runnable {
 
         result.add(bPanel, BorderLayout.SOUTH);
         result.add(panel, BorderLayout.CENTER);
+        return result;
+    }
+    public static JPanel sellerOrBuyer() {
+        JPanel panel = new JPanel();
+        JPanel result = new JPanel(new BorderLayout());
+        panel.setLayout(new GridLayout(2, 1));
+        JButton change = new JButton("Seller");
+        JButton stores = new JButton("Buyer");
+
+        panel.add(stores);
+
+        panel.add(change);
+
+        result.add(panel, BorderLayout.CENTER);
+
         return result;
     }
 
