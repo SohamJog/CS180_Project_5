@@ -754,4 +754,47 @@ public class GUIMain extends JComponent implements Runnable {
         }
     }
 
+    public static JPanel prodStats(PrintWriter pr, BufferedReader br) {
+        JPanel result = new JPanel(new BorderLayout());
+        JPanel panel = new JPanel();
+        pr.println("viewProductStatistics");
+        pr.flush();
+        pr.println("n");
+        pr.flush();
+        try {
+            int rows = Integer.parseInt(br.readLine());
+            panel.setLayout(new GridLayout(rows, 1));
+            for(int i = 0; i < rows; i++) {
+                panel.add(new JLabel(br.readLine()));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        result.add(panel, BorderLayout.CENTER);
+        JPanel buttons = new JPanel(new FlowLayout());
+        JButton goBack = new JButton("Go Back");
+        goBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pr.println("goBack");
+                pr.flush();
+                cardLayout.show(mainPanel, "statisticsMenu");
+            }
+        });
+        JButton sort = new JButton("Sort");
+        sort.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pr.println("viewProductStatistics");
+                pr.flush();
+                pr.println("n");
+                pr.flush();
+            }
+        });
+        buttons.add(goBack);
+        buttons.add(sort);
+        result.add(panel, BorderLayout.SOUTH);
+        return result;
+    }
+
 }
