@@ -417,9 +417,7 @@ public class GUIMain extends JComponent implements Runnable {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
         panel.setLayout(new GridLayout(3, 1));
-        JButton change = new JButton("View Statistics by Store");
-        JButton stores = new JButton("View Statistics by Product");
-        JButton cart = new JButton("View Statistics by Customer");
+        JButton store = new JButton("View Statistics by Store");
         JButton goBack = new JButton("Go Back");
         goBack.addActionListener(new ActionListener() {
             @Override
@@ -430,11 +428,19 @@ public class GUIMain extends JComponent implements Runnable {
             }
         });
         panel.add(goBack);
-        JButton pswd = new JButton("View Statistics by Product");
-        JButton dlt = new JButton("View Statistics by Customer");
-        panel.add(change);
-        panel.add(pswd);
-        panel.add(dlt);
+        JButton product = new JButton("View Statistics by Product");
+        product.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JPanel prodStats = prodStats(pr, br, "n");
+                mainPanel.add(prodStats, "prodStats");
+                cardLayout.show(mainPanel, "prodStats");
+            }
+        });
+        JButton customer = new JButton("View Statistics by Customer");
+        panel.add(store);
+        panel.add(product);
+        panel.add(customer);
         result.add(panel, BorderLayout.CENTER);
         return result;
     }
@@ -754,12 +760,12 @@ public class GUIMain extends JComponent implements Runnable {
         }
     }
 
-    public static JPanel prodStats(PrintWriter pr, BufferedReader br) {
+    public static JPanel prodStats(PrintWriter pr, BufferedReader br, String sortOrNot) {
         JPanel result = new JPanel(new BorderLayout());
         JPanel panel = new JPanel();
         pr.println("viewProductStatistics");
         pr.flush();
-        pr.println("n");
+        pr.println(sortOrNot);
         pr.flush();
         try {
             int rows = Integer.parseInt(br.readLine());
@@ -785,15 +791,14 @@ public class GUIMain extends JComponent implements Runnable {
         sort.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                pr.println("viewProductStatistics");
-                pr.flush();
-                pr.println("n");
-                pr.flush();
+                JPanel newProdStats = prodStats(pr, br, "y");
+                mainPanel.add(newProdStats, "newProdStats");
+                cardLayout.show(mainPanel, "newProdStats");
             }
         });
         buttons.add(goBack);
         buttons.add(sort);
-        result.add(panel, BorderLayout.SOUTH);
+        result.add(buttons, BorderLayout.SOUTH);
         return result;
     }
 
