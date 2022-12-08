@@ -817,6 +817,14 @@ public class GUIMain extends JComponent implements Runnable {
         JPanel result = new JPanel(new BorderLayout());
         panel.setLayout(new GridLayout(5, 1));
         JButton change = new JButton("Buy Tickets");
+        change.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JPanel market = market(pr, br);
+                mainPanel.add(market, "market");
+                cardLayout.show(mainPanel, "market");
+            }
+        });
         JButton stores = new JButton("Shopping Cart");
         JButton cart = new JButton("Change Account Info");
         JButton history = new JButton("View Purchase History");
@@ -868,6 +876,8 @@ public class GUIMain extends JComponent implements Runnable {
                         pr.println("accessTicket");
                         pr.flush();
                         JPanel ticket = ticketMenu(pr, br, fI);
+                        mainPanel.add(ticket, "ticket");
+                        cardLayout.show(mainPanel, "ticket");
                     }
                 });
 
