@@ -80,8 +80,7 @@ public class GUIMain extends JComponent implements Runnable {
         sellerSignIn = sellerSignIn(frame, writer, reader);
         userSignIn = userSignIn(frame, writer, reader);
 
-//        JPanel customerDash = customerDash();
-//        JPanel market = market(writer, reader);
+//
         mainPanel.add(signInUp, "signInUp");
         mainPanel.add(sellerSignUp, "sellerSignUp");
         mainPanel.add(userSignUp, "userSignUp");
@@ -498,15 +497,14 @@ public class GUIMain extends JComponent implements Runnable {
 
                     if(inp.equals("true")) {
                         JOptionPane.showMessageDialog(f, "Signed in successfully!");
-                        sellerDash = sellerDash(pr, br);
-                        storesMenu = storesMenu(pr, br);
-                        statisticsMenu = statisticsMenu(pr, br);
-                        changeAccountMenu = changeAccountMenu(pr, br);
-                        mainPanel.add(sellerDash, "sellerDash");
-                        mainPanel.add(statisticsMenu, "statisticsMenu");
-                        mainPanel.add(storesMenu, "storesMenu");
-                        mainPanel.add(changeAccountMenu, "changeAccountMenu");
-                        cardLayout.show(mainPanel, "sellerDash");
+                        customerDash = customerDash(pr, br);
+                        System.out.println("one");
+//                        market = market(pr, br);
+                        mainPanel.add(customerDash, "customerDash");
+                        System.out.println("two");
+//                        mainPanel.add(market, "market");
+                        cardLayout.show(mainPanel, "customerDash");
+                        System.out.println("three");
                     } else {
                         JOptionPane.showMessageDialog(f, "Incorrect email or password");
                     }
