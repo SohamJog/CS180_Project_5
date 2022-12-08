@@ -543,12 +543,13 @@ public class GUIMain extends JComponent implements Runnable {
         JButton logOut = new JButton("Log Out");
         panel.add(logOut);
 
-        //TODO jenny work on this
         JButton reload = new JButton("Reload");
         reload.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //cardLayout.show(mainPanel, "customerDash");
+                JPanel newCustomerDash = customerDash(pr, br);
+                mainPanel.add(newCustomerDash, "newCustomerDash");
+                cardLayout.show(mainPanel, "newCustomerDash");
             }
         });
         logOut.addActionListener(new ActionListener() {
@@ -738,7 +739,6 @@ public class GUIMain extends JComponent implements Runnable {
 
     public static void cartMenu(PrintWriter pr, BufferedReader br) {
         JPanel panel = new JPanel();
-        //TODO: jenny work on this
         JButton reload = new JButton("Reload");
         reload.addActionListener(new ActionListener() {
             @Override
