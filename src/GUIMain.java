@@ -183,6 +183,18 @@ public class GUIMain extends JComponent implements Runnable {
                     String inp = "bananas";
                     try {
                         inp = br.readLine();
+                        if (inp.equals("true")) {
+                            // Show a success message
+                            JOptionPane.showMessageDialog(f, "Submitted successfully!");
+
+                            cardLayout.show(mainPanel, "signInUp");
+                        } else {
+                            JOptionPane.showMessageDialog(f, "Account already exists!");
+                        }
+                        // Clear the input fields if the input is valid
+                        nameField.setText("");
+                        emailField.setText("");
+                        passwordField.setText("");
                     } catch (Exception f) {
                         f.printStackTrace();
                     }
@@ -191,14 +203,6 @@ public class GUIMain extends JComponent implements Runnable {
                     // send "sellerSignup" to the server
                     // then send name, email, and password respectively to the server
                     // server sends back either "true" or success or "false" otherwise
-
-                    // Clear the input fields if the input is valid
-                    nameField.setText("");
-                    emailField.setText("");
-                    passwordField.setText("");
-
-                    // Show a success message
-                    JOptionPane.showMessageDialog(f, "Submitted successfully!");
                 }
             }
         });
