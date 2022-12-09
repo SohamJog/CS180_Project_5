@@ -528,7 +528,10 @@ public class User {
                 while (line != null) {
                     if (!line.equals("")) {
                         String[] inp = line.split(";");
-                        if (inp[3].equals(name)) {
+
+                        //TODO fix this
+
+                        if (inp[3].equals(email)) {
                             ret += String.format("Name: %s\nSeller: %s\nStore: %s\nPrice: %s\nDescription: %s\nQuantity: %s\n\n",
                                     inp[1], inp[2], inp[4], inp[5],
                                     inp[6], inp[7]);

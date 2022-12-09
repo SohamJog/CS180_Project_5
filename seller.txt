@@ -1,8 +1,7 @@
 armaan;arm@gmail.com;crondon;bananas
-armanya;soham;soham2;new,new2,new3,fatStore,sdjfi,sbhntj,hmm,hmmmmmmm
+armaanya;soham;soham2
 a;a;a;asdf
 a;adf;asdf;bball tickets
-a;b;c
 lala;lala@gmail.com;crondon
 soham;soham@gmail.com;soham
 jenny;jenny0503@gmail.com;jenny

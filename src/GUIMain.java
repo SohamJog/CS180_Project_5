@@ -600,6 +600,7 @@ public class GUIMain extends JComponent implements Runnable {
                 pr.println("changeName");
                 pr.flush();
                 pr.println(name);
+                pr.flush();
             }
         });
         pswd.addActionListener(new ActionListener() {
@@ -609,6 +610,7 @@ public class GUIMain extends JComponent implements Runnable {
                 pr.println("changePassword");
                 pr.flush();
                 pr.println(pswd);
+                pr.flush();
             }
         });
         dlt.addActionListener(new ActionListener() {
@@ -1293,5 +1295,6 @@ public class GUIMain extends JComponent implements Runnable {
         buttons.add(sort);
         result.add(buttons, BorderLayout.SOUTH);
         return result;
+
     }
 }
