@@ -570,9 +570,39 @@ public class GUIMain extends JComponent implements Runnable {
         cart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cardLayout.show(mainPanel, "cartMenu");
+                cardLayout.show(mainPanel, "sellerCarts");
             }
         });
+        return result;
+    }
+
+    public static JPanel sellerCarts(PrintWriter pr, BufferedReader br, ObjectInputStream ois) {
+        JPanel panel = new JPanel();
+        JPanel result = new JPanel(new BorderLayout());
+        pr.println("viewProductsInCustomerShoppingCarts");
+        pr.flush();
+        java.util.List<String> uCart = null;
+        try {
+            uCart = (java.util.List<String>) ois.readObject();
+            panel.setLayout(new GridLayout(uCart.size()+1, 1));
+            for(String t : uCart) {
+                panel.add(new JLabel(t));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        JButton goBack = new JButton("Go back");
+        JPanel bPanel = new JPanel();
+        bPanel.setLayout(new FlowLayout());
+        bPanel.add(goBack);
+        goBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(mainPanel, "sellerDash");
+            }
+        });
+        result.add(panel, BorderLayout.CENTER);
+        result.add(bPanel, BorderLayout.SOUTH);
         return result;
     }
 

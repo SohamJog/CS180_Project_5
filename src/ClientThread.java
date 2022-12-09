@@ -172,13 +172,8 @@ public class ClientThread implements Runnable {
                                     productStats(seller.getEmail(), false, pr);
                                 }
                             } else if (action.equals("viewProductsInCustomerShoppingCarts")) {
-                                ArrayList<String> sCart = seller.shoppingCart();
-                                pr.println(sCart.size());
-                                pr.flush();
-                                for (String s : sCart) {
-                                    pr.println(s);
-                                    pr.flush();
-                                }
+                                oos.writeObject(seller.shoppingCart());
+                                oos.flush();
                             }
                             action = br.readLine();
                         } // when to send quit??
