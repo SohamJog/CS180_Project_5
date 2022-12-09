@@ -30,6 +30,7 @@ public class GUIMain extends JComponent implements Runnable {
     private static JPanel sellerOrBuyer;
     private static JPanel customerDash;
     private static JPanel market;
+    private static JPanel custStats;
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new GUIMain());
@@ -708,7 +709,7 @@ public class GUIMain extends JComponent implements Runnable {
         customer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JPanel custStats = custStats(pr, br, "n");
+                custStats = custStats(pr, br, "n");
                 mainPanel.add(custStats, "custStats");
                 cardLayout.show(mainPanel, "custStats");
             }
@@ -1226,9 +1227,9 @@ public class GUIMain extends JComponent implements Runnable {
         sort.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JPanel newCustStats = custStats(pr, br, "y");
-                mainPanel.add(newCustStats, "newCustStats");
-                cardLayout.show(mainPanel, "newCustStats");
+                custStats = custStats(pr, br, "y");
+                mainPanel.add(custStats, "custStats");
+                cardLayout.show(mainPanel, "custStats");
             }
         });
         buttons.add(goBack);

@@ -21,9 +21,8 @@ public class ClientThread implements Runnable {
             pr.flush();
 
             // 1 - what would you like to do? (sign in or sign up)
-            String signInUp;
-            do { // an option to quit - not sure if needed tho
-                signInUp = br.readLine();
+            String signInUp = br.readLine();
+            while (!signInUp.equals("quit")) { // an option to quit - not sure if needed tho
                 if (signInUp.equals("sellerSignup")) {
                     String name = br.readLine();
                     String email = br.readLine();
@@ -53,9 +52,8 @@ public class ClientThread implements Runnable {
                     if (seller != null) {
                         pr.println("true");
                         pr.flush();
-                        String action;
-                        do {
-                            action = br.readLine();
+                        String action = br.readLine();
+                        while (!action.equals("quit")) {
                             if (action.equals("changeName")) {
                                 String newName = br.readLine();
                                 seller.changeName(newName);
@@ -94,9 +92,8 @@ public class ClientThread implements Runnable {
                                 }
 
 
-                                String storeAction;
-                                do {
-                                    storeAction = br.readLine();
+                                String storeAction = br.readLine();
+                                while (!storeAction.equals("goBack")) {
                                     if (storeAction.equals("newTicket")) {
                                         try {
                                             String zero = br.readLine();
@@ -116,9 +113,8 @@ public class ClientThread implements Runnable {
                                         pr.println(t);
                                         pr.flush();
 
-                                        String ticketAction;
-                                        do {
-                                            ticketAction = br.readLine();
+                                        String ticketAction = br.readLine();
+                                        while(!ticketAction.equals("goBack")) {
                                             if (ticketAction.equals("deleteTicket")) {
                                                 store.deleteTickets(t.getId());
                                             } else if (ticketAction.equals("changeTicketName")) {
@@ -134,9 +130,11 @@ public class ClientThread implements Runnable {
                                                 int newTicketQuantity = Integer.parseInt(br.readLine());
                                                 t.changeInfo(t.getName(), t.getPrice(), t.getDescription(), newTicketQuantity);
                                             }
-                                        } while(!ticketAction.equals("goBack"));
+                                            ticketAction = br.readLine();
+                                        }
                                     }
-                                } while (!storeAction.equals("goBack"));
+                                    storeAction = br.readLine();
+                                }
                             } else if (action.equals("viewStoreStatistics")) {
                                 pr.println(seller.getStores().size());
                                 pr.flush();
@@ -175,7 +173,8 @@ public class ClientThread implements Runnable {
                                     pr.flush();
                                 }
                             }
-                        } while (!action.equals("quit")); // when to send quit??
+                            action = br.readLine();
+                        } // when to send quit??
                     } else {
                         pr.println("false");
                         pr.flush();
@@ -187,10 +186,9 @@ public class ClientThread implements Runnable {
                     if (user != null) {
                         pr.println("true");
                         pr.flush();
-                        String action;
+                        String action = br.readLine();
                         // hello guys
-                        do {
-                            action = br.readLine();
+                        while (!action.equals("quit")) {
                             if (action.equals("changeName")) {
                                 String newName = br.readLine();
                                 user.changeName(newName);
@@ -288,7 +286,8 @@ public class ClientThread implements Runnable {
                                     user.customerStoreDash(false, pr);
                                 }
                             }
-                        } while (!action.equals("quit"));
+                            action = br.readLine();
+                        }
                         System.out.println("action: " + action);
                         System.out.println("outsideLoop");
                     } else {
@@ -296,7 +295,8 @@ public class ClientThread implements Runnable {
                         pr.flush();
                     }
                 }
-            } while (!signInUp.equals("quit"));
+                signInUp = br.readLine();
+            }
             pr.close();
             br.close();
             socket.close(); // put these into a finally?
