@@ -636,6 +636,7 @@ public class GUIMain extends JComponent implements Runnable {
                     pr.flush();
                     pr.println(name);
                     pr.flush();
+                    JOptionPane.showMessageDialog(panel, "Name changed successfully!");
                 } else {
                     JOptionPane.showMessageDialog(panel, "Please enter a valid name");
                 }
@@ -650,6 +651,7 @@ public class GUIMain extends JComponent implements Runnable {
                     pr.flush();
                     pr.println(pswd);
                     pr.flush();
+                    JOptionPane.showMessageDialog(panel, "Password changed successfully!");
                 } else {
                     JOptionPane.showMessageDialog(panel, "Please enter a valid password");
                 }
