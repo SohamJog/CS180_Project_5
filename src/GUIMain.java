@@ -1161,8 +1161,6 @@ public class GUIMain extends JComponent implements Runnable {
             public void actionPerformed(ActionEvent e) {
 //                pr.println("goBack");
 //                pr.flush();
-                cart = cartMenu(pr, br, ois);
-                mainPanel.add(cart, "cart");
                 cardLayout.show(mainPanel, "customerDash");
             }
         });
@@ -1182,7 +1180,9 @@ public class GUIMain extends JComponent implements Runnable {
                     JOptionPane.showMessageDialog(panel, "Nothing to checkout!",
                             "Ticket Emporium", JOptionPane.ERROR_MESSAGE);
                 }
-                cardLayout.show(mainPanel, "customerDash");
+                cart = cartMenu(pr, br, ois);
+                mainPanel.add(cart, "cart");
+                cardLayout.show(mainPanel, "cart");
             }
         });
         buttons.add(checkout);
