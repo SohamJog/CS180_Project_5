@@ -1,6 +1,5 @@
 2;ticket;soham;bigStore;10.00;yummy;6
 3;banana;arm@gmail.com;bananas;20.00;bananas;20
-4;newTicket;soham;new;10.00;dd;1
 5;newTicket2;soham;new;10.00;dsdf;2
 6;newTicket3;soham;new;10.00;sdf;2
 7;b;soham;new;3.00;dsffer;2
