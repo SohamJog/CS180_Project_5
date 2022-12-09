@@ -9,7 +9,7 @@
 - [Code]: 
 - [Report]: 
 
-## Class Explainations:
+## Class Explanations:
     
 ### GUIMain Class
 The main class contains the GUIMain method that interacts with the user by asking for input , taking in the inputs through GUI and processes the data (calling different methods), and gives the respective results through GUI.
@@ -155,10 +155,10 @@ The Ticket class contains the information about the Ticket, including ticket id(
   - Testing: tested in the GUIMain method 
 
 ### ClientThread Class
-Creates a Thread using Runnable , allowing multiple clients to access the application independently and concurrently.
+Creates a Thread using Runnable, allowing multiple clients to access the application independently and concurrently.
 
 - displayMarketPlace:
-   - Displays the existing marketplace to the user and allows them to sort the data.
+ - Displays the existing marketplace to the user and allows them to sort the data.
 
 - storeDash:
   - Displays Dashboard of past transactions and corresponding details to the seller and allows them to sort the data
