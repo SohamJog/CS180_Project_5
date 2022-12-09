@@ -747,8 +747,6 @@ public class GUIMain extends JComponent implements Runnable {
                     try {
                         if (br.readLine().equals("true")) {
                             JOptionPane.showMessageDialog(panel, "Store created successfully!");
-                            pr.println("listStores");
-                            pr.flush();
                             storesMenu = storesMenu(pr, br);
                             mainPanel.add(storesMenu, "storesMenu");
                             cardLayout.show(mainPanel, "storesMenu");
