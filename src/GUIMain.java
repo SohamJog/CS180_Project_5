@@ -70,7 +70,7 @@ public class GUIMain extends JComponent implements Runnable {
         JFrame frame = new JFrame("Ticket Emporium");
 
         // Set the size of the frame
-        frame.setSize(400, 300);
+        frame.setSize(1000, 1000);
 
         // Set the default close operation for the frame
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -949,7 +949,8 @@ public class GUIMain extends JComponent implements Runnable {
         try {
             int numTix = Integer.parseInt(br.readLine());
             System.out.println(numTix);
-            panel.setLayout(new GridLayout(numTix, 1));
+            panel.setLayout(new GridLayout(numTix+1, 1));
+            panel.add(new JLabel("Marketplace"));
             for(int i = 0; i < numTix; i++) {
                 String one = br.readLine();
                 String two = br.readLine();
