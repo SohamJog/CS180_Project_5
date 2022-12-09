@@ -600,20 +600,28 @@ public class GUIMain extends JComponent implements Runnable {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String name = JOptionPane.showInputDialog("Enter your new name");
-                pr.println("changeName");
-                pr.flush();
-                pr.println(name);
-                pr.flush();
+                if(name != null) {
+                    pr.println("changeName");
+                    pr.flush();
+                    pr.println(name);
+                    pr.flush();
+                } else {
+                    JOptionPane.showMessageDialog(panel, "Please enter a valid name");
+                }
             }
         });
         pswd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String pswd = JOptionPane.showInputDialog("Enter your new password");
-                pr.println("changePassword");
-                pr.flush();
-                pr.println(pswd);
-                pr.flush();
+                if(pswd != null) {
+                    pr.println("changePassword");
+                    pr.flush();
+                    pr.println(pswd);
+                    pr.flush();
+                } else {
+                    JOptionPane.showMessageDialog(panel, "Please enter a valid password");
+                }
             }
         });
         dlt.addActionListener(new ActionListener() {
