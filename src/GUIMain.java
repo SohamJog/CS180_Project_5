@@ -681,6 +681,8 @@ public class GUIMain extends JComponent implements Runnable {
             public void actionPerformed(ActionEvent e) {
                 pr.println("goBack");
                 pr.flush();
+                market = market(pr, br, "false", "false");
+                mainPanel.add(market, "market");
                 cardLayout.show(mainPanel, "market");
             }
         });
@@ -866,12 +868,6 @@ public class GUIMain extends JComponent implements Runnable {
         JButton stats = new JButton("View Statistics");
         JButton logOut = new JButton("Log Out");
         panel.add(logOut);
-        history.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
 
         change.addActionListener(new ActionListener() {
             @Override
@@ -1183,6 +1179,8 @@ public class GUIMain extends JComponent implements Runnable {
             public void actionPerformed(ActionEvent e) {
 //                pr.println("goBack");
 //                pr.flush();
+                customerDash = customerDash(pr, br, ois);
+                mainPanel.add(customerDash, "customerDash");
                 cardLayout.show(mainPanel, "customerDash");
             }
         });
