@@ -1,5 +1,2 @@
 
-
-
-
-3;banana2;arm@gmail.com;bananas;10.00;dd;2
+2;lalaTicket;lala@gmail.com;lalasStore;200.00;better than jenny's ticket;199

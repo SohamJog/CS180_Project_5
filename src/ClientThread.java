@@ -172,13 +172,8 @@ public class ClientThread implements Runnable {
                                     productStats(seller.getEmail(), false, pr);
                                 }
                             } else if (action.equals("viewProductsInCustomerShoppingCarts")) {
-                                ArrayList<String> sCart = seller.shoppingCart();
-                                pr.println(sCart.size());
-                                pr.flush();
-                                for (String s : sCart) {
-                                    pr.println(s);
-                                    pr.flush();
-                                }
+                                oos.writeObject(seller.shoppingCart());
+                                oos.flush();
                             }
                             action = br.readLine();
                         } // when to send quit??
@@ -256,19 +251,34 @@ public class ClientThread implements Runnable {
                                         pr.flush();
                                         String choice3 = br.readLine();
                                         if (choice3.equals("addToCart")) {
-                                            int quantity = Integer.parseInt(br.readLine());
-                                            if (user.addToCart(product, quantity)) {
-                                                pr.println("true");
-                                                pr.flush();
-                                            } else {
+                                            int quantity = 0;
+                                            boolean ok = true;
+                                            try {
+                                                quantity = Integer.parseInt(br.readLine());
+                                            }
+                                            catch (NumberFormatException e) {
+                                                ok = false;
                                                 pr.println("false");
                                                 pr.flush();
                                             }
-                                            market = displayMarketplace("false", search);
+                                            if(ok) {
+                                                if (user.addToCart(product, quantity)) {
+                                                    pr.println("true");
+                                                    pr.flush();
+                                                } else {
+                                                    pr.println("false");
+                                                    pr.flush();
+                                                }
+                                                //market = displayMarketplace("false", search);
+                                            }
+
                                         }
                                     }
                                     choice2 = br.readLine();
                                 }
+                                //debug
+                                System.out.println("here");
+                                //
                             } else if (action.equals("purchaseHistory")) {
                                 oos.writeObject(user.displayPastTransactions());
                                 oos.flush();

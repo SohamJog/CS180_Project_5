@@ -70,7 +70,7 @@ public class GUIMain extends JComponent implements Runnable {
         JFrame frame = new JFrame("Ticket Emporium");
 
         // Set the size of the frame
-        frame.setSize(400, 300);
+        frame.setSize(1000, 1000);
 
         // Set the default close operation for the frame
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -570,9 +570,39 @@ public class GUIMain extends JComponent implements Runnable {
         cart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cardLayout.show(mainPanel, "cartMenu");
+                cardLayout.show(mainPanel, "sellerCarts");
             }
         });
+        return result;
+    }
+
+    public static JPanel sellerCarts(PrintWriter pr, BufferedReader br, ObjectInputStream ois) {
+        JPanel panel = new JPanel();
+        JPanel result = new JPanel(new BorderLayout());
+        pr.println("viewProductsInCustomerShoppingCarts");
+        pr.flush();
+        java.util.List<String> uCart = null;
+        try {
+            uCart = (java.util.List<String>) ois.readObject();
+            panel.setLayout(new GridLayout(uCart.size()+1, 1));
+            for(String t : uCart) {
+                panel.add(new JLabel(t));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        JButton goBack = new JButton("Go back");
+        JPanel bPanel = new JPanel();
+        bPanel.setLayout(new FlowLayout());
+        bPanel.add(goBack);
+        goBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(mainPanel, "sellerDash");
+            }
+        });
+        result.add(panel, BorderLayout.CENTER);
+        result.add(bPanel, BorderLayout.SOUTH);
         return result;
     }
 
@@ -606,6 +636,7 @@ public class GUIMain extends JComponent implements Runnable {
                     pr.flush();
                     pr.println(name);
                     pr.flush();
+                    JOptionPane.showMessageDialog(panel, "Name changed successfully!");
                 } else {
                     JOptionPane.showMessageDialog(panel, "Please enter a valid name");
                 }
@@ -620,6 +651,7 @@ public class GUIMain extends JComponent implements Runnable {
                     pr.flush();
                     pr.println(pswd);
                     pr.flush();
+                    JOptionPane.showMessageDialog(panel, "Password changed successfully!");
                 } else {
                     JOptionPane.showMessageDialog(panel, "Please enter a valid password");
                 }
@@ -660,6 +692,7 @@ public class GUIMain extends JComponent implements Runnable {
             public void actionPerformed(ActionEvent e) {
                 pr.println("addToCart");
                 pr.flush();
+
                 pr.println(quantity.getText());
                 pr.flush();
                 try {
@@ -668,7 +701,10 @@ public class GUIMain extends JComponent implements Runnable {
                         JOptionPane.showMessageDialog(null, "Added to cart!");
                     }
                     else {
-                        JOptionPane.showMessageDialog(null, "Not enough tickets for sale!");
+                        JOptionPane.showMessageDialog(null, "Please enter a valid quantity");
+                        pr.println("goBack");
+                        pr.flush();
+                        cardLayout.show(mainPanel, "market");
                     }
                 } catch (Exception f) {
                     f.printStackTrace();
@@ -915,7 +951,8 @@ public class GUIMain extends JComponent implements Runnable {
         try {
             int numTix = Integer.parseInt(br.readLine());
             System.out.println(numTix);
-            panel.setLayout(new GridLayout(numTix, 1));
+            panel.setLayout(new GridLayout(numTix+1, 1));
+            panel.add(new JLabel("Marketplace"));
             for(int i = 0; i < numTix; i++) {
                 String one = br.readLine();
                 String two = br.readLine();
