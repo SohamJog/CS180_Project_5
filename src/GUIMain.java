@@ -33,6 +33,7 @@ public class GUIMain extends JComponent implements Runnable {
     private static JPanel custStats;
     private static JPanel storeStats;
     private static JPanel cart;
+    private static JPanel purchaseHistory;
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new GUIMain());
@@ -854,6 +855,14 @@ public class GUIMain extends JComponent implements Runnable {
             }
         });
         JButton history = new JButton("View Purchase History");
+        history.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                purchaseHistory = purchaseHistory(pr, br, ois);
+                mainPanel.add(purchaseHistory, "purchaseHistory");
+                cardLayout.show(mainPanel, "purchaseHistory");
+            }
+        });
         JButton stats = new JButton("View Statistics");
         JButton logOut = new JButton("Log Out");
         panel.add(logOut);
@@ -1340,5 +1349,31 @@ public class GUIMain extends JComponent implements Runnable {
         result.add(buttons, BorderLayout.SOUTH);
         return result;
 
+    }
+
+    public static JPanel purchaseHistory(PrintWriter pr, BufferedReader br, ObjectInputStream ois) {
+        JPanel result = new JPanel(new BorderLayout());
+        JPanel panel = new JPanel();
+        pr.println("viewPurchaseHistory");
+        pr.flush();
+        try {
+            panel.add(new JLabel((String)ois.readObject()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        JPanel buttons = new JPanel(new FlowLayout());
+        JButton goBack = new JButton("Go Back");
+        goBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pr.println("goBack");
+                pr.flush();
+                cardLayout.show(mainPanel, "customerMenu");
+            }
+        });
+        buttons.add(goBack);
+        result.add(buttons, BorderLayout.SOUTH);
+        result.add(panel, BorderLayout.CENTER);
+        return result;
     }
 }

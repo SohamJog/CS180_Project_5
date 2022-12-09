@@ -270,8 +270,8 @@ public class ClientThread implements Runnable {
                                     choice2 = br.readLine();
                                 }
                             } else if (action.equals("purchaseHistory")) {
-                                pr.println(user.displayPastTransactions());
-                                pr.flush();
+                                oos.writeObject(user.displayPastTransactions());
+                                oos.flush();
                             } else if (action.equals("displayShoppingCart")) {
                                 oos.writeObject(user.getShoppingCart());
                                 oos.flush();
