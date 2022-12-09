@@ -425,11 +425,9 @@ public class GUIMain extends JComponent implements Runnable {
                         sellerDash = sellerDash(pr, br);
                         storesMenu = storesMenu(pr, br);
                         statisticsMenu = statisticsMenu(pr, br);
-                        changeAccountMenu = changeAccountMenu(pr, br);
                         mainPanel.add(sellerDash, "sellerDash");
                         mainPanel.add(statisticsMenu, "statisticsMenu");
                         mainPanel.add(storesMenu, "storesMenu");
-                        mainPanel.add(changeAccountMenu, "changeAccountMenu");
                         cardLayout.show(mainPanel, "sellerDash");
                     } else {
                         JOptionPane.showMessageDialog(f, "Incorrect email or password");
@@ -556,6 +554,8 @@ public class GUIMain extends JComponent implements Runnable {
         change.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                changeAccountMenu = changeAccountMenu(pr, br, "seller");
+                mainPanel.add(changeAccountMenu, "changeAccountMenu");
                 cardLayout.show(mainPanel, "changeAccountMenu");
             }
         });
@@ -574,7 +574,7 @@ public class GUIMain extends JComponent implements Runnable {
         return result;
     }
 
-    public static JPanel changeAccountMenu(PrintWriter pr, BufferedReader br) {
+    public static JPanel changeAccountMenu(PrintWriter pr, BufferedReader br, String sellerOrBuyer) {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
         panel.setLayout(new GridLayout(3, 1));
@@ -588,7 +588,11 @@ public class GUIMain extends JComponent implements Runnable {
             public void actionPerformed(ActionEvent e) {
 //                pr.println("goBack");
 //                pr.flush();
-                cardLayout.show(mainPanel, "sellerDash");
+                if (sellerOrBuyer.equals("seller")) {
+                    cardLayout.show(mainPanel, "sellerDash");
+                } else if (sellerOrBuyer.equals("customer")) {
+                    cardLayout.show(mainPanel, "customerDash");
+                }
             }
         });
         JButton pswd = new JButton("Change Password");
@@ -836,6 +840,8 @@ public class GUIMain extends JComponent implements Runnable {
         account.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                changeAccountMenu = changeAccountMenu(pr, br, "customer");
+                mainPanel.add(changeAccountMenu, "changeAccountMenu");
                 cardLayout.show(mainPanel, "changeAccountMenu");
             }
         });
