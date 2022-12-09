@@ -172,13 +172,8 @@ public class ClientThread implements Runnable {
                                     productStats(seller.getEmail(), false, pr);
                                 }
                             } else if (action.equals("viewProductsInCustomerShoppingCarts")) {
-                                ArrayList<String> sCart = seller.shoppingCart();
-                                pr.println(sCart.size());
-                                pr.flush();
-                                for (String s : sCart) {
-                                    pr.println(s);
-                                    pr.flush();
-                                }
+                                oos.writeObject(seller.shoppingCart());
+                                oos.flush();
                             }
                             action = br.readLine();
                         } // when to send quit??
@@ -285,8 +280,8 @@ public class ClientThread implements Runnable {
                                 System.out.println("here");
                                 //
                             } else if (action.equals("purchaseHistory")) {
-                                pr.println(user.displayPastTransactions());
-                                pr.flush();
+                                oos.writeObject(user.displayPastTransactions());
+                                oos.flush();
                             } else if (action.equals("displayShoppingCart")) {
                                 oos.writeObject(user.getShoppingCart());
                                 oos.flush();
