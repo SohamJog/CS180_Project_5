@@ -580,8 +580,6 @@ public class GUIMain extends JComponent implements Runnable {
         JPanel result = new JPanel(new BorderLayout());
         panel.setLayout(new GridLayout(3, 1));
         JButton change = new JButton("Change Name");
-        JButton stores = new JButton("Change Password");
-        JButton cart = new JButton("Delete Account");
         JButton goBack = new JButton("Go Back");
         panel.add(goBack);
         goBack.addActionListener(new ActionListener() {
@@ -623,7 +621,8 @@ public class GUIMain extends JComponent implements Runnable {
             public void actionPerformed(ActionEvent e) {
                 pr.println("deleteAccount");
                 pr.flush();
-                cardLayout.show(mainPanel, "loginMenu");
+                JOptionPane.showMessageDialog(panel, "Account deleted");
+                cardLayout.show(mainPanel, "signInUp");
             }
         });
         panel.add(change);
