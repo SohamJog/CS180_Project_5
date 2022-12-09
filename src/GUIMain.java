@@ -31,6 +31,7 @@ public class GUIMain extends JComponent implements Runnable {
     private static JPanel customerDash;
     private static JPanel market;
     private static JPanel custStats;
+    private static JPanel storeStats;
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new GUIMain());
@@ -694,7 +695,7 @@ public class GUIMain extends JComponent implements Runnable {
         store.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JPanel storeStats = storeStats(pr, br, "n");
+                storeStats = storeStats(pr, br, "n");
                 mainPanel.add(storeStats, "storeStats");
                 cardLayout.show(mainPanel, "storeStats");
             }
@@ -1283,9 +1284,9 @@ public class GUIMain extends JComponent implements Runnable {
         sort.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JPanel newStoreStats = custStats(pr, br, "y");
-                mainPanel.add(newStoreStats, "newStoreStats");
-                cardLayout.show(mainPanel, "newStoreStats");
+                storeStats = storeStats(pr, br, "y");
+                mainPanel.add(storeStats, "storeStats");
+                cardLayout.show(mainPanel, "storeStats");
             }
         });
         buttons.add(goBack);
