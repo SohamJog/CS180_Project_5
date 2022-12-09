@@ -644,7 +644,7 @@ public class GUIMain extends JComponent implements Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        JTextField quantity = new JTextField("Number of Tickets", 20);
+        JTextField quantity = new JTextField("Enter Number of Tickets Here!", 20);
         panel.add(quantity);
         JButton add = new JButton("Add to Cart");
         add.addActionListener(new ActionListener() {
@@ -660,7 +660,7 @@ public class GUIMain extends JComponent implements Runnable {
                         JOptionPane.showMessageDialog(null, "Added to cart!");
                     }
                     else {
-                        JOptionPane.showMessageDialog(null, "Not enough tickets");
+                        JOptionPane.showMessageDialog(null, "Not enough tickets for sale!");
                     }
                 } catch (Exception f) {
                     f.printStackTrace();
@@ -860,14 +860,14 @@ public class GUIMain extends JComponent implements Runnable {
             }
         });
 
-        JButton reload = new JButton("Reload");
-        reload.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // todo - jenny
-            }
-        });
-        panel.add(reload);
+//        JButton reload = new JButton("Reload");
+//        reload.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                // todo - jenny
+//            }
+//        });
+//        panel.add(reload);
         logOut.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
