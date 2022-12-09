@@ -581,8 +581,8 @@ public class GUIMain extends JComponent implements Runnable {
         goBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                pr.println("goBack");
-                pr.flush();
+//                pr.println("goBack");
+//                pr.flush();
                 cardLayout.show(mainPanel, "sellerDash");
             }
         });
@@ -680,8 +680,8 @@ public class GUIMain extends JComponent implements Runnable {
         goBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                pr.println("goBack");
-                pr.flush();
+//                pr.println("goBack");
+//                pr.flush();
                 cardLayout.show(mainPanel, "sellerDash");
             }
         });
@@ -759,8 +759,8 @@ public class GUIMain extends JComponent implements Runnable {
         goBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                pr.println("goBack");
-                pr.flush();
+//                pr.println("goBack");
+//                pr.flush();
                 cardLayout.show(mainPanel, "sellerDash");
             }
         });
@@ -1141,8 +1141,8 @@ public class GUIMain extends JComponent implements Runnable {
         goBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                pr.println("goBack");
-                pr.flush();
+//                pr.println("goBack");
+//                pr.flush();
                 cardLayout.show(mainPanel, "statisticsMenu");
             }
         });
@@ -1175,8 +1175,8 @@ public class GUIMain extends JComponent implements Runnable {
         goBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                pr.println("goBack");
-                pr.flush();
+//                pr.println("goBack");
+//                pr.flush();
                 cardLayout.show(mainPanel, "statisticsMenu");
             }
         });
@@ -1217,8 +1217,8 @@ public class GUIMain extends JComponent implements Runnable {
         goBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                pr.println("goBack");
-                pr.flush();
+//                pr.println("goBack");
+//                pr.flush();
                 cardLayout.show(mainPanel, "statisticsMenu");
             }
         });
@@ -1259,8 +1259,8 @@ public class GUIMain extends JComponent implements Runnable {
         goBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                pr.println("goBack");
-                pr.flush();
+//                pr.println("goBack");
+//                pr.flush();
                 cardLayout.show(mainPanel, "statisticsMenu");
             }
         });
