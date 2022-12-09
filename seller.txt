@@ -1,10 +1,10 @@
 armaan;arm@gmail.com;crondon;bananas
-armaanya;soham;soham2;jenny
+armaanya;soham;soham2;crondon,bloomington
 a;a;a;asdf
 a;adf;asdf;bball tickets
 lala;lala@gmail.com;crondon
 soham;soham@gmail.com;soham
 jenny;jenny0503@gmail.com;jenny
 abhay;abhaybestra@gmail.com;igotomit
-jenny2;jenny2@gmail.com;helloiamjenny;asdfasdfas
+jenny2;jenny2@gmail.com;helloiamjenny;asdfasdfas,fherljkthrelkj
 sellerSignup;lol;lol@

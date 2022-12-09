@@ -313,7 +313,8 @@ class Seller {
                 while (line != null) {
                     String[] contents = line.split(";");
                     if (contents[1].equals(email)) {
-                        line = name + ";" + email + ";" + password;
+                        line = name + ";" + email + ";" + password + ";" + contents[3];
+
                     }
                     lines.add(line);
                     line = br.readLine();
