@@ -1201,6 +1201,7 @@ public class GUIMain extends JComponent implements Runnable {
             panel.setLayout(new GridLayout(uCart.size()+1, 1));
             for(Ticket t : uCart) {
                 panel.add(new JLabel(t.toString()));
+                System.out.println(t.toString());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -1236,13 +1237,13 @@ public class GUIMain extends JComponent implements Runnable {
                 if(finalUCart.size() > 0) {
                     JOptionPane.showMessageDialog(panel, "Checkout successful!",
                             "Ticket Emporium", JOptionPane.INFORMATION_MESSAGE);
+                    cart = cartMenu(pr, br, ois);
+                    mainPanel.add(cart, "cart");
+                    cardLayout.show(mainPanel, "cart");
                 } else {
                     JOptionPane.showMessageDialog(panel, "Nothing to checkout!",
                             "Ticket Emporium", JOptionPane.ERROR_MESSAGE);
                 }
-                cart = cartMenu(pr, br, ois);
-                mainPanel.add(cart, "cart");
-                cardLayout.show(mainPanel, "cart");
             }
         });
         buttons.add(checkout);
@@ -1392,7 +1393,8 @@ public class GUIMain extends JComponent implements Runnable {
     public static JPanel purchaseHistory(PrintWriter pr, BufferedReader br, ObjectInputStream ois) {
         JPanel result = new JPanel(new BorderLayout());
         JPanel panel = new JPanel();
-        pr.println("viewPurchaseHistory");
+        pr.println("purchaseHistory");
+        pr.flush();
         java.util.List<String> uCart = null;
         try {
             uCart = (java.util.List<String>) ois.readObject();
@@ -1408,9 +1410,9 @@ public class GUIMain extends JComponent implements Runnable {
         goBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                pr.println("goBack");
-                pr.flush();
-                cardLayout.show(mainPanel, "customerMenu");
+//                pr.println("goBack");
+//                pr.flush();
+                cardLayout.show(mainPanel, "customerDash");
             }
         });
         buttons.add(goBack);
