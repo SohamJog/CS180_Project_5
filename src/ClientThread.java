@@ -202,29 +202,43 @@ public class ClientThread implements Runnable {
                                 ArrayList<Ticket> market;
                                 String search = "";
                                 Ticket product;
-                                market = displayMarketplace(false, "");
-                                String choice2;
-                                do {
-                                    choice2 = br.readLine();
-                                    pr.println(market.size());
+                                String sort = br.readLine();
+                                market = displayMarketplace(sort, "");
+                                System.out.println(market.size());
+                                pr.println(market.size());
+                                pr.flush();
+                                for (int i = 0; i < market.size(); i++) {
+                                    pr.println(market.get(i).getName());
                                     pr.flush();
-                                    for (int i = 0; i < market.size(); i++) {
-                                        pr.println(market.get(i).getName());
-                                        pr.flush();
-                                        pr.println(market.get(i).getSellerEmail());
-                                        pr.flush();
-                                        pr.println(market.get(i).getStoreName());
-                                        pr.flush();
-                                        pr.println(market.get(i).getPrice());
-                                        pr.flush();
-                                    }
-                                    if (choice2.equals("sort")) {
+                                    pr.println(market.get(i).getSellerEmail());
+                                    pr.flush();
+                                    pr.println(market.get(i).getStoreName());
+                                    pr.flush();
+                                    pr.println(market.get(i).getPrice());
+                                    pr.flush();
+                                }
+                                String choice2 = br.readLine();
+                                while (!choice2.equals("goBack")) {
+//                                    if (choice2.equals("sort")) {
+//                                        pr.println(market.size());
+//                                        pr.flush();
+//                                        market = displayMarketplace(true, search);
+                                    if (choice2.equals("search")) {
+                                        String searchWord = br.readLine();
+                                        market = displayMarketplace("false", searchWord);
+                                        System.out.println(market.size());
                                         pr.println(market.size());
                                         pr.flush();
-                                        market = displayMarketplace(true, search);
-                                    } else if (choice2.equals("search")) {
-                                        String searchWord = br.readLine();
-                                        market = displayMarketplace(false, searchWord);
+                                        for (int i = 0; i < market.size(); i++) {
+                                            pr.println(market.get(i).getName());
+                                            pr.flush();
+                                            pr.println(market.get(i).getSellerEmail());
+                                            pr.flush();
+                                            pr.println(market.get(i).getStoreName());
+                                            pr.flush();
+                                            pr.println(market.get(i).getPrice());
+                                            pr.flush();
+                                        }
                                     } else if (choice2.equals("accessTicket")) {
                                         int t = Integer.parseInt(br.readLine());
                                         product = market.get(t);
@@ -240,10 +254,11 @@ public class ClientThread implements Runnable {
                                                 pr.println("false");
                                                 pr.flush();
                                             }
-                                            market = displayMarketplace(false, search);
+                                            market = displayMarketplace("false", search);
                                         }
                                     }
-                                } while (!choice2.equals("goBack"));
+                                    choice2 = br.readLine();
+                                }
                             } else if (action.equals("purchaseHistory")) {
                                 pr.println(user.displayPastTransactions());
                                 pr.flush();
@@ -275,6 +290,8 @@ public class ClientThread implements Runnable {
                                 }
                             }
                         } while (!action.equals("quit"));
+                        System.out.println("action: " + action);
+                        System.out.println("outsideLoop");
                     } else {
                         pr.println("false");
                         pr.flush();
@@ -288,7 +305,7 @@ public class ClientThread implements Runnable {
             e.printStackTrace();
         }
     }
-    public static ArrayList<Ticket> displayMarketplace(boolean sort, String search) {
+    public static ArrayList<Ticket> displayMarketplace(String sort, String search) {
         File f = new File("availableTickets.txt");
         ArrayList<Ticket> tickets = new ArrayList<>();
         String[] ticketInfo;
@@ -310,7 +327,7 @@ public class ClientThread implements Runnable {
                     tickets.remove(i);
             }
         }
-        if (sort) {
+        if (sort.equals("true")) {
             Collections.sort(tickets, Comparator.comparing(Ticket::getPrice));
         }
         return tickets;

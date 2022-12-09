@@ -813,14 +813,6 @@ public class GUIMain extends JComponent implements Runnable {
         JPanel result = new JPanel(new BorderLayout());
         panel.setLayout(new GridLayout(5, 1));
         JButton change = new JButton("Buy Tickets");
-        change.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JPanel market = market(pr, br);
-                mainPanel.add(market, "market");
-                cardLayout.show(mainPanel, "market");
-            }
-        });
         JButton cart = new JButton("Shopping Cart");
         cart.addActionListener(new ActionListener() {
             @Override
@@ -845,7 +837,7 @@ public class GUIMain extends JComponent implements Runnable {
         change.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                market = market(pr, br);
+                market = market(pr, br, "false", "false");
                 mainPanel.add(market, "market");
                 cardLayout.show(mainPanel, "market");
             }
@@ -876,19 +868,25 @@ public class GUIMain extends JComponent implements Runnable {
         return result;
     }
 
-    public static JPanel market(PrintWriter pr, BufferedReader br) {
+    public static JPanel market(PrintWriter pr, BufferedReader br, String sortOption, String searchOption) {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
-        pr.println("displayMarketplace");
-        pr.flush();
-        try {
-            pr.println("");
+        if (!searchOption.equals("true")) {
+            pr.println("displayMarketplace");
             pr.flush();
+            pr.println(sortOption);
+            pr.flush();
+        }
+        try {
             int numTix = Integer.parseInt(br.readLine());
             System.out.println(numTix);
             panel.setLayout(new GridLayout(numTix, 1));
             for(int i = 0; i < numTix; i++) {
-                JButton tix = new JButton(br.readLine()+" "+br.readLine()+" "+br.readLine()+" "+br.readLine());
+                String one = br.readLine();
+                String two = br.readLine();
+                String three = br.readLine();
+                String four = br.readLine();
+                JButton tix = new JButton(one+" "+two+" "+three+" "+four);
                 final int fI = i;
                 tix.addActionListener(new ActionListener() {
                     @Override
@@ -901,7 +899,6 @@ public class GUIMain extends JComponent implements Runnable {
                     }
                 });
                 panel.add(tix);
-
             }
 
         } catch (Exception e) {
@@ -922,12 +919,14 @@ public class GUIMain extends JComponent implements Runnable {
         sort.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                pr.println("sort");
-                pr.flush();
+//                pr.println("sort");
+//                pr.flush();
                 try {
-                    JPanel newMarket = market(pr, br);
-                    mainPanel.add(newMarket, "newMarket");
-                    cardLayout.show(mainPanel, "newMarket");
+                    pr.println("goBack");
+                    pr.flush();
+                    market = market(pr, br, "true", "false");
+                    mainPanel.add(market, "market");
+                    cardLayout.show(mainPanel, "market");
                 } catch (Exception f) {
                     f.printStackTrace();
                 }
@@ -942,13 +941,9 @@ public class GUIMain extends JComponent implements Runnable {
                 pr.flush();
                 pr.println(search.getText());
                 pr.flush();
-                try {
-                    JPanel newMarket = market(pr, br);
-                    mainPanel.add(newMarket, "newMarket");
-                    cardLayout.show(mainPanel, "newMarket");
-                } catch (Exception f) {
-                    f.printStackTrace();
-                }
+                market = market(pr, br, "false", "true");
+                mainPanel.add(market, "market");
+                cardLayout.show(mainPanel, "market");
             }
         });
         buttonPanel.add(sort);
