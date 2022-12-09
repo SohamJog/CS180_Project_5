@@ -702,9 +702,9 @@ public class GUIMain extends JComponent implements Runnable {
                     }
                     else {
                         JOptionPane.showMessageDialog(null, "Please enter a valid quantity");
-                        pr.println("goBack");
-                        pr.flush();
-                        cardLayout.show(mainPanel, "market");
+//                        pr.println("goBack");
+//                        pr.flush();
+//                        cardLayout.show(mainPanel, "market");
                     }
                 } catch (Exception f) {
                     f.printStackTrace();
