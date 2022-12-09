@@ -19,117 +19,117 @@ The User class contains the information about the user, including name(String), 
 
 - login:
   - Allows the users to log into their account with email and password. If the account exists and the email and password are correct, returns a User object with corresponding information, returns null otherwise.
-  - Testing: tested in the main method + test cases in Testing class
+  - Testing: tested in the main method 
 
 - signUp:
   - Allows the users to sign up for an account with their name, email, and address. Returns true when successfully sign up and false if the account already exists.
-  - Testing: tested in the main method + test cases in Testing class
+  - Testing: tested in the main method 
 
 - addToCart:
   - Allows the users to add items (tickets) to their shopping cart. This method also updates the text files that store the related information.
-  - Testing: tested in the main method + test cases in Testing class
+  - Testing: tested in the main method 
   
 - removeFromCart:
   - Allows the users to remove items (tickets) from their cart. This method also updates the text files that store the related information.
-  - Testing: tested in the main method + test cases in Testing class
+  - Testing: tested in the main method 
   
 - buyTicket:
   - Allows the user to buy a ticket. This method updates the user's shopping cart (since they have bought it) and updates the related files.
-  - Testing: tested in the main method + test cases in Testing class
+  - Testing: tested in the main method 
 
 - displayPastTransactions:
   - Displays the order history (the tickets bought by the user).
-  - Testing: tested in the main method + test cases in Testing class
+  - Testing: tested in the main method 
   
 - displayShoppingCart:
   - Displays the items in the user's shopping cart (including the product name, price, quantity available, description, and more).
-  - Testing: tested in the main method + test cases in Testing class
+  - Testing: tested in the main method 
   
 - changePassword:
   - Allows the user to change their password. This updates the files that store the user information.
-  - Testing: tested in the main method + test cases in Testing class
+  - Testing: tested in the main method 
   
 - changeName:
   - Allows the user to change their name. This updates the files that store the user information.
-  - Testing: tested in the main method + test cases in Testing class
+  - Testing: tested in the main method 
 
 - deleteAccount:
   - Allows the users to delete their accounts. This updates the files that store the user information.
-  - Testing: tested in the main method + test cases in Testing class
+  - Testing: tested in the main method 
 
 - updateFile:
   - Updates the files that store the user information with the latest information.
-  - Testing: tested in the main method (called in the changePassword and changeName method) + test cases in Testing class
+  - Testing: tested in the main method (called in the changePassword and changeName method) 
 
 - writeToFile: 
-  - Similar to updateFile. Used for writing the userinformation to files.
-  - Testing: tested in the main method (called in the signUp method) + test cases in Testing class
+  - Similar to updateFile. Used for writing the user information to files.
+  - Testing: tested in the main method (called in the signUp method) 
   
 - summary:
   - Returns a String of the summary of the user.
-  - Testing: tested in the main method (called in the writeToFile method) + test cases in Testing class
+  - Testing: tested in the main method (called in the writeToFile method) 
 
 ### Seller Class
 The Seller class contains the information about the seller, including name(String), email(String), password(String), storeNames(ArrayList), and stores(ArrayList). It also contains the following functionalities:
 
 - login:
   - Allows the sellers to log into their account with email and password. If the account exists and the email and password are correct, returns a Seller object with corresponding information, returns null otherwise.
-  - Testing: tested in the main method + test cases in Testing class
+  - Testing: tested in the main method 
 
 - signUp:
   - Allows the sellers to sign up for an account with their name, email, and address. Returns true when successfully sign up and false if the account already exists.
-  - Testing: tested in the main method + test cases in Testing class
+  - Testing: tested in the main method 
   
 - createStore:
   - Allows the sellers to create a store with a store name.
-  - Testing: tested in the main method + test cases in Testing class
+  - Testing: tested in the main method 
   
 - changePassword:
   - Allows the sellers to change their password. This updates the files that store the seller information.
-  - Testing: tested in the main method + test cases in Testing class
+  - Testing: tested in the main method 
   
 - changeName:
   - Allows the sellers to change their name. This updates the files that store the seller information.
-  - Testing: tested in the main method + test cases in Testing class
+  - Testing: tested in the main method 
   
 - deleteAccount:
   - Allows the sellers to delete their accounts. This updates the files that store the seller information.
-  - Testing: tested in the main method + test cases in Testing class
+  - Testing: tested in the main method 
   
 - shoppingCart:
   - Prints the items in the customers' shopping cart for the seller to view.
-  - Testing: tested in the main method + test cases in Testing class
+  - Testing: tested in the main method 
   
 - summary:
   - Returns a string of the seller's summary (including the name, email, password, and the name of the stores owned by that seller).
-  - Testing: tested in the main method (called in the writeToFile method) + test cases in Testing class
+  - Testing: tested in the main method (called in the writeToFile method) 
   
 - writeToFile: 
   - Write the seller information returned by the summary method to the text file.
-  - Testing: tested in the main method (called in the signUp method) + test cases in Testing class
+  - Testing: tested in the main method (called in the signUp method) 
   
 - newStoreWrite:
   - Writes the newly created store information into the file.
-  - Testing: tested in the main method (called in the createStore method) + test cases in Testing class
+  - Testing: tested in the main method (called in the createStore method) 
 
 - customerList:
   - Lists the past trasactions for every store.
-  - Testing: tested in the main method + test cases in Testing class
+  - Testing: tested in the main method 
   
 - updateFile:
   - Updates the files that store the seller information with the latest information.
-  - Testing: tested in the main method (called in the changePassword and changeName method) + test cases in Testing class
+  - Testing: tested in the main method (called in the changePassword and changeName method) 
 
 ### Store Class
 The store class contains the information about the store, including its name (String) and the tickets it has (ArrayList). It also includes the following functionalities:
 
 - newTickets:
   - Allows the sellers to create new tickets in their store with provided information (such as the name of the ticket, the price, and more). This updates the files storing the ticket and store information.
-  - Testing: tested in the main method + test cases in Testing class
+  - Testing: tested in the main method 
   
 - deleteTickets:
   - Allows the sellers to delete tickets in their stores. This updates the files storing the ticket and store information.
-  - Testing: tested in the main method + test cases in Testing class
+  - Testing: tested in the main method 
 
 - getRevenue:
   - Get the total revenue of the store.
@@ -140,19 +140,19 @@ The Ticket class contains the information about the Ticket, including ticket id(
 
 - toFile:
   - Return a string summary of the ticket that is used for writing to files.
-  - Testing: tested in the main method (called in the writeToFile method and changeInfo method) + test cases in Testing class
+  - Testing: tested in the main method (called in the writeToFile method and changeInfo method) 
 
 - changeInfo:
   - Update the file that stores ticket information with the most-updated info.
-  - Testing: tested in the main method + test cases in Testing class
+  - Testing: tested in the main method 
   
 - toProduct:
   - Prints the product on the console (we use it for displaying the products in the menu).
-  - Testing: tested in the main method + test cases in Testing class
+  - Testing: tested in the main method 
 
 - toString:
   - Prints all the details about the product on the console.
-  - Testing: tested in the main method + test cases in Testing class
+  - Testing: tested in the main method 
 
 ### ClientThread Class
 Creates a Thread using Runnable , allowing multiple clients to access the application independently and concurrently.
