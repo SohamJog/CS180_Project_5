@@ -737,24 +737,26 @@ public class GUIMain extends JComponent implements Runnable {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String name = JOptionPane.showInputDialog("Enter the name of the new store");
-                if(name.isEmpty()) {
-                    JOptionPane.showMessageDialog(panel, "Store name cannot be empty");
-                } else {
-                    pr.println("createNewStore");
-                    pr.flush();
-                    pr.println(name);
-                    pr.flush();
-                    try {
-                        if (br.readLine().equals("true")) {
-                            JOptionPane.showMessageDialog(panel, "Store created successfully!");
-                            storesMenu = storesMenu(pr, br);
-                            mainPanel.add(storesMenu, "storesMenu");
-                            cardLayout.show(mainPanel, "storesMenu");
-                        } else {
-                            JOptionPane.showMessageDialog(panel, "Store with that name already exists!");
+                if (name != null) {
+                    if(name.isEmpty()) {
+                        JOptionPane.showMessageDialog(panel, "Store name cannot be empty");
+                    } else {
+                        pr.println("createNewStore");
+                        pr.flush();
+                        pr.println(name);
+                        pr.flush();
+                        try {
+                            if (br.readLine().equals("true")) {
+                                JOptionPane.showMessageDialog(panel, "Store created successfully!");
+                                storesMenu = storesMenu(pr, br);
+                                mainPanel.add(storesMenu, "storesMenu");
+                                cardLayout.show(mainPanel, "storesMenu");
+                            } else {
+                                JOptionPane.showMessageDialog(panel, "Store with that name already exists!");
+                            }
+                        } catch (Exception f) {
+                            f.printStackTrace();
                         }
-                    } catch (Exception f) {
-                        f.printStackTrace();
                     }
                 }
             }

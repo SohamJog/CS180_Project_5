@@ -96,9 +96,8 @@ public class ClientThread implements Runnable {
                                     pr.println(storeProducts.get(i).getName());
                                     pr.flush();
                                 }
-
-
                                 String storeAction = br.readLine();
+                                System.out.println(storeAction);
                                 while (!storeAction.equals("goBack")) {
                                     if (storeAction.equals("newTicket")) {
                                         try {
