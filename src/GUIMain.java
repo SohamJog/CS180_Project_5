@@ -964,7 +964,7 @@ public class GUIMain extends JComponent implements Runnable {
         return result;
     }
 
-    public static JPanel storeMenu(PrintWriter pr, BufferedReader br, String storeName) {
+    public static JPanel storeMenu(PrintWriter pr, BufferedReader br, String storeNameP) {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
         JButton newTix = new JButton("Add new Ticket");
@@ -1001,7 +1001,9 @@ public class GUIMain extends JComponent implements Runnable {
                         pr.println(JOptionPane.showInputDialog(panel, "Failed to add ticket",
                                 "Ticket Emporium", JOptionPane.QUESTION_MESSAGE));
                     }
-                    storeMenu = storeMenu(pr, br, storeName);
+                    pr.println("goBack");
+                    pr.flush();
+                    storeMenu = storeMenu(pr, br, storeNameP);
                     mainPanel.add(storeMenu, "storeMenu");
                     cardLayout.show(mainPanel, "storeMenu"); // bug here
                 } catch (Exception f) {
@@ -1014,8 +1016,9 @@ public class GUIMain extends JComponent implements Runnable {
         reload.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("pressed");
-                storeMenu = storeMenu(pr, br, storeName);
+                pr.println("goBack");
+                pr.flush();
+                storeMenu = storeMenu(pr, br, storeNameP);
                 mainPanel.add(storeMenu, "storeMenu");
                 cardLayout.show(mainPanel, "storeMenu");
             }
@@ -1025,7 +1028,7 @@ public class GUIMain extends JComponent implements Runnable {
         try {
             pr.println("enterStore");
             pr.flush();
-            pr.println(storeName);
+            pr.println(storeNameP);
             pr.flush();
             int numTickets = Integer.parseInt(br.readLine());
             panel.setLayout(new GridLayout(numTickets+1, 1));
