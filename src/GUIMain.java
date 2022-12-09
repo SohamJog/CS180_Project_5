@@ -702,8 +702,7 @@ public class GUIMain extends JComponent implements Runnable {
                     String inp = br.readLine();
                     if(inp.equals("true")) {
                         JOptionPane.showMessageDialog(null, "Added to cart!");
-                    }
-                    else {
+                    } else {
                         JOptionPane.showMessageDialog(null, "Please enter a valid quantity");
                         pr.println("goBack");
                         pr.flush();

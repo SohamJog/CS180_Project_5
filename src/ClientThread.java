@@ -243,8 +243,7 @@ public class ClientThread implements Runnable {
                                             boolean ok = true;
                                             try {
                                                 quantity = Integer.parseInt(br.readLine());
-                                            }
-                                            catch (NumberFormatException e) {
+                                            } catch (NumberFormatException e) {
                                                 ok = false;
                                                 pr.println("false");
                                                 pr.flush();
