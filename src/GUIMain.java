@@ -1392,9 +1392,13 @@ public class GUIMain extends JComponent implements Runnable {
         JPanel result = new JPanel(new BorderLayout());
         JPanel panel = new JPanel();
         pr.println("viewPurchaseHistory");
-        pr.flush();
+        java.util.List<String> uCart = null;
         try {
-            panel.add(new JLabel((String)ois.readObject()));
+            uCart = (java.util.List<String>) ois.readObject();
+            panel.setLayout(new GridLayout(uCart.size()+1, 1));
+            for(String t : uCart) {
+                panel.add(new JLabel(t));
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
