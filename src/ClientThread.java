@@ -24,6 +24,8 @@ public class ClientThread implements Runnable {
             String signInUp = br.readLine();
             while (!signInUp.equals("quit")) { // an option to quit - not sure if needed tho
                 if (signInUp.equals("sellerSignup")) {
+
+
                     String name = br.readLine();
                     String email = br.readLine();
                     String password = br.readLine();
@@ -46,6 +48,10 @@ public class ClientThread implements Runnable {
                         pr.flush();
                     }
                 } else if (signInUp.equals("sellerSignin")) {
+
+                    //debug
+                    System.out.println("sellerSignin");
+
                     String email = br.readLine();
                     String password = br.readLine();
                     Seller seller = Seller.login(email, password);
@@ -180,6 +186,10 @@ public class ClientThread implements Runnable {
                         pr.flush();
                     }
                 } else if (signInUp.equals("userSignin")) {
+
+                    //debug
+                    System.out.println("userSignin");
+
                     String email = br.readLine();
                     String password = br.readLine();
                     User user = User.login(email, password);

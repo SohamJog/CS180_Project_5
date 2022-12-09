@@ -499,6 +499,8 @@ public class GUIMain extends JComponent implements Runnable {
                         f.printStackTrace();
                     }
 
+                    //System.out.println(inp);
+
                     if(inp.equals("true")) {
                         JOptionPane.showMessageDialog(f, "Signed in successfully!");
                         customerDash = customerDash(pr, br, ois);
@@ -506,6 +508,7 @@ public class GUIMain extends JComponent implements Runnable {
                         cardLayout.show(mainPanel, "customerDash");
                     } else {
                         JOptionPane.showMessageDialog(f, "Incorrect email or password");
+                        System.out.println(inp);
                     }
                 }
             }
@@ -1144,7 +1147,7 @@ public class GUIMain extends JComponent implements Runnable {
             public void actionPerformed(ActionEvent e) {
 //                pr.println("goBack");
 //                pr.flush();
-                cardLayout.show(mainPanel, "statisticsMenu");
+                cardLayout.show(mainPanel, "customerDash");
             }
         });
         buttons.add(reload);
@@ -1204,6 +1207,7 @@ public class GUIMain extends JComponent implements Runnable {
         pr.println(sortOrNot);
         pr.flush();
         try {
+            System.out.println(br.readLine());
             int rows = Integer.parseInt(br.readLine());
             panel.setLayout(new GridLayout(rows, 1));
             for(int i = 0; i < rows; i++) {
