@@ -32,6 +32,7 @@ public class GUIMain extends JComponent implements Runnable {
     private static JPanel market;
     private static JPanel custStats;
     private static JPanel storeStats;
+    private static JPanel cart;
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new GUIMain());
@@ -827,11 +828,11 @@ public class GUIMain extends JComponent implements Runnable {
         JPanel result = new JPanel(new BorderLayout());
         panel.setLayout(new GridLayout(5, 1));
         JButton change = new JButton("Buy Tickets");
-        JButton cart = new JButton("Shopping Cart");
-        cart.addActionListener(new ActionListener() {
+        JButton cartB = new JButton("Shopping Cart");
+        cartB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JPanel cart = cartMenu(pr, br, ois);
+                cart = cartMenu(pr, br, ois);
                 mainPanel.add(cart, "cart");
                 cardLayout.show(mainPanel, "cart");
             }
@@ -876,7 +877,7 @@ public class GUIMain extends JComponent implements Runnable {
             }
         });
         panel.add(change);
-        panel.add(cart);
+        panel.add(cartB);
         panel.add(account);
         panel.add(history);
         panel.add(stats);
@@ -1136,10 +1137,11 @@ public class GUIMain extends JComponent implements Runnable {
         JPanel panel = new JPanel();
         pr.println("displayShoppingCart");
         pr.flush();
+        java.util.List<Ticket> uCart = null;
         try {
-            java.util.List<Ticket> cart = (java.util.List<Ticket>) ois.readObject();
-            panel.setLayout(new GridLayout(cart.size()+1, 1));
-            for(Ticket t : cart) {
+            uCart = (java.util.List<Ticket>) ois.readObject();
+            panel.setLayout(new GridLayout(uCart.size()+1, 1));
+            for(Ticket t : uCart) {
                 panel.add(new JLabel(t.toString()));
             }
         } catch (Exception e) {
@@ -1159,11 +1161,31 @@ public class GUIMain extends JComponent implements Runnable {
             public void actionPerformed(ActionEvent e) {
 //                pr.println("goBack");
 //                pr.flush();
+                cart = cartMenu(pr, br, ois);
+                mainPanel.add(cart, "cart");
                 cardLayout.show(mainPanel, "customerDash");
             }
         });
         buttons.add(reload);
         buttons.add(goBack);
+        JButton checkout = new JButton("Checkout");
+        java.util.List<Ticket> finalUCart = uCart;
+        checkout.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pr.println("checkout");
+                pr.flush();
+                if(finalUCart.size() > 0) {
+                    JOptionPane.showMessageDialog(panel, "Checkout successful!",
+                            "Ticket Emporium", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(panel, "Nothing to checkout!",
+                            "Ticket Emporium", JOptionPane.ERROR_MESSAGE);
+                }
+                cardLayout.show(mainPanel, "customerDash");
+            }
+        });
+        buttons.add(checkout);
         result.add(panel, BorderLayout.CENTER);
         result.add(buttons, BorderLayout.SOUTH);
         return result;

@@ -17,3 +17,7 @@
 4;ticket3;soham;zzz;store;45.00;meh;1
 4;ticket3;soham;zzz;store;45.00;meh;1
 3;ticket2;soham;zzz;bigStore;20.00;yucky;5
+4;newTicket;soham;jenny;new;10.00;dd;1
+7;b;soham;jenny;new;3.00;dsffer;1
+2;ticket;soham;another;bigStore;10.00;yummy;6
+3;banana;arm@gmail.com;jenny;bananas;20.00;bananas;4
