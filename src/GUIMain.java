@@ -659,6 +659,7 @@ public class GUIMain extends JComponent implements Runnable {
             public void actionPerformed(ActionEvent e) {
                 pr.println("addToCart");
                 pr.flush();
+
                 pr.println(quantity.getText());
                 pr.flush();
                 try {
@@ -667,7 +668,10 @@ public class GUIMain extends JComponent implements Runnable {
                         JOptionPane.showMessageDialog(null, "Added to cart!");
                     }
                     else {
-                        JOptionPane.showMessageDialog(null, "Not enough tickets for sale!");
+                        JOptionPane.showMessageDialog(null, "Please enter a valid quantity");
+                        pr.println("goBack");
+                        pr.flush();
+                        cardLayout.show(mainPanel, "market");
                     }
                 } catch (Exception f) {
                     f.printStackTrace();
