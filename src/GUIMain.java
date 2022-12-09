@@ -34,6 +34,7 @@ public class GUIMain extends JComponent implements Runnable {
     private static JPanel storeStats;
     private static JPanel cart;
     private static JPanel purchaseHistory;
+    private static JPanel sellerCarts;
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new GUIMain());
@@ -84,7 +85,7 @@ public class GUIMain extends JComponent implements Runnable {
         signInUp = signInUp();
         sellerSignUp = sellerSignUp(frame, writer, reader);
         userSignUp = userSignUp(frame, writer, reader);
-        sellerSignIn = sellerSignIn(frame, writer, reader);
+        sellerSignIn = sellerSignIn(frame, writer, reader, ois);
         userSignIn = userSignIn(frame, writer, reader, ois);
 
 //
@@ -366,7 +367,7 @@ public class GUIMain extends JComponent implements Runnable {
 
 
 
-    public static JPanel sellerSignIn(JFrame f, PrintWriter pr, BufferedReader br) {
+    public static JPanel sellerSignIn(JFrame f, PrintWriter pr, BufferedReader br, ObjectInputStream ois) {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
         panel.setLayout(new GridLayout(2,2));
@@ -424,7 +425,7 @@ public class GUIMain extends JComponent implements Runnable {
 
                     if(inp.equals("true")) {
                         JOptionPane.showMessageDialog(f, "Signed in successfully!");
-                        sellerDash = sellerDash(pr, br);
+                        sellerDash = sellerDash(pr, br, ois);
                         storesMenu = storesMenu(pr, br);
                         statisticsMenu = statisticsMenu(pr, br);
                         mainPanel.add(sellerDash, "sellerDash");
@@ -521,7 +522,7 @@ public class GUIMain extends JComponent implements Runnable {
 
 
 
-    public static JPanel sellerDash(PrintWriter pr, BufferedReader br) {
+    public static JPanel sellerDash(PrintWriter pr, BufferedReader br, ObjectInputStream ois) {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
         panel.setLayout(new GridLayout(4, 1));
@@ -570,6 +571,8 @@ public class GUIMain extends JComponent implements Runnable {
         cart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                sellerCarts = sellerCarts(pr, br, ois);
+                mainPanel.add(sellerCarts, "sellerCarts");
                 cardLayout.show(mainPanel, "sellerCarts");
             }
         });
