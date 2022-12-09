@@ -857,6 +857,12 @@ public class GUIMain extends JComponent implements Runnable {
         JButton stats = new JButton("View Statistics");
         JButton logOut = new JButton("Log Out");
         panel.add(logOut);
+        history.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
 
         change.addActionListener(new ActionListener() {
             @Override
