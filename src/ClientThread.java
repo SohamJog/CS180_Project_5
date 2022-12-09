@@ -145,29 +145,31 @@ public class ClientThread implements Runnable {
                                 pr.println(seller.getStores().size());
                                 pr.flush();
                                 for (Store s : seller.getStores()) {
-                                    pr.println(s.getName() + "\n____________\nRevenue: $" + s.getRevenue() + "\nCustomer List:");
+                                    pr.println("[" + s.getName() + "]");
+                                    pr.flush();
+                                    pr.println("-Revenue: $" + s.getRevenue());
+                                    pr.flush();
+                                    pr.println("-Customer List: ");
+                                    pr.flush();
+                                    pr.println(s.getCustomerList().size());
                                     pr.flush();
                                     s.getCustomerList().forEach((key) -> {
                                         pr.println(key);
                                         pr.flush();
                                     });
-                                    pr.println();
-                                    pr.flush();
                                 }
-                                pr.println();
-                                pr.flush();
                             } else if (action.equals("viewCustomerStatistics")) {
                                 String sort = br.readLine();
                                 if (sort.equals("y")) {
                                     customerStats(seller.getEmail(), true, pr);
-                                } else {
+                                } else if (sort.equals("n")) {
                                     customerStats(seller.getEmail(), false, pr);
                                 }
                             } else if (action.equals("viewProductStatistics")) {
                                 String sort = br.readLine();
                                 if (sort.equals("y")) {
                                     productStats(seller.getEmail(), true, pr);
-                                } else {
+                                } else if (sort.equals("n")){
                                     productStats(seller.getEmail(), false, pr);
                                 }
                             } else if (action.equals("viewProductsInCustomerShoppingCarts")) {

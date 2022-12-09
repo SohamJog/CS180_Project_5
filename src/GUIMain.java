@@ -1179,8 +1179,8 @@ public class GUIMain extends JComponent implements Runnable {
         goBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                pr.println("goBack");
-//                pr.flush();
+                pr.println("goBack");
+                pr.flush();
                 cardLayout.show(mainPanel, "statisticsMenu");
             }
         });
@@ -1207,7 +1207,6 @@ public class GUIMain extends JComponent implements Runnable {
         pr.println(sortOrNot);
         pr.flush();
         try {
-            System.out.println(br.readLine());
             int rows = Integer.parseInt(br.readLine());
             panel.setLayout(new GridLayout(rows, 1));
             for(int i = 0; i < rows; i++) {
@@ -1222,8 +1221,8 @@ public class GUIMain extends JComponent implements Runnable {
         goBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                pr.println("goBack");
-//                pr.flush();
+                pr.println("goBack");
+                pr.flush();
                 cardLayout.show(mainPanel, "statisticsMenu");
             }
         });
@@ -1253,7 +1252,18 @@ public class GUIMain extends JComponent implements Runnable {
             int rows = Integer.parseInt(br.readLine());
             panel.setLayout(new GridLayout(rows, 1));
             for(int i = 0; i < rows; i++) {
-                panel.add(new JLabel(br.readLine()));
+                String one = br.readLine();
+                String two = br.readLine();
+                String three = br.readLine();
+                int customerNum = Integer.parseInt(br.readLine());
+                String customers = "";
+                if (customerNum != 0) {
+                    customers += br.readLine();
+                    for (int j = 1; j < customerNum; j++) {
+                        customers += ", " + br.readLine();
+                    }
+                }
+                panel.add(new JLabel( one + "\n" + two + "\n" + three + "\n" + customers));
             }
         } catch (Exception e) {
             e.printStackTrace();
