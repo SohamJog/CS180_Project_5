@@ -1189,7 +1189,7 @@ public class GUIMain extends JComponent implements Runnable {
         sort.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                prodStats = prodStats(pr, br, "n");
+                prodStats = prodStats(pr, br, "y");
                 mainPanel.add(prodStats, "prodStats");
                 cardLayout.show(mainPanel, "prodStats");
             }
