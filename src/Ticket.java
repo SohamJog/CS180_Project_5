@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @version November 14, 2022
  */
 
-class Ticket {
+class Ticket implements Serializable {
 
     private int id;
     private String sellerEmail;

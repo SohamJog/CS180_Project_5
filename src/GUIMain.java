@@ -3,8 +3,10 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.*;
 
 public class GUIMain extends JComponent implements Runnable {
     private static String choice;
@@ -42,11 +44,12 @@ public class GUIMain extends JComponent implements Runnable {
         Socket socket = null;
         BufferedReader reader = null;
         PrintWriter writer = null;
-
+        ObjectInputStream ois = null;
         try {
             socket = new Socket("localhost", 4242);
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             writer = new PrintWriter(socket.getOutputStream());
+            ois = new ObjectInputStream(socket.getInputStream());
             System.out.println("Connected to the server!");
         } catch (Exception e) {
             e.printStackTrace();
@@ -78,7 +81,7 @@ public class GUIMain extends JComponent implements Runnable {
         sellerSignUp = sellerSignUp(frame, writer, reader);
         userSignUp = userSignUp(frame, writer, reader);
         sellerSignIn = sellerSignIn(frame, writer, reader);
-        userSignIn = userSignIn(frame, writer, reader);
+        userSignIn = userSignIn(frame, writer, reader, ois);
 
 //
         mainPanel.add(signInUp, "signInUp");
@@ -439,7 +442,7 @@ public class GUIMain extends JComponent implements Runnable {
 
 
     ///
-    public static JPanel userSignIn(JFrame f, PrintWriter pr, BufferedReader br) {
+    public static JPanel userSignIn(JFrame f, PrintWriter pr, BufferedReader br, ObjectInputStream ois) {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
         panel.setLayout(new GridLayout(2,2));
@@ -497,7 +500,7 @@ public class GUIMain extends JComponent implements Runnable {
 
                     if(inp.equals("true")) {
                         JOptionPane.showMessageDialog(f, "Signed in successfully!");
-                        customerDash = customerDash(pr, br);
+                        customerDash = customerDash(pr, br, ois);
                         mainPanel.add(customerDash, "customerDash");
                         cardLayout.show(mainPanel, "customerDash");
                     } else {
@@ -808,7 +811,7 @@ public class GUIMain extends JComponent implements Runnable {
         return result;
     }
 
-    public static JPanel customerDash(PrintWriter pr, BufferedReader br) {
+    public static JPanel customerDash(PrintWriter pr, BufferedReader br, ObjectInputStream ois) {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
         panel.setLayout(new GridLayout(5, 1));
@@ -825,7 +828,7 @@ public class GUIMain extends JComponent implements Runnable {
         cart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JPanel cart = cartMenu(pr, br);
+                JPanel cart = cartMenu(pr, br, ois);
                 mainPanel.add(cart, "cart");
                 cardLayout.show(mainPanel, "cart");
             }
@@ -1117,9 +1120,20 @@ public class GUIMain extends JComponent implements Runnable {
         }
     }
 
-    public static JPanel cartMenu(PrintWriter pr, BufferedReader br) {
+    public static JPanel cartMenu(PrintWriter pr, BufferedReader br, ObjectInputStream ois) {
         JPanel result = new JPanel(new BorderLayout());
         JPanel panel = new JPanel();
+        pr.println("displayShoppingCart");
+        pr.flush();
+        try {
+            java.util.List<Ticket> cart = (java.util.List<Ticket>) ois.readObject();
+            panel.setLayout(new GridLayout(cart.size()+1, 1));
+            for(Ticket t : cart) {
+                panel.add(new JLabel(t.toString()));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         JButton reload = new JButton("Reload");
         reload.addActionListener(new ActionListener() {
             @Override
@@ -1127,13 +1141,20 @@ public class GUIMain extends JComponent implements Runnable {
                 // todo - jenny
             }
         });
-        panel.add(reload);
-
-        try {
-            panel.setLayout(new GridLayout(Integer.parseInt(br.readLine()), 1));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        JPanel buttons = new JPanel(new FlowLayout());
+        JButton goBack = new JButton("Go Back");
+        goBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pr.println("goBack");
+                pr.flush();
+                cardLayout.show(mainPanel, "statisticsMenu");
+            }
+        });
+        buttons.add(reload);
+        buttons.add(goBack);
+        result.add(panel, BorderLayout.CENTER);
+        result.add(buttons, BorderLayout.SOUTH);
         return result;
     }
 
