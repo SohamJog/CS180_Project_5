@@ -16,6 +16,7 @@ public class ClientThread implements Runnable {
         try {
             br = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
             pr = new PrintWriter(socket.getOutputStream());
+            ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
             pr.println("Connected");
             pr.flush();
 
@@ -263,10 +264,8 @@ public class ClientThread implements Runnable {
                                 pr.println(user.displayPastTransactions());
                                 pr.flush();
                             } else if (action.equals("displayShoppingCart")) {
-                                pr.println(user.displayShoppingCart());
-                                pr.flush();
-                                pr.println(user.getShoppingCart().size());
-                                pr.flush();
+                                oos.writeObject(user.getShoppingCart());
+                                oos.flush();
                             } else if (action.equals("removeItem")) {
                                 int choice3 = Integer.parseInt(br.readLine());
                                 user.removeFromCart(user.getShoppingCart().get(choice3 - 1));
