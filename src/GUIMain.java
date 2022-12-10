@@ -1233,8 +1233,17 @@ public class GUIMain extends JComponent implements Runnable {
             uCart = (java.util.List<Ticket>) ois.readObject();
             panel.setLayout(new GridLayout(uCart.size()+1, 1));
             for(Ticket t : uCart) {
-                panel.add(new JLabel(t.toString()));
-                System.out.println(t.toString());
+                String ti = t.toString();
+                String[] temp = ti.split("Seller:");
+                panel.add(new JLabel(temp[0]));
+                String[] temp2 = temp[1].split("Store Name:");
+                panel.add(new JLabel("Seller:"+ temp2[0]));
+                String[] temp3 = temp2[1].split("Store" + "\nPrice:" );
+                panel.add(new JLabel("Store Name:"   + temp3[0]));
+                panel.add(new JLabel("Store Price:"   + temp3[1]));
+
+
+
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -1443,7 +1452,7 @@ public class GUIMain extends JComponent implements Runnable {
                 panel.add(new JLabel("Price:"  + temp4[0]));
                 String[] temp5 = temp4[1].split("Quantity:");
                 panel.add(new JLabel("Description:" + temp5[0]));
-
+                panel.add(new JLabel("Quantity:" + temp5[1]));
             }
         } catch (Exception e) {
             e.printStackTrace();
