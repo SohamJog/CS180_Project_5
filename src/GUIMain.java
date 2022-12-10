@@ -93,7 +93,7 @@ public class GUIMain extends JComponent implements Runnable {
         sellerSignIn = sellerSignIn(frame, writer, reader, ois);
         userSignIn = userSignIn(frame, writer, reader, ois);
 
-
+//
         mainPanel.add(signInUp, "signInUp");
         mainPanel.add(sellerSignUp, "sellerSignUp");
         mainPanel.add(userSignUp, "userSignUp");
@@ -1097,6 +1097,17 @@ public class GUIMain extends JComponent implements Runnable {
     public JPanel market(PrintWriter pr, BufferedReader br, String sortOption, String searchOption) {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
+        JButton reload = new JButton("Reload");
+        reload.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pr.println("goBack");
+                pr.flush();
+                market = market(pr, br, "false", "false");
+                mainPanel.add(market, "market");
+                cardLayout.show(mainPanel, "market");
+            }
+        });
         if (!searchOption.equals("true")) {
             pr.println("displayMarketplace");
             pr.flush();
@@ -1176,6 +1187,7 @@ public class GUIMain extends JComponent implements Runnable {
         buttonPanel.add(sort);
         buttonPanel.add(search);
         buttonPanel.add(searchButton);
+        buttonPanel.add(reload);
         result.add(buttonPanel, BorderLayout.SOUTH);
         result.add(panel, BorderLayout.CENTER);
         return result;

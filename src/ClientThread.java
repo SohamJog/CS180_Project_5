@@ -196,7 +196,6 @@ public class ClientThread implements Runnable {
                             } else if (action.equals("deleteAccount")) {
                                 user.deleteAccount();
                             } else if (action.equals("displayMarketplace")) {
-                                System.out.println("displayMarketPlace");
                                 ArrayList<Ticket> market;
                                 String search = "";
                                 Ticket product;
