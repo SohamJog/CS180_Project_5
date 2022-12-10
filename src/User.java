@@ -165,7 +165,8 @@ public class User {
             toKeep.setQuantity(ticket.getQuantity() - toBuy.getQuantity());
 
             shoppingCart.add(toBuy);
-            System.out.println(shoppingCart);
+            //debug
+            //System.out.println(shoppingCart);
             ArrayList<String> lines = new ArrayList<>();
             File f = new File("shoppingCart.txt");
             try (BufferedReader br = new BufferedReader(new FileReader(f))) {

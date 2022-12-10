@@ -2,7 +2,7 @@
 
 ## Instructions - How to run and compile:
 - Step 1 - Clone or download the source code from this repository
-- Step 2 - Run the GUIMain method using corresponding GUI.
+- Step 2 - Run the GUIMain method 
 - Step 3 - You will see directions printed out on the GUI once you run the GUIMain method. Simply follow the directions and choose the options you want to proceed!
 
 ## Submissions:
