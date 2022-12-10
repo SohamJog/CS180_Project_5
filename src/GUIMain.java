@@ -689,7 +689,13 @@ public class GUIMain extends JComponent implements Runnable {
         JPanel result = new JPanel(new BorderLayout());
         panel.setLayout(new GridLayout(3, 1));
         try {
-            panel.add(new JLabel(br.readLine() + " " + br.readLine() + " " + br.readLine() + " " + br.readLine() + " " + br.readLine() + " " + br.readLine()));
+            String name = br.readLine();
+            String seller = br.readLine();
+            String store = br.readLine();
+            String description = br.readLine();
+            String price = br.readLine();
+            String quantityInput = br.readLine();
+            panel.add(new JLabel(name + " " + seller + " " + store + " " + description + " " + " " + price + " " + quantityInput));
         } catch (Exception e) {
             e.printStackTrace();
         }

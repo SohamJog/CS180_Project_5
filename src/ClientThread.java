@@ -237,14 +237,29 @@ public class ClientThread implements Runnable {
                                     } else if (choice2.equals("accessTicket")) {
                                         int t = Integer.parseInt(br.readLine());
                                         product = market.get(t);
-                                        pr.println(product.toProduct());
+                                        String name = "Name: " + product.getName();
+                                        String seller = "Seller: " + product.getSellerEmail();
+                                        String store = "Store Name: " + product.getStoreName();
+                                        String description = "Description: " + product.getDescription();
+                                        String price = Double.toString(product.getPrice());
+                                        String quantityInput = "Quantity: " + product.getQuantity();
+                                        pr.println(name);
+                                        pr.flush();
+                                        pr.println(seller);
+                                        pr.flush();
+                                        pr.println(store);
+                                        pr.flush();
+                                        pr.println(description);
+                                        pr.flush();
+                                        pr.println(price);
+                                        pr.flush();
+                                        pr.println(quantityInput);
                                         pr.flush();
                                         String choice3 = br.readLine();
                                         if (choice3.equals("addToCart")) {
                                             int quantity = 0;
                                             boolean ok = true;
                                             try {
-
                                                 quantity = Integer.parseInt(br.readLine());
                                             } catch (NumberFormatException e) {
                                                 ok = false;
