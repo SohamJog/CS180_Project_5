@@ -728,6 +728,7 @@ public class GUIMain extends JComponent implements Runnable {
         JButton goBack = new JButton("Go Back");
         goBack.addActionListener(new ActionListener() {
             @Override
+
             public void actionPerformed(ActionEvent e) {
                 pr.println("displayMarketplace");
                 pr.flush();
