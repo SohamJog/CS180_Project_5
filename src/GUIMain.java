@@ -41,6 +41,7 @@ public class GUIMain extends JComponent implements Runnable {
     private String currentPassword;
     private JPanel allStores;
     private JPanel statsMenu;
+    private JPanel specStores;
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new GUIMain());
@@ -1011,6 +1012,9 @@ public class GUIMain extends JComponent implements Runnable {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // jenny
+                specStores = specStores(pr, br, ois, "n");
+                mainPanel.add(specStores, "specStores");
+                cardLayout.show(mainPanel, "specStores");
             }
         });
         JPanel buttonPanel = new JPanel();
