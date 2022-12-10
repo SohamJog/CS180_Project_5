@@ -109,7 +109,7 @@ public class ClientThread implements Runnable {
                                     } else if (storeAction.equals("accessTicket")) {
                                         int ticketNumber = Integer.parseInt(br.readLine());
                                         Ticket t = store.getTickets().get(ticketNumber); // armanya
-                                        pr.println(t);
+                                        pr.println(t.toProduct());
                                         pr.flush();
 
                                         String ticketAction = br.readLine();

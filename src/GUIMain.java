@@ -707,7 +707,6 @@ public class GUIMain extends JComponent implements Runnable {
             public void actionPerformed(ActionEvent e) {
                 pr.println("addToCart");
                 pr.flush();
-
                 pr.println(quantity.getText());
                 pr.flush();
                 try {
@@ -980,7 +979,7 @@ public class GUIMain extends JComponent implements Runnable {
                     public void actionPerformed(ActionEvent e) {
                         pr.println("accessTicket");
                         pr.flush();
-                        JPanel ticket = ticketMenu(pr, br, fI); // armanya
+                        JPanel ticket = ticketMenu(pr, br, fI);
                         mainPanel.add(ticket, "ticket");
                         cardLayout.show(mainPanel, "ticket");
                     }
