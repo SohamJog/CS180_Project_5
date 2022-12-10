@@ -135,6 +135,7 @@ public class GUIMain extends JComponent implements Runnable {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(mainPanel, "sellerOrBuyer");
+                choice = "Sign in";
             }
         });
         JButton signUp = new JButton("Sign up");
@@ -142,6 +143,7 @@ public class GUIMain extends JComponent implements Runnable {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(mainPanel, "sellerOrBuyer");
+                choice = "Sign up";
             }
         });
         panel.add(signIn);
