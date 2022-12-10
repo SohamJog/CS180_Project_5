@@ -237,7 +237,7 @@ public class ClientThread implements Runnable {
                                         }
                                     } else if (choice2.equals("accessTicket")) {
 
-                                        //soham
+
                                         System.out.println("access ticket");
 
                                         int t = Integer.parseInt(br.readLine());
@@ -290,7 +290,6 @@ public class ClientThread implements Runnable {
                                     choice2 = br.readLine();
                                 }
                             } else if (action.equals("purchaseHistory")) {
-                                //System.out.println("history");
                                 oos.writeObject(user.displayPastTransactions());
                                 oos.flush();
                             } else if (action.equals("displayShoppingCart")) {
