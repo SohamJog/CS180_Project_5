@@ -1329,12 +1329,18 @@ public class GUIMain extends JComponent implements Runnable {
                 remove.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+                        JOptionPane.showConfirmDialog(panel,
+                                "Do you want to remove this item from the shopping cart?",
+                                "Remove Item",
+                                JOptionPane.YES_NO_OPTION,
+                                JOptionPane.QUESTION_MESSAGE);
                         pr.println("removeItem");
                         pr.flush();
                         pr.println(finalI);
                         pr.flush();
                     }
                 });
+                panel.add(remove);
             }
         } catch (Exception e) {
             e.printStackTrace();
