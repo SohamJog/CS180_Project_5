@@ -1034,7 +1034,11 @@ public class GUIMain extends JComponent implements Runnable {
         JPanel result = new JPanel(new BorderLayout());
         JPanel panel = new JPanel();
         try {
-
+            Map map = (Map) ois.readObject();
+            panel.setLayout(new GridLayout(map.size(), 1));
+            for (Object key : map.keySet()) {
+                JLabel store = new JLabel(key.toString() + " - " + map.get(key));
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
