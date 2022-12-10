@@ -235,16 +235,16 @@ public class ClientThread implements Runnable {
                                     } else if (choice2.equals("accessTicket")) {
                                         int t = Integer.parseInt(br.readLine());
                                         product = market.get(t);
-                                        pr.println(product.toProduct());
-                                        pr.flush();
+                                        oos.writeObject(product.toProduct());
+                                        oos.flush();
                                         String choice3 = br.readLine();
                                         if (choice3.equals("addToCart")) {
                                             int quantity = 0;
                                             boolean ok = true;
                                             try {
+
                                                 quantity = Integer.parseInt(br.readLine());
-                                            }
-                                            catch (NumberFormatException e) {
+                                            } catch (NumberFormatException e) {
                                                 ok = false;
                                                 pr.println("false");
                                                 pr.flush();
@@ -259,7 +259,6 @@ public class ClientThread implements Runnable {
                                                 }
                                                 //market = displayMarketplace("false", search);
                                             }
-
                                         }
                                     }
                                     choice2 = br.readLine();
