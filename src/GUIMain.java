@@ -1152,7 +1152,21 @@ public class GUIMain extends JComponent implements Runnable {
         JPanel result = new JPanel(new BorderLayout());
         panel.setLayout(new GridLayout(6, 1));
         try {
-            panel.add(new JLabel("<html>" + br.readLine() + "</html>"));
+            String t= br.readLine();
+            System.out.println(t);
+            if(t.contains("SStore Name")){
+                t =t.replace("SStore Name", "Store Name");
+            }
+            if(t.contains("SDescription")){
+                t =t.replace("SDescription", "Description");
+            }
+            if(t.contains("SPrice")){
+                t =t.replace("SPrice", "Price");
+            }
+            if(t.contains("SQuantity")){
+                t =t.replace("SQuantity", "Quantity");
+            }
+            panel.add(new JLabel("<html>" + t + "</html>"));
             JButton dTicket = new JButton("Delete Ticket");
             dTicket.addActionListener(new ActionListener() {
                 @Override
