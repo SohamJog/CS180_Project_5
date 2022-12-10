@@ -1061,6 +1061,37 @@ public class GUIMain extends JComponent implements Runnable {
         return result;
     }
 
+    public JPanel specStores(PrintWriter pr, BufferedReader br, ObjectInputStream ois, String sort) {
+        pr.println("statisticsForStoresShopped");
+        pr.flush();
+        pr.println(sort);
+        pr.flush();
+        JPanel result = new JPanel(new BorderLayout());
+        JPanel panel = new JPanel();
+        try {
+            Map map = (Map) ois.readObject();
+            panel.setLayout(new GridLayout(map.size(), 1));
+            for (Object key : map.keySet()) {
+                JLabel store = new JLabel(key.toString() + " - " + map.get(key));
+                panel.add(store);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        JPanel buttonPanel = new JPanel();
+        JButton goBack = new JButton("Go Back");
+        goBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(mainPanel, "statsMenu");
+            }
+        });
+        buttonPanel.add(goBack);
+        result.add(panel, BorderLayout.CENTER);
+        result.add(buttonPanel, BorderLayout.SOUTH);
+        return result;
+    }
+
     public JPanel market(PrintWriter pr, BufferedReader br, String sortOption, String searchOption) {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
