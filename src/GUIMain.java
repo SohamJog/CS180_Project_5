@@ -1345,6 +1345,29 @@ public class GUIMain extends JComponent implements Runnable {
                             pr.println(finalI);
                             pr.flush();
                         }
+
+                        //log out and log in again
+                        pr.println("quit");
+                        pr.flush();
+                        //log in again
+                        pr.println("userSignin");
+                        pr.flush();
+                        pr.println(currentUsername);
+                        pr.flush();
+                        pr.println(currentPassword);
+                        pr.flush();
+                        try {
+                            br.readLine();
+                        }
+                        catch (Exception f) {
+                            f.printStackTrace();
+                        }
+
+                        cart = cartMenu(pr, br, ois);
+                        mainPanel.add(cart, "cart");
+                        cardLayout.show(mainPanel, "cart");
+                        //
+
                     }
                 });
                 panel.add(remove);
