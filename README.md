@@ -8,7 +8,7 @@
 ## Submissions:
 - [Code]: 
 - [Report]: 
-
+- [Presentation]:
 ## Class Explanations:
     
 ### GUIMain Class
