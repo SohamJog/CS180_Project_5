@@ -297,7 +297,7 @@ public class ClientThread implements Runnable {
                                 oos.flush();
                             } else if (action.equals("removeItem")) {
                                 int choice3 = Integer.parseInt(br.readLine());
-                                user.removeFromCart(user.getShoppingCart().get(choice3 - 1));
+                                user.removeFromCart(user.getShoppingCart().get(choice3));
                             } else if (action.equals("checkout")) {
                                 while (user.getShoppingCart().size() > 0) {
                                     user.buyTicket(user.getShoppingCart().get(0));
