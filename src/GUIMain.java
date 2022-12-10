@@ -1029,6 +1029,7 @@ public class GUIMain extends JComponent implements Runnable {
             panel.setLayout(new GridLayout(map.size(), 1));
             for (Object key : map.keySet()) {
                 JLabel store = new JLabel(key.toString() + " - " + map.get(key));
+                panel.add(store);
             }
         } catch (Exception e) {
             e.printStackTrace();
