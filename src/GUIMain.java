@@ -125,32 +125,27 @@ public class GUIMain extends JComponent implements Runnable {
     public static JPanel signInUp() {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
-        panel.setLayout(new FlowLayout());
+        panel.setLayout(new GridLayout(3, 1));
         panel.add(new JLabel("What would you like to do"));
-        String[] options = {"Sign in", "Sign up"};
-        JComboBox comboBox = new JComboBox(options);
-        panel.add(comboBox);
         JPanel bPanel = new JPanel();
         bPanel.setLayout(new FlowLayout());
-
-        //create a jbutton to go back to seller or buyer
-
-
-
-
-        // Create a submit button
-        JButton submitButton = new JButton("Submit");
-        bPanel.add(submitButton);
         // Add an action listener to the submit button
-        submitButton.addActionListener(new ActionListener() {
+        JButton signIn = new JButton("Sign in");
+        signIn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                choice = (String) comboBox.getSelectedItem();
                 cardLayout.show(mainPanel, "sellerOrBuyer");
             }
         });
-
-        result.add(bPanel, BorderLayout.SOUTH);
+        JButton signUp = new JButton("Sign up");
+        signUp.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(mainPanel, "sellerOrBuyer");
+            }
+        });
+        panel.add(signIn);
+        panel.add(signUp);
         result.add(panel, BorderLayout.CENTER);
         return result;
     }
