@@ -47,9 +47,7 @@ public class GUIMain extends JComponent implements Runnable {
         SwingUtilities.invokeLater(new GUIMain());
     }
 
-//    public GUIMain() {
-//
-//    }
+
 
     @Override
     public void run() {
@@ -95,7 +93,7 @@ public class GUIMain extends JComponent implements Runnable {
         sellerSignIn = sellerSignIn(frame, writer, reader, ois);
         userSignIn = userSignIn(frame, writer, reader, ois);
 
-//
+
         mainPanel.add(signInUp, "signInUp");
         mainPanel.add(sellerSignUp, "sellerSignUp");
         mainPanel.add(userSignUp, "userSignUp");
