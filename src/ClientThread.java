@@ -335,6 +335,7 @@ public class ClientThread implements Runnable {
         }
     }
     public static ArrayList<Ticket> displayMarketplace(String sort, String search) {
+        search = search.toLowerCase();
         File f = new File("availableTickets.txt");
         ArrayList<Ticket> tickets = new ArrayList<>();
         String[] ticketInfo;
@@ -352,8 +353,11 @@ public class ClientThread implements Runnable {
         }
         if (!search.equals("")) {
             for (int i = 0; i < tickets.size(); i++) {
-                if (!(tickets.get(i).getName().contains(search) || tickets.get(i).getStoreName().contains(search) || tickets.get(i).getDescription().contains(search)))
+                if (!(tickets.get(i).getName().toLowerCase().contains(search) || tickets.get(i).getStoreName().toLowerCase().contains(search) || tickets.get(i).getDescription().toLowerCase().contains(search))) {
                     tickets.remove(i);
+                    i--;
+                }
+
             }
         }
         if (sort.equals("true")) {
