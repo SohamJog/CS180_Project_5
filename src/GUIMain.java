@@ -602,13 +602,21 @@ public class GUIMain extends JComponent implements Runnable {
             e.printStackTrace();
         }
         JButton goBack = new JButton("Go back");
+        JButton reload = new JButton("Reload");
         JPanel bPanel = new JPanel();
         bPanel.setLayout(new FlowLayout());
         bPanel.add(goBack);
+        bPanel.add(reload);
         goBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(mainPanel, "sellerDash");
+            }
+        });
+        reload.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(mainPanel, "sellerCarts");
             }
         });
         result.add(panel, BorderLayout.CENTER);
