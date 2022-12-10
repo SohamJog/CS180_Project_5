@@ -1203,6 +1203,8 @@ public class GUIMain extends JComponent implements Runnable {
             public void actionPerformed(ActionEvent e) {
                 pr.println("goBack");
                 pr.flush();
+                pr.println("goBack");
+                pr.flush();
                 storeMenu = storeMenu(pr, br, ois, storeNameP);
                 mainPanel.add(storeMenu, "storeMenu");
                 cardLayout.show(mainPanel, "storeMenu");

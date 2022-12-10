@@ -108,7 +108,7 @@ public class ClientThread implements Runnable {
                                         }
                                     } else if (storeAction.equals("accessTicket")) {
                                         int ticketNumber = Integer.parseInt(br.readLine());
-                                        Ticket t = store.getTickets().get(ticketNumber);
+                                        Ticket t = store.getTickets().get(ticketNumber); // armanya
                                         pr.println(t);
                                         pr.flush();
 
@@ -132,8 +132,10 @@ public class ClientThread implements Runnable {
                                             ticketAction = br.readLine();
                                         }
                                     }
+                                    System.out.println("exist while loop");
                                     storeAction = br.readLine();
                                 }
+                                System.out.println("exit outter while loop");
                             } else if (action.equals("viewStoreStatistics")) {
                                 pr.println(seller.getStores().size());
                                 pr.flush();
