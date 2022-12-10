@@ -595,7 +595,7 @@ public class GUIMain extends JComponent implements Runnable {
             uCart = (java.util.List<String>) ois.readObject();
             panel.setLayout(new GridLayout(uCart.size()+1, 1));
             for(String t : uCart) {
-                panel.add(new JLabel(t));
+                panel.add(new JLabel("<html>" + t + "</html>"));
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -88,9 +88,9 @@ class Seller {
                                 String[] ticketInfo = s.split(";");
                                 if (ticketInfo[2].equals(email)) {
                                     if (match.equals("")) {
-                                        match += "Customer: " + contents[0] + "\nItems:\n";
+                                        match += "Customer: " + contents[0] + "<br/>Items:<br/>";
                                     }
-                                    match += "Name: " + ticketInfo[1] + " Price: " + ticketInfo[4] + " Quantity: " + ticketInfo[6] + "\n";
+                                    match += "Name: " + ticketInfo[1] + " Price: " + ticketInfo[4] + " Quantity: " + ticketInfo[6] + "<br/>";
                                 }
                             }
                             result.add(match);
