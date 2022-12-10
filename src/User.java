@@ -488,7 +488,7 @@ public class User {
             return true;
         }}
 
-    public void customerStoreDash(boolean sort, PrintWriter pr) {
+    public ArrayList<String> customerStoreDash(boolean sort) {
         synchronized (Seller.obj) {
             File f = new File("pastTransactions.txt");
             Map<String, Integer> stores = new HashMap<>();
@@ -509,14 +509,16 @@ public class User {
                         .stream()
                         .sorted(Map.Entry.comparingByValue())
                         .forEach((key) -> {
-                            pr.println(key);
-                            pr.flush();
+                            //pr.println(key);
+                            //pr.flush();
                         });
             } else {
                 for (String key : stores.keySet()) {
-                    pr.println(key + "=" + stores.get(key));
+                    //pr.println(key + "=" + stores.get(key));
                 }
             }
+            ArrayList<String> list = new ArrayList<>();
+            return list;
         }}
 
     public ArrayList<String> displayPastTransactions() {

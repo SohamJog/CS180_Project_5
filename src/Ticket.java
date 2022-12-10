@@ -127,7 +127,7 @@ class Ticket implements Serializable {
         String ret = "";
 
 
-        ret = String.format("Name: %s\nSeller: %s\nStore Name: %s\nPrice: %.2f"
+        ret = String.format("Name: %s<br/>Seller: %s<br/>Store Name: %s<br/>Price: %.2f"
                 , name,
                 sellerEmail,
                 storeName, price);

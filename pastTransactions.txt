@@ -75,4 +75,6 @@
 3;basketball tickets;soham;jenny;basketball Store;200.00;awesome basketball tickets;1
 4;sport ticket;soham;jenny;basketball Store;20.00;sport tickets;1
 5;jenny's ticket;lala@gmail.com;jenny;lalasStore;30.00;jenny's ticket in this store;1
-2;asdf;lala@gmail.com;jenny;lalasStore;12.00;adfs;100
+4;sport ticket;soham;jenny;basketball Store;20.00;sport tickets;1
+2;asdf;lala@gmail.com;jenny;lalasStore;12.00;adfs;1
+3;basketball tickets;soham;jenny;basketball Store;200.00;awesome basketball tickets;1
