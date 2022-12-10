@@ -39,14 +39,15 @@ public class GUIMain extends JComponent implements Runnable {
 
     private String currentUsername;
     private String currentPassword;
+    private JPanel allStores;
+    private JPanel statsMenu;
+    private JPanel specStores;
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new GUIMain());
     }
 
-//    public GUIMain() {
-//
-//    }
+
 
     @Override
     public void run() {
@@ -92,7 +93,7 @@ public class GUIMain extends JComponent implements Runnable {
         sellerSignIn = sellerSignIn(frame, writer, reader, ois);
         userSignIn = userSignIn(frame, writer, reader, ois);
 
-//
+
         mainPanel.add(signInUp, "signInUp");
         mainPanel.add(sellerSignUp, "sellerSignUp");
         mainPanel.add(userSignUp, "userSignUp");
@@ -954,6 +955,14 @@ public class GUIMain extends JComponent implements Runnable {
             }
         });
         JButton stats = new JButton("View Statistics");
+        stats.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                statsMenu = statsMenu(pr, br, ois);
+                mainPanel.add(statsMenu, "statsMenu");
+                cardLayout.show(mainPanel, "statsMenu");
+            }
+        });
         JButton logOut = new JButton("Log Out");
         panel.add(logOut);
 
@@ -982,7 +991,7 @@ public class GUIMain extends JComponent implements Runnable {
         return result;
     }
 
-    public JPanel statsMenu(PrintWriter pr, BufferedReader br) {
+    public JPanel statsMenu(PrintWriter pr, BufferedReader br, ObjectInputStream ois) {
         JPanel result = new JPanel(new BorderLayout());
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(2, 1));
@@ -991,6 +1000,9 @@ public class GUIMain extends JComponent implements Runnable {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // jenny
+                allStores = allStores(pr, br, ois, "n");
+                mainPanel.add(allStores, "allStores");
+                cardLayout.show(mainPanel, "allStores");
             }
         });
         JButton specific = new JButton("Statistics for stores I've shopped at");
@@ -998,6 +1010,9 @@ public class GUIMain extends JComponent implements Runnable {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // jenny
+                specStores = specStores(pr, br, ois, "n");
+                mainPanel.add(specStores, "specStores");
+                cardLayout.show(mainPanel, "specStores");
             }
         });
         JPanel buttonPanel = new JPanel();
@@ -1039,7 +1054,38 @@ public class GUIMain extends JComponent implements Runnable {
         goBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cardLayout.show(mainPanel, "customerDash");
+                cardLayout.show(mainPanel, "statsMenu");
+            }
+        });
+        buttonPanel.add(goBack);
+        result.add(panel, BorderLayout.CENTER);
+        result.add(buttonPanel, BorderLayout.SOUTH);
+        return result;
+    }
+
+    public JPanel specStores(PrintWriter pr, BufferedReader br, ObjectInputStream ois, String sort) {
+        pr.println("statisticsForStoresShopped");
+        pr.flush();
+        pr.println(sort);
+        pr.flush();
+        JPanel result = new JPanel(new BorderLayout());
+        JPanel panel = new JPanel();
+        try {
+            Map map = (Map) ois.readObject();
+            panel.setLayout(new GridLayout(map.size(), 1));
+            for (Object key : map.keySet()) {
+                JLabel store = new JLabel(key.toString() + " - " + map.get(key));
+                panel.add(store);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        JPanel buttonPanel = new JPanel();
+        JButton goBack = new JButton("Go Back");
+        goBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(mainPanel, "statsMenu");
             }
         });
         buttonPanel.add(goBack);
