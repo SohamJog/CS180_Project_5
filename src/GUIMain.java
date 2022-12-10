@@ -728,15 +728,16 @@ public class GUIMain extends JComponent implements Runnable {
                     String inp = br.readLine();
                     if(inp.equals("true")) {
                         JOptionPane.showMessageDialog(null, "Added to cart!");
-
                     } else {
                         JOptionPane.showMessageDialog(null, "Please enter a valid quantity");
-                        pr.println("displayMarketplace");
-                        pr.flush();
-//                market = market(pr, br, "false", "false");
-//                mainPanel.add(market, "market");
-                        cardLayout.show(mainPanel, "market");
                     }
+//                    pr.println("displayMarketplace");
+//                    pr.flush();
+                    pr.println("goBack");
+                    pr.flush();
+                    market = market(pr, br, "false", "false");
+                    mainPanel.add(market, "market");
+                    cardLayout.show(mainPanel, "market");
                 } catch (Exception f) {
                     f.printStackTrace();
                 }
