@@ -616,6 +616,8 @@ public class GUIMain extends JComponent implements Runnable {
         reload.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                sellerCarts = sellerCarts(pr, br, ois);
+                mainPanel.add(sellerCarts, "sellerCarts");
                 cardLayout.show(mainPanel, "sellerCarts");
             }
         });
