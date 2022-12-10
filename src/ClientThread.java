@@ -305,6 +305,7 @@ public class ClientThread implements Runnable {
                                 String sort = br.readLine();
                                 if (sort.equals("y")) {
                                     oos.writeObject(storeDash(true));
+                                    System.out.println("sort");
                                 } else {
                                     oos.writeObject(storeDash(false));
                                 }
@@ -379,7 +380,7 @@ public class ClientThread implements Runnable {
             e.printStackTrace();
         }
         if (sort) {
-            stores.entrySet()
+            stores = (Map<String, Integer>) stores.entrySet()
                     .stream()
                     .sorted(Map.Entry.comparingByValue());
         }
