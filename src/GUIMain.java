@@ -1325,13 +1325,16 @@ public class GUIMain extends JComponent implements Runnable {
         try {
             int rows = Integer.parseInt(br.readLine());
             panel.setLayout(new GridLayout(rows, 1));
+
             for(int i = 0; i < rows; i++) {
-                panel.add(new JLabel(br.readLine()));
+                String ti = br.readLine();
+                ti = ti.replace("=", ": ");
+                panel.add(new JLabel(ti));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        result.add(panel, BorderLayout.CENTER);
+        result.add(panel, BorderLayout.NORTH);
         JPanel buttons = new JPanel(new FlowLayout());
         JButton goBack = new JButton("Go Back");
         goBack.addActionListener(new ActionListener() {
@@ -1368,12 +1371,14 @@ public class GUIMain extends JComponent implements Runnable {
             int rows = Integer.parseInt(br.readLine());
             panel.setLayout(new GridLayout(rows, 1));
             for(int i = 0; i < rows; i++) {
-                panel.add(new JLabel(br.readLine()));
+                String ti = br.readLine();
+                ti = ti.replace("=", ": ");
+                panel.add(new JLabel(ti));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        result.add(panel, BorderLayout.CENTER);
+        result.add(panel, BorderLayout.NORTH);
         JPanel buttons = new JPanel(new FlowLayout());
         JButton goBack = new JButton("Go Back");
         goBack.addActionListener(new ActionListener() {
