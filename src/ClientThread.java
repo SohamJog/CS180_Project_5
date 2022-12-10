@@ -215,6 +215,9 @@ public class ClientThread implements Runnable {
                                 }
                                 String choice2 = br.readLine();
                                 while (!choice2.equals("goBack")) {
+
+
+
 //                                    if (choice2.equals("sort")) {
 //                                        pr.println(market.size());
 //                                        pr.flush();
@@ -235,6 +238,10 @@ public class ClientThread implements Runnable {
                                             pr.flush();
                                         }
                                     } else if (choice2.equals("accessTicket")) {
+
+                                        //soham
+                                        System.out.println("access ticket");
+
                                         int t = Integer.parseInt(br.readLine());
                                         product = market.get(t);
                                         String name = "Name: " + product.getName();
@@ -257,6 +264,10 @@ public class ClientThread implements Runnable {
                                         pr.flush();
                                         String choice3 = br.readLine();
                                         if (choice3.equals("addToCart")) {
+
+                                            //soham
+                                            System.out.println("add to cart");
+
                                             int quantity = 0;
                                             boolean ok = true;
                                             try {
@@ -277,11 +288,15 @@ public class ClientThread implements Runnable {
                                                 //market = displayMarketplace("false", search);
                                             }
                                         }
+
+
+
+
                                     }
                                     choice2 = br.readLine();
                                 }
                             } else if (action.equals("purchaseHistory")) {
-                                System.out.println("history");
+                                //System.out.println("history");
                                 oos.writeObject(user.displayPastTransactions());
                                 oos.flush();
                             } else if (action.equals("displayShoppingCart")) {

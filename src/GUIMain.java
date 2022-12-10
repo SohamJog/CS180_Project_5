@@ -714,6 +714,7 @@ public class GUIMain extends JComponent implements Runnable {
                     String inp = br.readLine();
                     if(inp.equals("true")) {
                         JOptionPane.showMessageDialog(null, "Added to cart!");
+
                     } else {
                         JOptionPane.showMessageDialog(null, "Please enter a valid quantity");
 //                        pr.println("goBack");
@@ -729,7 +730,7 @@ public class GUIMain extends JComponent implements Runnable {
         goBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                pr.println("goBack");
+                pr.println("displayMarketplace");
                 pr.flush();
 //                market = market(pr, br, "false", "false");
 //                mainPanel.add(market, "market");
