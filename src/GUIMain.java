@@ -1075,8 +1075,8 @@ public class GUIMain extends JComponent implements Runnable {
                     pr.flush();
                     String ticketCreation = br.readLine();
                     if (ticketCreation.equals("false")) {
-                        pr.println(JOptionPane.showInputDialog(panel, "Failed to add ticket",
-                                "Ticket Emporium", JOptionPane.QUESTION_MESSAGE));
+                        JOptionPane.showMessageDialog(null, "Failed to create ticket",
+                                "Ticket Emporium", JOptionPane.INFORMATION_MESSAGE);
                     }
                     pr.println("goBack");
                     pr.flush();
