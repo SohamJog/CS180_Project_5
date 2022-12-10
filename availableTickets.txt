@@ -1,8 +1,1 @@
-
-
-4;sport ticket;soham;basketball Store;20.00;sport tickets;192
-2;asdf;lala@gmail.com;lalasStore;12.00;adfs;114
-3;basketball tickets;soham;basketball Store;200.00;awesome basketball tickets;10
-
-6;tired;lala@gmail.com;lalasStore;22.00;d;2
-5;jenny's ticket;lala@gmail.com;lalasStore;30.00;jenny's ticket in this store;21
+4;sport ticket;soham;basketball Store;20.00;sport tickets;1
