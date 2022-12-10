@@ -196,6 +196,7 @@ public class ClientThread implements Runnable {
                             } else if (action.equals("deleteAccount")) {
                                 user.deleteAccount();
                             } else if (action.equals("displayMarketplace")) {
+                                System.out.println("displayMarketPlace");
                                 ArrayList<Ticket> market;
                                 String search = "";
                                 Ticket product;
@@ -215,9 +216,6 @@ public class ClientThread implements Runnable {
                                 }
                                 String choice2 = br.readLine();
                                 while (!choice2.equals("goBack")) {
-
-
-
 //                                    if (choice2.equals("sort")) {
 //                                        pr.println(market.size());
 //                                        pr.flush();
@@ -288,10 +286,6 @@ public class ClientThread implements Runnable {
                                                 //market = displayMarketplace("false", search);
                                             }
                                         }
-
-
-
-
                                     }
                                     choice2 = br.readLine();
                                 }

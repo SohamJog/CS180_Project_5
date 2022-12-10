@@ -730,10 +730,10 @@ public class GUIMain extends JComponent implements Runnable {
             @Override
 
             public void actionPerformed(ActionEvent e) {
-                pr.println("displayMarketplace");
+                pr.println("goBack");
                 pr.flush();
-//                market = market(pr, br, "false", "false");
-//                mainPanel.add(market, "market");
+                market = market(pr, br, "false", "false");
+                mainPanel.add(market, "market");
                 cardLayout.show(mainPanel, "market");
             }
         });
