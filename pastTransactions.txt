@@ -22,3 +22,10 @@
 2;ticket;soham;another;bigStore;10.00;yummy;6
 3;banana;arm@gmail.com;jenny;bananas;20.00;bananas;4
 2;JennysTicket;jenny2@gmail.com;jenny;asdfasdfas;200.00;Epic new ticket;200
+2;lalaTicket;lala@gmail.com;jenny;lalasStore;200.00;better than jenny's ticket;200
+2;banana1;arm@gmail.com;jenny;bananas;10.00;bananas;3
+3;banana2;arm@gmail.com;jenny;bananas;3.00;bananas;3
+2;banana;arm@gmail.com;jenny;bananas;2.00;s;2
+2;banana1;arm@gmail.com;jenny;bananas;10.00;d;4
+2;lalaTicket;lala@gmail.com;jenny;lalasStore;200.00;better than jenny's ticket;1
+5;jenny3;lala@gmail.com;jenny;lalasStore;33.00;d;2

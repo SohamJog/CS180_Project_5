@@ -165,6 +165,7 @@ public class User {
             toKeep.setQuantity(ticket.getQuantity() - toBuy.getQuantity());
 
             shoppingCart.add(toBuy);
+            System.out.println(shoppingCart);
             ArrayList<String> lines = new ArrayList<>();
             File f = new File("shoppingCart.txt");
             try (BufferedReader br = new BufferedReader(new FileReader(f))) {
@@ -517,24 +518,19 @@ public class User {
             }
         }}
 
-    public String displayPastTransactions() {
+    public ArrayList<String> displayPastTransactions() {
         synchronized (Seller.obj) {
-            String ret = "";
+            ArrayList<String> ret = new ArrayList<>();
             File f = new File("pastTransactions.txt");
-
-
             try (BufferedReader br = new BufferedReader(new FileReader(f))) {
                 String line = br.readLine();
                 while (line != null) {
                     if (!line.equals("")) {
                         String[] inp = line.split(";");
-
-                        //TODO fix this
-
                         if (inp[3].equals(email)) {
-                            ret += String.format("Name: %s\nSeller: %s\nStore: %s\nPrice: %s\nDescription: %s\nQuantity: %s\n\n",
+                            ret.add(String.format("Name: %s\nSeller: %s\nStore: %s\nPrice: %s\nDescription: %s\nQuantity: %s\n\n",
                                     inp[1], inp[2], inp[4], inp[5],
-                                    inp[6], inp[7]);
+                                    inp[6], inp[7]));
                         }
                     }
                     line = br.readLine();
@@ -543,7 +539,6 @@ public class User {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
             return ret;
         } }
 

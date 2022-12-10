@@ -48,10 +48,6 @@ public class ClientThread implements Runnable {
                         pr.flush();
                     }
                 } else if (signInUp.equals("sellerSignin")) {
-
-                    //debug
-                    System.out.println("sellerSignin");
-
                     String email = br.readLine();
                     String password = br.readLine();
                     Seller seller = Seller.login(email, password);
@@ -90,14 +86,12 @@ public class ClientThread implements Runnable {
                                 Store store = seller.getStores().get(choice2);
                                 ArrayList<Ticket> storeProducts = store.getTickets();
                                 pr.println(storeProducts.size());
-                               // System.out.println(store.getName());
                                 pr.flush();
                                 for (int i = 0; i < storeProducts.size(); i++) {
                                     pr.println(storeProducts.get(i).getName());
                                     pr.flush();
                                 }
                                 String storeAction = br.readLine();
-                                System.out.println(storeAction);
                                 while (!storeAction.equals("goBack")) {
                                     if (storeAction.equals("newTicket")) {
                                         try {
@@ -182,10 +176,6 @@ public class ClientThread implements Runnable {
                         pr.flush();
                     }
                 } else if (signInUp.equals("userSignin")) {
-
-                    //debug
-                    System.out.println("userSignin");
-
                     String email = br.readLine();
                     String password = br.readLine();
                     User user = User.login(email, password);
@@ -209,7 +199,6 @@ public class ClientThread implements Runnable {
                                 Ticket product;
                                 String sort = br.readLine();
                                 market = displayMarketplace(sort, "");
-                                System.out.println(market.size());
                                 pr.println(market.size());
                                 pr.flush();
                                 for (int i = 0; i < market.size(); i++) {
@@ -231,7 +220,6 @@ public class ClientThread implements Runnable {
                                     if (choice2.equals("search")) {
                                         String searchWord = br.readLine();
                                         market = displayMarketplace("false", searchWord);
-                                        System.out.println(market.size());
                                         pr.println(market.size());
                                         pr.flush();
                                         for (int i = 0; i < market.size(); i++) {
@@ -255,8 +243,7 @@ public class ClientThread implements Runnable {
                                             boolean ok = true;
                                             try {
                                                 quantity = Integer.parseInt(br.readLine());
-                                            }
-                                            catch (NumberFormatException e) {
+                                            } catch (NumberFormatException e) {
                                                 ok = false;
                                                 pr.println("false");
                                                 pr.flush();
@@ -271,15 +258,12 @@ public class ClientThread implements Runnable {
                                                 }
                                                 //market = displayMarketplace("false", search);
                                             }
-
                                         }
                                     }
                                     choice2 = br.readLine();
                                 }
-                                //debug
-                                System.out.println("here");
-                                //
                             } else if (action.equals("purchaseHistory")) {
+                                System.out.println("history");
                                 oos.writeObject(user.displayPastTransactions());
                                 oos.flush();
                             } else if (action.equals("displayShoppingCart")) {
@@ -309,8 +293,6 @@ public class ClientThread implements Runnable {
                             }
                             action = br.readLine();
                         }
-                        System.out.println("action: " + action);
-                        System.out.println("outsideLoop");
                     } else {
                         pr.println("false");
                         pr.flush();
