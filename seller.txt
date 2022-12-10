@@ -1,6 +1,6 @@
 armaan;arm@gmail.com;crondon;bananas
 a;adf;asdf;bball tickets
-lala;lala@gmail.com;crondon1;lalasStore
+lala;lala@gmail.com;crondon1;lalasStore,hello
 jenny;jenny0503@gmail.com;jenny
 abhay;abhaybestra@gmail.com;igotomit
 jenny2;jenny2@gmail.com;helloiamjenny;asdfasdfas,fherljkthrelkj

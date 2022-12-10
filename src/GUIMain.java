@@ -596,7 +596,7 @@ public class GUIMain extends JComponent implements Runnable {
             uCart = (java.util.List<String>) ois.readObject();
             panel.setLayout(new GridLayout(uCart.size()+1, 1));
             for(String t : uCart) {
-                panel.add(new JLabel("<html>" + t + "</html>"));
+                   panel.add(new JLabel("<html>" + t + "<html>"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -982,7 +982,7 @@ public class GUIMain extends JComponent implements Runnable {
             int numTix = Integer.parseInt(br.readLine());
             System.out.println(numTix);
             panel.setLayout(new GridLayout(numTix+1, 1));
-            panel.add(new JLabel("Marketplace"));
+            panel.add(new JLabel("                                                                                                                                                                                                Marketplace"));
             for(int i = 0; i < numTix; i++) {
                 String one = br.readLine();
                 String two = br.readLine();
