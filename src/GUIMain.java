@@ -1387,6 +1387,8 @@ public class GUIMain extends JComponent implements Runnable {
         checkout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+
                 pr.println("checkout");
                 pr.flush();
                 if(finalUCart.size() > 0) {
@@ -1399,6 +1401,32 @@ public class GUIMain extends JComponent implements Runnable {
                     JOptionPane.showMessageDialog(panel, "Nothing to checkout!",
                             "Ticket Emporium", JOptionPane.ERROR_MESSAGE);
                 }
+
+                //
+                //log out and log in again
+                pr.println("quit");
+                pr.flush();
+                //log in again
+                pr.println("userSignin");
+                pr.flush();
+                pr.println(currentUsername);
+                pr.flush();
+                pr.println(currentPassword);
+                pr.flush();
+                try {
+                    br.readLine();
+                }
+                catch (Exception f) {
+                    f.printStackTrace();
+                }
+                customerDash = customerDash(pr, br, ois);
+                mainPanel.add(customerDash, "customerDash");
+                cardLayout.show(mainPanel, "customerDash");
+                //
+//                pr.println("displayShoppingCart");
+//                pr.flush();
+
+
             }
         });
         buttons.add(checkout);
