@@ -1114,7 +1114,7 @@ public class GUIMain extends JComponent implements Runnable {
                         pr.println("accessTicket");
                         pr.flush();
                         try {
-                            JPanel prodMenu = prodMenu(pr, br, ois, fI);
+                            JPanel prodMenu = prodMenu(pr, br, ois, fI, storeNameP);
                             mainPanel.add(prodMenu, "prodMenu");
                             cardLayout.show(mainPanel, "prodMenu");
                         } catch (Exception f) {
@@ -1131,7 +1131,7 @@ public class GUIMain extends JComponent implements Runnable {
         return result;
     }
 
-    public static JPanel prodMenu(PrintWriter pr, BufferedReader br, ObjectInputStream ois, int i) { // continues
+    public static JPanel prodMenu(PrintWriter pr, BufferedReader br, ObjectInputStream ois, int i, String storeNameP) { // continues
         pr.println(i);
         pr.flush();
         JPanel panel = new JPanel();
