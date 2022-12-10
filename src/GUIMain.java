@@ -1104,14 +1104,12 @@ public class GUIMain extends JComponent implements Runnable {
 //                        System.out.println(fI);
                         pr.println("accessTicket");
                         pr.flush();
-                        for(int j = 0; j < fI; j++) {
-                            try {
-                                JPanel prodMenu = prodMenu(pr, br, fI);
-                                mainPanel.add(prodMenu, "prodMenu");
-                                cardLayout.show(mainPanel, "prodMenu");
-                            } catch (Exception f) {
-                                f.printStackTrace();
-                            }
+                        try {
+                            JPanel prodMenu = prodMenu(pr, br, fI);
+                            mainPanel.add(prodMenu, "prodMenu");
+                            cardLayout.show(mainPanel, "prodMenu");
+                        } catch (Exception f) {
+                            f.printStackTrace();
                         }
                     }
                 });
