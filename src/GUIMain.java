@@ -158,10 +158,12 @@ public class GUIMain extends JComponent implements Runnable {
 
         JButton seller = new JButton("Seller");
         JButton buyer = new JButton("Buyer");
+        JButton back = new JButton("Back");
 
         panel.add(seller);
 
         panel.add(buyer);
+        panel.add(back);
 
         result.add(panel, BorderLayout.CENTER);
         seller.addActionListener(new ActionListener() {
@@ -186,6 +188,13 @@ public class GUIMain extends JComponent implements Runnable {
                 else if (choice.equals("Sign in")) {
                     cardLayout.show(mainPanel, "userSignIn");
                 }
+            }
+        });
+
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(mainPanel, "signInUp");
             }
         });
 
