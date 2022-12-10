@@ -719,8 +719,8 @@ public class GUIMain extends JComponent implements Runnable {
             public void actionPerformed(ActionEvent e) {
                 pr.println("goBack");
                 pr.flush();
-                market = market(pr, br, "false", "false");
-                mainPanel.add(market, "market");
+//                market = market(pr, br, "false", "false");
+//                mainPanel.add(market, "market");
                 cardLayout.show(mainPanel, "market");
             }
         });
@@ -967,7 +967,7 @@ public class GUIMain extends JComponent implements Runnable {
                     public void actionPerformed(ActionEvent e) {
                         pr.println("accessTicket");
                         pr.flush();
-                        JPanel ticket = ticketMenu(pr, br, fI);
+                        JPanel ticket = ticketMenu(pr, br, fI); // armanya
                         mainPanel.add(ticket, "ticket");
                         cardLayout.show(mainPanel, "ticket");
                     }
@@ -1069,7 +1069,7 @@ public class GUIMain extends JComponent implements Runnable {
                     pr.flush();
                     storeMenu = storeMenu(pr, br, storeNameP);
                     mainPanel.add(storeMenu, "storeMenu");
-                    cardLayout.show(mainPanel, "storeMenu"); // bug here
+                    cardLayout.show(mainPanel, "storeMenu");
                 } catch (Exception f) {
                     f.printStackTrace();
                 }
@@ -1104,21 +1104,24 @@ public class GUIMain extends JComponent implements Runnable {
                 tick.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        System.out.println(fI);
+//                        System.out.println(fI);
                         pr.println("accessTicket");
                         pr.flush();
-                        pr.println(fI);
-                        pr.flush();
-                        try {
-                            int inp = Integer.parseInt(br.readLine());
-                            for(int i=0;i<inp;i++) {
-                                System.out.println(br.readLine());
-                            }
-                        }
-                        catch (Exception f) {
-                            f.printStackTrace();
-                        }
-
+                        // continue
+//                        pr.println(fI);
+//                        pr.flush();
+//                        try {
+//                            int inp = Integer.parseInt(br.readLine());
+//                            for(int i=0;i<inp;i++) {
+//                                System.out.println(br.readLine());
+//                            }
+//                        }
+//                        catch (Exception f) {
+//                            f.printStackTrace();
+//                        }
+                        JPanel prodMenu = prodMenu(pr, br);
+                        mainPanel.add(prodMenu, "prodMenu");
+                        cardLayout.show(mainPanel, "prodMenu");
                     }
                 });
                 panel.add(tick);
@@ -1130,8 +1133,10 @@ public class GUIMain extends JComponent implements Runnable {
         return result;
     }
 
-    public static void prodMenu(JFrame f, PrintWriter pr, BufferedReader br) {
+    public static JPanel prodMenu(PrintWriter pr, BufferedReader br) { // continues
+
         JPanel panel = new JPanel();
+        JPanel result = new JPanel(new BorderLayout());
         panel.setLayout(new GridLayout(6, 1));
         try {
             panel.add(new JLabel(br.readLine()));
@@ -1143,6 +1148,7 @@ public class GUIMain extends JComponent implements Runnable {
                     pr.flush();
                 }
             });
+            panel.add(dTicket);
             JButton tName = new JButton("Change Ticket Name");
             tName.addActionListener(new ActionListener() {
                 @Override
@@ -1154,6 +1160,7 @@ public class GUIMain extends JComponent implements Runnable {
                 }
             });
             JButton tPrice = new JButton("Change Ticket Price");
+            panel.add(tPrice);
             tPrice.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -1165,6 +1172,7 @@ public class GUIMain extends JComponent implements Runnable {
                 }
             });
             JButton tDesc = new JButton("Change Ticket Description");
+            panel.add(tDesc);
             tDesc.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -1175,6 +1183,7 @@ public class GUIMain extends JComponent implements Runnable {
                 }
             });
             JButton tQuant = new JButton("Change Ticket Quantity");
+            panel.add(tQuant);
             tQuant.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -1187,6 +1196,8 @@ public class GUIMain extends JComponent implements Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        result.add(panel, BorderLayout.CENTER);
+        return result;
     }
 
     public static JPanel cartMenu(PrintWriter pr, BufferedReader br, ObjectInputStream ois) {

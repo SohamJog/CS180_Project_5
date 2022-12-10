@@ -258,7 +258,6 @@ public class ClientThread implements Runnable {
                                                 }
                                                 //market = displayMarketplace("false", search);
                                             }
-
                                         }
                                     }
                                     choice2 = br.readLine();
