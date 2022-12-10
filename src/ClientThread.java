@@ -306,16 +306,16 @@ public class ClientThread implements Runnable {
                             } else if (action.equals("statisticsForAllStores")) {
                                 String sort = br.readLine();
                                 if (sort.equals("y")) {
-                                    storeDash(true, pr);
+                                    oos.writeObject(storeDash(true));
                                 } else {
-                                    storeDash(false, pr);
+                                    oos.writeObject(storeDash(false));
                                 }
                             } else if (action.equals("statisticsForStoresShopped")) {
                                 String sort = br.readLine();
                                 if (sort.equals("y")) {
-                                    user.customerStoreDash(true, pr);
+                                    oos.writeObject(user.customerStoreDash(true));
                                 } else {
-                                    user.customerStoreDash(false, pr);
+                                    oos.writeObject(user.customerStoreDash(false));
                                 }
                             }
                             action = br.readLine();
@@ -366,7 +366,7 @@ public class ClientThread implements Runnable {
         return tickets;
     }
 
-    public static void storeDash(boolean sort, PrintWriter pr) {
+    public static Map storeDash(boolean sort) {
         File f = new File("pastTransactions.txt");
         Map<String, Integer> stores = new HashMap<>();
         String[] ticketInfo;
@@ -380,22 +380,12 @@ public class ClientThread implements Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        pr.println(stores.size());
-        pr.flush();
         if (sort) {
             stores.entrySet()
                     .stream()
-                    .sorted(Map.Entry.comparingByValue())
-                    .forEach((key) -> {
-                        pr.println(key);
-                        pr.flush();
-                    });
-        } else {
-            for (String key : stores.keySet()) {
-                pr.println(key + "=" + stores.get(key));
-                pr.flush();
-            }
+                    .sorted(Map.Entry.comparingByValue());
         }
+        return stores;
     }
 
     public static void customerStats(String seller, boolean sort, PrintWriter pr) {

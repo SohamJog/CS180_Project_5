@@ -991,6 +991,67 @@ public class GUIMain extends JComponent implements Runnable {
         return result;
     }
 
+    public JPanel statsMenu(PrintWriter pr, BufferedReader br) {
+        JPanel result = new JPanel(new BorderLayout());
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(2, 1));
+        JButton all = new JButton("Statistics for all stores");
+        all.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // jenny
+            }
+        });
+        JButton specific = new JButton("Statistics for stores I've shopped at");
+        specific.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // jenny
+            }
+        });
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout());
+        JButton goBack = new JButton("Go Back");
+        goBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(mainPanel, "customerDash");
+            }
+        });
+        buttonPanel.add(goBack);
+        panel.add(all);
+        panel.add(specific);
+        result.add(panel, BorderLayout.CENTER);
+        result.add(buttonPanel, BorderLayout.SOUTH);
+        return result;
+    }
+
+    public JPanel allStores(PrintWriter pr, BufferedReader br, ObjectInputStream ois, String sort) {
+        pr.println("statisticsForAllStores");
+        pr.flush();
+        pr.println(sort);
+        pr.flush();
+        JPanel result = new JPanel(new BorderLayout());
+        JPanel panel = new JPanel();
+        try {
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        JPanel buttonPanel = new JPanel();
+        JButton goBack = new JButton("Go Back");
+        goBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(mainPanel, "customerDash");
+            }
+        });
+        buttonPanel.add(goBack);
+        result.add(panel, BorderLayout.CENTER);
+        result.add(buttonPanel, BorderLayout.SOUTH);
+        return result;
+    }
+
     public JPanel market(PrintWriter pr, BufferedReader br, String sortOption, String searchOption) {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
@@ -1282,19 +1343,20 @@ public class GUIMain extends JComponent implements Runnable {
         java.util.List<Ticket> uCart = null;
         try {
             uCart = (java.util.List<Ticket>) ois.readObject();
-            panel.setLayout(new GridLayout(uCart.size()+1, 1));
-            for(Ticket t : uCart) {
-                String ti = t.toString();
-                String[] temp = ti.split("Seller:");
-                panel.add(new JLabel(temp[0]));
-                String[] temp2 = temp[1].split("Store Name:");
-                panel.add(new JLabel("Seller:"+ temp2[0]));
-                String[] temp3 = temp2[1].split("Store" + "\nPrice:" );
-                panel.add(new JLabel("Store Name:"   + temp3[0]));
-                panel.add(new JLabel("Store Price:"   + temp3[1]));
-
-
-
+            panel.setLayout(new GridLayout(uCart.size()+1, 2));
+            for(int i = 0; i < uCart.size(); i++) {
+                panel.add(new JLabel("<html>" + uCart.get(i) + "</html>"));
+                JButton remove = new JButton("Remove Ticket");
+                int finalI = i;
+                remove.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        pr.println("removeItem");
+                        pr.flush();
+                        pr.println(finalI);
+                        pr.flush();
+                    }
+                });
             }
         } catch (Exception e) {
             e.printStackTrace();
