@@ -1138,7 +1138,7 @@ public class GUIMain extends JComponent implements Runnable {
         JPanel result = new JPanel(new BorderLayout());
         panel.setLayout(new GridLayout(6, 1));
         try {
-            panel.add(new JLabel(ois.readObject().toString()));
+            panel.add(new JLabel("<html>" + br.readLine() + "</html>"));
             JButton dTicket = new JButton("Delete Ticket");
             dTicket.addActionListener(new ActionListener() {
                 @Override
@@ -1195,6 +1195,21 @@ public class GUIMain extends JComponent implements Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout());
+        JButton goBack = new JButton("Go Back");
+        goBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pr.println("goBack");
+                pr.flush();
+                storeMenu = storeMenu(pr, br, ois, storeNameP);
+                mainPanel.add(storeMenu, "storeMenu");
+                cardLayout.show(mainPanel, "storeMenu");
+            }
+        });
+        buttonPanel.add(goBack);
+        result.add(buttonPanel, BorderLayout.SOUTH);
         result.add(panel, BorderLayout.CENTER);
         return result;
     }
