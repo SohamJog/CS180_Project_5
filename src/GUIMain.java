@@ -39,6 +39,8 @@ public class GUIMain extends JComponent implements Runnable {
 
     private String currentUsername;
     private String currentPassword;
+    private JPanel allStores;
+    private JPanel statsMenu;
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new GUIMain());
@@ -954,6 +956,14 @@ public class GUIMain extends JComponent implements Runnable {
             }
         });
         JButton stats = new JButton("View Statistics");
+        stats.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                statsMenu = statsMenu(pr, br, ois);
+                mainPanel.add(statsMenu, "statsMenu");
+                cardLayout.show(mainPanel, "statsMenu");
+            }
+        });
         JButton logOut = new JButton("Log Out");
         panel.add(logOut);
 
@@ -982,7 +992,7 @@ public class GUIMain extends JComponent implements Runnable {
         return result;
     }
 
-    public JPanel statsMenu(PrintWriter pr, BufferedReader br) {
+    public JPanel statsMenu(PrintWriter pr, BufferedReader br, ObjectInputStream ois) {
         JPanel result = new JPanel(new BorderLayout());
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(2, 1));
@@ -991,6 +1001,9 @@ public class GUIMain extends JComponent implements Runnable {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // jenny
+                allStores = allStores(pr, br, ois, "n");
+                mainPanel.add(allStores, "allStores");
+                cardLayout.show(mainPanel, "allStores");
             }
         });
         JButton specific = new JButton("Statistics for stores I've shopped at");
@@ -1039,7 +1052,7 @@ public class GUIMain extends JComponent implements Runnable {
         goBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cardLayout.show(mainPanel, "customerDash");
+                cardLayout.show(mainPanel, "statsMenu");
             }
         });
         buttonPanel.add(goBack);
