@@ -730,8 +730,8 @@ public class GUIMain extends JComponent implements Runnable {
             public void actionPerformed(ActionEvent e) {
                 pr.println("goBack");
                 pr.flush();
-//                market = market(pr, br, "false", "false");
-//                mainPanel.add(market, "market");
+                market = market(pr, br, "false", "false");
+                mainPanel.add(market, "market");
                 cardLayout.show(mainPanel, "market");
             }
         });
