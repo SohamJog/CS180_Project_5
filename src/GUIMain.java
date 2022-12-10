@@ -9,33 +9,36 @@ import java.net.Socket;
 import java.util.*;
 
 public class GUIMain extends JComponent implements Runnable {
-    private static String choice;
-    private static CardLayout cardLayout = new CardLayout();
-    private static JPanel mainPanel = new JPanel();
-    private static Socket socket;
-    private static BufferedReader reader;
-    private static PrintWriter writer;
-    private static JPanel signInUp;
-    private static JPanel sellerSignUp;
-    private static JPanel userSignUp;
-    private static JPanel sellerSignIn;
-    private static JPanel userSignIn;
-    private static JPanel sellerDash;
-    private static JPanel storesMenu;
-    private static JPanel statisticsMenu;
-    private static JPanel changeAccountMenu;
-    private static JPanel prodStats;
-    private static JPanel storeMenu;
+    private String choice;
+    private CardLayout cardLayout = new CardLayout();
+    private JPanel mainPanel = new JPanel();
+    private Socket socket;
+    private BufferedReader reader;
+    private PrintWriter writer;
+    private JPanel signInUp;
+    private JPanel sellerSignUp;
+    private JPanel userSignUp;
+    private JPanel sellerSignIn;
+    private JPanel userSignIn;
+    private JPanel sellerDash;
+    private JPanel storesMenu;
+    private JPanel statisticsMenu;
+    private JPanel changeAccountMenu;
+    private JPanel prodStats;
+    private JPanel storeMenu;
 
-    private static JPanel sellerOrBuyer;
-    private static JPanel customerDash;
-    private static JPanel market;
-    private static JPanel custStats;
-    private static JPanel storeStats;
-    private static JPanel cart;
-    private static JPanel purchaseHistory;
-    private static JPanel sellerCarts;
-    private static boolean buyOrNot;
+    private JPanel sellerOrBuyer;
+    private JPanel customerDash;
+    private JPanel market;
+    private JPanel custStats;
+    private JPanel storeStats;
+    private JPanel cart;
+    private JPanel purchaseHistory;
+    private JPanel sellerCarts;
+    private boolean buyOrNot;
+
+    private String currentUsername;
+    private String currentPassword;
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new GUIMain());
@@ -123,7 +126,7 @@ public class GUIMain extends JComponent implements Runnable {
         frame.setVisible(true);
     }
 
-    public static JPanel signInUp() {
+    public JPanel signInUp() {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
         panel.setLayout(new GridLayout(3, 1));
@@ -152,7 +155,7 @@ public class GUIMain extends JComponent implements Runnable {
         result.add(panel, BorderLayout.CENTER);
         return result;
     }
-    public static JPanel sellerOrBuyer(JFrame f, PrintWriter pr, BufferedReader br) {
+    public JPanel sellerOrBuyer(JFrame f, PrintWriter pr, BufferedReader br) {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
         panel.setLayout(new GridLayout(4, 1));
@@ -202,7 +205,7 @@ public class GUIMain extends JComponent implements Runnable {
         return result;
     }
 
-    public static JPanel sellerSignUp(JFrame f, PrintWriter pr, BufferedReader br) {
+    public JPanel sellerSignUp(JFrame f, PrintWriter pr, BufferedReader br) {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
 
@@ -242,6 +245,7 @@ public class GUIMain extends JComponent implements Runnable {
                 String name = nameField.getText();
                 String email = emailField.getText();
                 String password = passwordField.getText();
+
 
                 // Check if the user's input is valid
                 if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
@@ -287,7 +291,7 @@ public class GUIMain extends JComponent implements Runnable {
         return result;
     }
 
-    public static JPanel userSignUp(JFrame f, PrintWriter pr, BufferedReader br) {
+    public JPanel userSignUp(JFrame f, PrintWriter pr, BufferedReader br) {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
 
@@ -374,7 +378,7 @@ public class GUIMain extends JComponent implements Runnable {
 
 
 
-    public static JPanel sellerSignIn(JFrame f, PrintWriter pr, BufferedReader br, ObjectInputStream ois) {
+    public JPanel sellerSignIn(JFrame f, PrintWriter pr, BufferedReader br, ObjectInputStream ois) {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
         panel.setLayout(new GridLayout(2,2));
@@ -431,6 +435,9 @@ public class GUIMain extends JComponent implements Runnable {
                     }
 
                     if(inp.equals("true")) {
+                        currentPassword = password;
+                        currentUsername = email;
+
                         JOptionPane.showMessageDialog(f, "Signed in successfully!");
                         sellerDash = sellerDash(pr, br, ois);
                         storesMenu = storesMenu(pr, br, ois);
@@ -452,7 +459,7 @@ public class GUIMain extends JComponent implements Runnable {
 
 
     ///
-    public static JPanel userSignIn(JFrame f, PrintWriter pr, BufferedReader br, ObjectInputStream ois) {
+    public JPanel userSignIn(JFrame f, PrintWriter pr, BufferedReader br, ObjectInputStream ois) {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
         panel.setLayout(new GridLayout(2,2));
@@ -511,6 +518,9 @@ public class GUIMain extends JComponent implements Runnable {
                     //System.out.println(inp);
 
                     if(inp.equals("true")) {
+                        currentUsername = email;
+                        currentPassword = password;
+
                         JOptionPane.showMessageDialog(f, "Signed in successfully!");
                         customerDash = customerDash(pr, br, ois);
                         mainPanel.add(customerDash, "customerDash");
@@ -529,7 +539,7 @@ public class GUIMain extends JComponent implements Runnable {
 
 
 
-    public static JPanel sellerDash(PrintWriter pr, BufferedReader br, ObjectInputStream ois) {
+    public JPanel sellerDash(PrintWriter pr, BufferedReader br, ObjectInputStream ois) {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
         panel.setLayout(new GridLayout(4, 1));
@@ -586,7 +596,7 @@ public class GUIMain extends JComponent implements Runnable {
         return result;
     }
 
-    public static JPanel sellerCarts(PrintWriter pr, BufferedReader br, ObjectInputStream ois) {
+    public JPanel sellerCarts(PrintWriter pr, BufferedReader br, ObjectInputStream ois) {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
         pr.println("viewProductsInCustomerShoppingCarts");
@@ -616,7 +626,7 @@ public class GUIMain extends JComponent implements Runnable {
         return result;
     }
 
-    public static JPanel changeAccountMenu(PrintWriter pr, BufferedReader br, String sellerOrBuyer) {
+    public JPanel changeAccountMenu(PrintWriter pr, BufferedReader br, String sellerOrBuyer) {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
         panel.setLayout(new GridLayout(3, 1));
@@ -661,6 +671,7 @@ public class GUIMain extends JComponent implements Runnable {
                     pr.flush();
                     pr.println(pswd);
                     pr.flush();
+                    currentPassword = pswd;
                     JOptionPane.showMessageDialog(panel, "Password changed successfully!");
                 } else {
                     JOptionPane.showMessageDialog(panel, "Please enter a valid password");
@@ -683,7 +694,7 @@ public class GUIMain extends JComponent implements Runnable {
         return result;
     }
 
-    public static JPanel ticketMenu(PrintWriter pr, BufferedReader br, int index) {
+    public JPanel ticketMenu(PrintWriter pr, BufferedReader br, int index) {
         buyOrNot = false;
         pr.println(index);
         pr.flush();
@@ -719,9 +730,11 @@ public class GUIMain extends JComponent implements Runnable {
 
                     } else {
                         JOptionPane.showMessageDialog(null, "Please enter a valid quantity");
-//                        pr.println("goBack");
-//                        pr.flush();
-//                        cardLayout.show(mainPanel, "market");
+                        pr.println("displayMarketplace");
+                        pr.flush();
+//                market = market(pr, br, "false", "false");
+//                mainPanel.add(market, "market");
+                        cardLayout.show(mainPanel, "market");
                     }
                 } catch (Exception f) {
                     f.printStackTrace();
@@ -752,7 +765,7 @@ public class GUIMain extends JComponent implements Runnable {
         return result;
     }
 
-    public static JPanel statisticsMenu(PrintWriter pr, BufferedReader br) {
+    public JPanel statisticsMenu(PrintWriter pr, BufferedReader br) {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
         panel.setLayout(new GridLayout(3, 1));
@@ -800,7 +813,7 @@ public class GUIMain extends JComponent implements Runnable {
         return result;
     }
 
-    public static JPanel storesMenu(PrintWriter pr, BufferedReader br, ObjectInputStream ois) {
+    public JPanel storesMenu(PrintWriter pr, BufferedReader br, ObjectInputStream ois) {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
         pr.println("listStores");
@@ -891,7 +904,7 @@ public class GUIMain extends JComponent implements Runnable {
         return result;
     }
 
-    public static JPanel customerDash(PrintWriter pr, BufferedReader br, ObjectInputStream ois) {
+    public JPanel customerDash(PrintWriter pr, BufferedReader br, ObjectInputStream ois) {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
         panel.setLayout(new GridLayout(5, 1));
@@ -900,6 +913,23 @@ public class GUIMain extends JComponent implements Runnable {
         cartB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //log out and log in again
+                pr.println("quit");
+                pr.flush();
+                //log in again
+                pr.println("userSignin");
+                pr.flush();
+                pr.println(currentUsername);
+                pr.flush();
+                pr.println(currentPassword);
+                pr.flush();
+                try {
+                    br.readLine();
+                }
+                catch (Exception f) {
+                    f.printStackTrace();
+                }
+
                 cart = cartMenu(pr, br, ois);
                 mainPanel.add(cart, "cart");
                 cardLayout.show(mainPanel, "cart");
@@ -961,7 +991,7 @@ public class GUIMain extends JComponent implements Runnable {
         return result;
     }
 
-    public static JPanel market(PrintWriter pr, BufferedReader br, String sortOption, String searchOption) {
+    public JPanel market(PrintWriter pr, BufferedReader br, String sortOption, String searchOption) {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
         if (!searchOption.equals("true")) {
@@ -1048,7 +1078,7 @@ public class GUIMain extends JComponent implements Runnable {
         return result;
     }
 
-    public static JPanel storeMenu(PrintWriter pr, BufferedReader br, ObjectInputStream ois, String storeNameP) {
+    public JPanel storeMenu(PrintWriter pr, BufferedReader br, ObjectInputStream ois, String storeNameP) {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
         JButton newTix = new JButton("Add new Ticket");
@@ -1145,7 +1175,7 @@ public class GUIMain extends JComponent implements Runnable {
         return result;
     }
 
-    public static JPanel prodMenu(PrintWriter pr, BufferedReader br, ObjectInputStream ois, int i, String storeNameP) { // continues
+    public JPanel prodMenu(PrintWriter pr, BufferedReader br, ObjectInputStream ois, int i, String storeNameP) { // continues
         pr.println(i);
         pr.flush();
         JPanel panel = new JPanel();
@@ -1244,7 +1274,7 @@ public class GUIMain extends JComponent implements Runnable {
         return result;
     }
 
-    public static JPanel cartMenu(PrintWriter pr, BufferedReader br, ObjectInputStream ois) {
+    public JPanel cartMenu(PrintWriter pr, BufferedReader br, ObjectInputStream ois) {
         JPanel result = new JPanel(new BorderLayout());
         JPanel panel = new JPanel();
         pr.println("displayShoppingCart");
@@ -1315,7 +1345,7 @@ public class GUIMain extends JComponent implements Runnable {
         return result;
     }
 
-    public static JPanel prodStats(PrintWriter pr, BufferedReader br, String sortOrNot) {
+    public JPanel prodStats(PrintWriter pr, BufferedReader br, String sortOrNot) {
         JPanel result = new JPanel(new BorderLayout());
         JPanel panel = new JPanel();
         pr.println("viewProductStatistics");
@@ -1357,7 +1387,7 @@ public class GUIMain extends JComponent implements Runnable {
         return result;
     }
 
-    public static JPanel custStats(PrintWriter pr, BufferedReader br, String sortOrNot) {
+    public JPanel custStats(PrintWriter pr, BufferedReader br, String sortOrNot) {
         JPanel result = new JPanel(new BorderLayout());
         JPanel panel = new JPanel();
         pr.println("viewCustomerStatistics");
@@ -1399,7 +1429,7 @@ public class GUIMain extends JComponent implements Runnable {
         return result;
     }
 
-    public static JPanel storeStats(PrintWriter pr, BufferedReader br, String sortOrNot) {
+    public JPanel storeStats(PrintWriter pr, BufferedReader br, String sortOrNot) {
         JPanel result = new JPanel(new BorderLayout());
         JPanel panel = new JPanel();
         pr.println("viewStoreStatistics");
@@ -1453,7 +1483,7 @@ public class GUIMain extends JComponent implements Runnable {
 
     }
 
-    public static JPanel purchaseHistory(PrintWriter pr, BufferedReader br, ObjectInputStream ois) {
+    public JPanel purchaseHistory(PrintWriter pr, BufferedReader br, ObjectInputStream ois) {
         JPanel result = new JPanel(new BorderLayout());
         JPanel panel = new JPanel();
         pr.println("purchaseHistory");
