@@ -35,6 +35,7 @@ public class GUIMain extends JComponent implements Runnable {
     private static JPanel cart;
     private static JPanel purchaseHistory;
     private static JPanel sellerCarts;
+    private static boolean buyOrNot;
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new GUIMain());
@@ -683,6 +684,7 @@ public class GUIMain extends JComponent implements Runnable {
     }
 
     public static JPanel ticketMenu(PrintWriter pr, BufferedReader br, int index) {
+        buyOrNot = false;
         pr.println(index);
         pr.flush();
         JPanel panel = new JPanel();
@@ -705,6 +707,7 @@ public class GUIMain extends JComponent implements Runnable {
         add.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                buyOrNot = true;
                 pr.println("addToCart");
                 pr.flush();
                 pr.println(quantity.getText());
@@ -730,6 +733,10 @@ public class GUIMain extends JComponent implements Runnable {
             @Override
 
             public void actionPerformed(ActionEvent e) {
+                if (buyOrNot == false) {
+                    pr.println("clear");
+                    pr.flush();
+                }
                 pr.println("goBack");
                 pr.flush();
                 market = market(pr, br, "false", "false");
