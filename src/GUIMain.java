@@ -126,7 +126,7 @@ public class GUIMain extends JComponent implements Runnable {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
         panel.setLayout(new GridLayout(3, 1));
-        panel.add(new JLabel("What would you like to do"));
+
         JPanel bPanel = new JPanel();
         bPanel.setLayout(new FlowLayout());
         // Add an action listener to the submit button
