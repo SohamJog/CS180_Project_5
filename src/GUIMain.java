@@ -945,15 +945,6 @@ public class GUIMain extends JComponent implements Runnable {
                 cardLayout.show(mainPanel, "market");
             }
         });
-
-//        JButton reload = new JButton("Reload");
-//        reload.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                // todo - jenny
-//            }
-//        });
-//        panel.add(reload);
         logOut.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1105,19 +1096,6 @@ public class GUIMain extends JComponent implements Runnable {
                 }
             }
         });
-
-        JButton reload = new JButton("Reload");
-        reload.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                pr.println("goBack");
-                pr.flush();
-                storeMenu = storeMenu(pr, br, ois, storeNameP);
-                mainPanel.add(storeMenu, "storeMenu");
-                cardLayout.show(mainPanel, "storeMenu");
-            }
-        });
-        panel.add(reload);
 
         try {
             pr.println("enterStore");
@@ -1279,13 +1257,6 @@ public class GUIMain extends JComponent implements Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        JButton reload = new JButton("Reload");
-        reload.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // todo - jenny
-            }
-        });
         JPanel buttons = new JPanel(new FlowLayout());
         JButton goBack = new JButton("Go Back");
         goBack.addActionListener(new ActionListener() {
@@ -1298,7 +1269,6 @@ public class GUIMain extends JComponent implements Runnable {
                 cardLayout.show(mainPanel, "customerDash");
             }
         });
-        buttons.add(reload);
         buttons.add(goBack);
         JButton checkout = new JButton("Checkout");
         java.util.List<Ticket> finalUCart = uCart;
@@ -1332,6 +1302,15 @@ public class GUIMain extends JComponent implements Runnable {
         pr.flush();
         pr.println(sortOrNot);
         pr.flush();
+        JButton reload = new JButton("Reload");
+        reload.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                prodStats = prodStats(pr, br, "n");
+                mainPanel.add(prodStats, "prodStats");
+                cardLayout.show(mainPanel, "prodStats");
+            }
+        });
         try {
             int rows = Integer.parseInt(br.readLine());
             panel.setLayout(new GridLayout(rows, 1));
@@ -1366,6 +1345,7 @@ public class GUIMain extends JComponent implements Runnable {
         });
         buttons.add(goBack);
         buttons.add(sort);
+        buttons.add(reload);
         result.add(buttons, BorderLayout.SOUTH);
         return result;
     }
@@ -1373,6 +1353,15 @@ public class GUIMain extends JComponent implements Runnable {
     public JPanel custStats(PrintWriter pr, BufferedReader br, String sortOrNot) {
         JPanel result = new JPanel(new BorderLayout());
         JPanel panel = new JPanel();
+        JButton reload = new JButton("Reload");
+        reload.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                custStats = custStats(pr, br, "n");
+                mainPanel.add(custStats, "custStats");
+                cardLayout.show(mainPanel, "custStats");
+            }
+        });
         pr.println("viewCustomerStatistics");
         pr.flush();
         pr.println(sortOrNot);
@@ -1410,6 +1399,7 @@ public class GUIMain extends JComponent implements Runnable {
         });
         buttons.add(goBack);
         buttons.add(sort);
+        buttons.add(reload);
         result.add(buttons, BorderLayout.SOUTH);
         return result;
     }
@@ -1417,6 +1407,15 @@ public class GUIMain extends JComponent implements Runnable {
     public JPanel storeStats(PrintWriter pr, BufferedReader br, String sortOrNot) {
         JPanel result = new JPanel(new BorderLayout());
         JPanel panel = new JPanel();
+        JButton reload = new JButton("Reload");
+        reload.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                storeStats = storeStats(pr, br, "n");
+                mainPanel.add(storeStats, "storeStats");
+                cardLayout.show(mainPanel, "storeStats");
+            }
+        });
         pr.println("viewStoreStatistics");
         pr.flush();
         pr.println(sortOrNot);
@@ -1463,6 +1462,7 @@ public class GUIMain extends JComponent implements Runnable {
         });
         buttons.add(goBack);
         buttons.add(sort);
+        buttons.add(reload);
         result.add(buttons, BorderLayout.SOUTH);
         return result;
 
