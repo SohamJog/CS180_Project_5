@@ -15,9 +15,9 @@
 The main class contains the GUIMain method that interacts with the user by asking for input , taking in the inputs through GUI and processes the data (calling different methods), and gives the respective results through GUI.
 There are various JPanels which help in displaying the GUI and the user can interact with the GUI by clicking on the buttons and entering the inputs in the text fields.
 These JPanels are added to the JFrame which is the main window of the GUI.
-The JPanels are: 
+Some of the JPanels are: 
  - signInUpPanel - This panel is the first panel that is displayed to the user. It has two buttons - Sign In and Sign Up. The user can click on either of the buttons to proceed.
-
+ - sellerOrBuyerPanel - This panel is displayed to the user after the user clicks on the Sign Up button. It has two buttons - Seller and Buyer. The user can click on either of the buttons to proceed.
 ### User Class
 The User class contains the information about the user, including name(String), email(String), password(String), and shoppingCart(ArrayList). It also contains the following functionalities:
 
