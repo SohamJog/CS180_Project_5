@@ -162,16 +162,21 @@ public class GUIMain extends JComponent implements Runnable {
         JPanel result = new JPanel(new BorderLayout());
         panel.setLayout(new GridLayout(4, 1));
 
+        JPanel bPanel = new JPanel();
+        bPanel.setLayout(new FlowLayout());
+
         JButton seller = new JButton("Seller");
         JButton buyer = new JButton("Buyer");
         JButton back = new JButton("Back");
 
         panel.add(seller);
 
+
         panel.add(buyer);
-        panel.add(back);
+        bPanel.add(back);
 
         result.add(panel, BorderLayout.CENTER);
+        result.add(bPanel, BorderLayout.SOUTH);
         seller.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -544,6 +549,9 @@ public class GUIMain extends JComponent implements Runnable {
     public JPanel sellerDash(PrintWriter pr, BufferedReader br, ObjectInputStream ois) {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
+        JPanel bPanel = new JPanel();
+        bPanel.setLayout(new FlowLayout());
+
         panel.setLayout(new GridLayout(4, 1));
         JButton change = new JButton("Change Account Details");
         JButton stores = new JButton("Access Stores");
@@ -557,8 +565,9 @@ public class GUIMain extends JComponent implements Runnable {
         panel.add(cart);
         panel.add(change);
         panel.add(stats);
-        panel.add(logOut);
+        bPanel.add(logOut);
         result.add(panel, BorderLayout.CENTER);
+        result.add(bPanel, BorderLayout.SOUTH);
         stores.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -630,11 +639,13 @@ public class GUIMain extends JComponent implements Runnable {
 
     public JPanel changeAccountMenu(PrintWriter pr, BufferedReader br, String sellerOrBuyer) {
         JPanel panel = new JPanel();
+        JPanel bPanel = new JPanel();
+        bPanel.setLayout(new FlowLayout());
         JPanel result = new JPanel(new BorderLayout());
         panel.setLayout(new GridLayout(3, 1));
         JButton change = new JButton("Change Name");
         JButton goBack = new JButton("Go Back");
-        panel.add(goBack);
+        bPanel.add(goBack);
         goBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -693,6 +704,7 @@ public class GUIMain extends JComponent implements Runnable {
         panel.add(pswd);
         panel.add(dlt);
         result.add(panel, BorderLayout.CENTER);
+        result.add(bPanel, BorderLayout.SOUTH);
         return result;
     }
 
@@ -771,6 +783,8 @@ public class GUIMain extends JComponent implements Runnable {
     public JPanel statisticsMenu(PrintWriter pr, BufferedReader br) {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
+        JPanel bPanel = new JPanel();
+        bPanel.setLayout(new FlowLayout());
         panel.setLayout(new GridLayout(3, 1));
         JButton goBack = new JButton("Go Back");
         goBack.addActionListener(new ActionListener() {
@@ -781,7 +795,7 @@ public class GUIMain extends JComponent implements Runnable {
                 cardLayout.show(mainPanel, "sellerDash");
             }
         });
-        panel.add(goBack);
+        bPanel.add(goBack);
         JButton store = new JButton("View Statistics by Store");
         store.addActionListener(new ActionListener() {
             @Override
@@ -813,12 +827,15 @@ public class GUIMain extends JComponent implements Runnable {
         panel.add(product);
         panel.add(customer);
         result.add(panel, BorderLayout.CENTER);
+        result.add(bPanel, BorderLayout.SOUTH);
         return result;
     }
 
     public JPanel storesMenu(PrintWriter pr, BufferedReader br, ObjectInputStream ois) {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
+        JPanel bPanel = new JPanel();
+        bPanel.setLayout(new FlowLayout());
         pr.println("listStores");
         pr.flush();
         JButton newStore = new JButton("Add new store");
@@ -851,7 +868,7 @@ public class GUIMain extends JComponent implements Runnable {
             }
         });
         JButton goBack = new JButton("Go Back");
-        panel.add(goBack);
+        bPanel.add(goBack);
         goBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -904,12 +921,15 @@ public class GUIMain extends JComponent implements Runnable {
             e.printStackTrace();
         }
         result.add(panel, BorderLayout.CENTER);
+        result.add(bPanel, BorderLayout.SOUTH);
         return result;
     }
 
     public JPanel customerDash(PrintWriter pr, BufferedReader br, ObjectInputStream ois) {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
+        JPanel bPanel = new JPanel();
+        bPanel.setLayout(new FlowLayout());
         panel.setLayout(new GridLayout(5, 1));
         JButton change = new JButton("Buy Tickets");
         JButton cartB = new JButton("Shopping Cart");
@@ -966,7 +986,7 @@ public class GUIMain extends JComponent implements Runnable {
             }
         });
         JButton logOut = new JButton("Log Out");
-        panel.add(logOut);
+        bPanel.add(logOut);
 
         change.addActionListener(new ActionListener() {
             @Override
@@ -990,6 +1010,7 @@ public class GUIMain extends JComponent implements Runnable {
         panel.add(history);
         panel.add(stats);
         result.add(panel, BorderLayout.CENTER);
+        result.add(bPanel, BorderLayout.SOUTH);
         return result;
     }
 
@@ -1218,9 +1239,11 @@ public class GUIMain extends JComponent implements Runnable {
     public JPanel storeMenu(PrintWriter pr, BufferedReader br, ObjectInputStream ois, String storeNameP) {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
+        JPanel bPanel = new JPanel();
+        bPanel.setLayout(new FlowLayout());
         JButton newTix = new JButton("Add new Ticket");
         JButton goBack = new JButton("Go Back");
-        panel.add(goBack);
+        bPanel.add(goBack);
         goBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1296,6 +1319,7 @@ public class GUIMain extends JComponent implements Runnable {
             e.printStackTrace();
         }
         result.add(panel, BorderLayout.CENTER);
+        result.add(bPanel, BorderLayout.SOUTH);
         return result;
     }
 
