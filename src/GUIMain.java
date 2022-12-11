@@ -1041,10 +1041,10 @@ public class GUIMain extends JComponent implements Runnable {
         JPanel result = new JPanel(new BorderLayout());
         JPanel panel = new JPanel();
         try {
-            Map map = (Map) ois.readObject();
-            panel.setLayout(new GridLayout(map.size(), 1));
-            for (Object key : map.keySet()) {
-                JLabel store = new JLabel(key.toString() + " - " + map.get(key));
+            int size  = Integer.parseInt(br.readLine());
+            panel.setLayout(new GridLayout(size, 1));
+            for (int i = 0; i < size; i++) {
+                JLabel store = new JLabel(br.readLine());
                 panel.add(store);
             }
         } catch (Exception e) {
@@ -1082,10 +1082,10 @@ public class GUIMain extends JComponent implements Runnable {
         JPanel result = new JPanel(new BorderLayout());
         JPanel panel = new JPanel();
         try {
-            Map map = (Map) ois.readObject();
-            panel.setLayout(new GridLayout(map.size(), 1));
-            for (Object key : map.keySet()) {
-                JLabel store = new JLabel(key.toString() + " - " + map.get(key));
+            int size  = Integer.parseInt(br.readLine());
+            panel.setLayout(new GridLayout(size, 1));
+            for (int i = 0; i < size; i++) {
+                JLabel store = new JLabel(br.readLine());
                 panel.add(store);
             }
         } catch (Exception e) {

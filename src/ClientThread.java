@@ -304,17 +304,16 @@ public class ClientThread implements Runnable {
                             } else if (action.equals("statisticsForAllStores")) {
                                 String sort = br.readLine();
                                 if (sort.equals("y")) {
-                                    oos.writeObject(storeDash(true));
-                                    System.out.println("sort");
+                                    storeDash(true, pr);
                                 } else {
-                                    oos.writeObject(storeDash(false));
+                                    storeDash(false, pr);
                                 }
                             } else if (action.equals("statisticsForStoresShopped")) {
                                 String sort = br.readLine();
                                 if (sort.equals("y")) {
-                                    oos.writeObject(user.customerStoreDash(true));
+                                    user.customerStoreDash(true, pr);
                                 } else {
-                                    oos.writeObject(user.customerStoreDash(false));
+                                    user.customerStoreDash(false, pr);
                                 }
                             }
                             action = br.readLine();
@@ -365,7 +364,7 @@ public class ClientThread implements Runnable {
         return tickets;
     }
 
-    public static Map storeDash(boolean sort) {
+    public static void storeDash(boolean sort, PrintWriter prNet) {
         File f = new File("pastTransactions.txt");
         Map<String, Integer> stores = new HashMap<>();
         String[] ticketInfo;
@@ -379,12 +378,23 @@ public class ClientThread implements Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        prNet.println(stores.size());
+        prNet.flush();
         if (sort) {
-            stores = (Map<String, Integer>) stores.entrySet()
+            stores.entrySet()
                     .stream()
-                    .sorted(Map.Entry.comparingByValue());
+                    .sorted(Map.Entry.comparingByValue())
+                    .forEach((key) -> {
+                        prNet.println(key.toString());
+                        prNet.flush();
+                    });
+        } else {
+            stores.entrySet()
+                    .forEach((key) -> {
+                        prNet.println(key.toString());
+                        prNet.flush();
+                    });
         }
-        return stores;
     }
 
     public static void customerStats(String seller, boolean sort, PrintWriter pr) {

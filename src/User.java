@@ -488,7 +488,7 @@ public class User {
             return true;
         }}
 
-    public Map customerStoreDash(boolean sort) {
+    public Map customerStoreDash(boolean sort, PrintWriter pr) {
         synchronized (Seller.obj) {
             File f = new File("pastTransactions.txt");
             Map<String, Integer> stores = new HashMap<>();
@@ -504,10 +504,22 @@ public class User {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            pr.println(stores.size());
+            pr.flush();
             if (sort) {
                 stores.entrySet()
                         .stream()
-                        .sorted(Map.Entry.comparingByValue());
+                        .sorted(Map.Entry.comparingByValue())
+                        .forEach((key) -> {
+                            pr.println(key.toString());
+                            pr.flush();
+                        });
+            } else {
+                stores.entrySet()
+                        .forEach((key) -> {
+                            pr.println(key.toString());
+                            pr.flush();
+                        });
             }
             return stores;
         }
