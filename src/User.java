@@ -491,23 +491,21 @@ public class User {
     public Map customerStoreDash(boolean sort) {
         synchronized (Seller.obj) {
             File f = new File("pastTransactions.txt");
-            Map<String, Integer> stores = new HashMap<>();
+            Map<Integer, String> stores = new HashMap<>();
             String[] ticketInfo;
             try (BufferedReader br = new BufferedReader(new FileReader(f))) {
                 String line = br.readLine();
                 while (line != null) {
                     ticketInfo = line.split(";");
                     if (ticketInfo[3].equals(email))
-                        stores.merge(ticketInfo[4], Integer.parseInt(ticketInfo[7]), Integer::sum);
+                        stores.merge(Integer.parseInt(ticketInfo[7]), ticketInfo[4], Integer::sum);
                     line = br.readLine();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
             if (sort) {
-                stores.entrySet()
-                        .stream()
-                        .sorted(Map.Entry.comparingByValue());
+                Map<String, Integer>
             }
             return stores;
         }

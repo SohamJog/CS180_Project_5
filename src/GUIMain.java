@@ -1333,10 +1333,14 @@ public class GUIMain extends JComponent implements Runnable {
             tName.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    pr.println("changeTicketName");
-                    pr.flush();
-                    pr.println(JOptionPane.showInputDialog(panel, "Enter new name",
-                            "Ticket Emporium", JOptionPane.QUESTION_MESSAGE));
+                    String name = JOptionPane.showInputDialog(panel, "Enter new name",
+                            "Ticket Emporium", JOptionPane.QUESTION_MESSAGE);
+                    if(name != null) {
+                        pr.println("changeName");
+                        pr.flush();
+                        pr.println(name);
+                        pr.flush();
+                    }
                 }
             });
             JButton tPrice = new JButton("Change Ticket Price");
@@ -1344,11 +1348,20 @@ public class GUIMain extends JComponent implements Runnable {
             tPrice.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    pr.println("changeTicketPrice");
-                    pr.flush();
-
-                    pr.println(JOptionPane.showInputDialog(panel, "Enter new price",
-                            "Ticket Emporium", JOptionPane.QUESTION_MESSAGE));
+                    String price = JOptionPane.showInputDialog(panel, "Enter new price",
+                            "Ticket Emporium", JOptionPane.QUESTION_MESSAGE);
+                    try {
+                        Integer.parseInt(price);
+                    } catch (NumberFormatException f) {
+                        JOptionPane.showMessageDialog(null, "Please enter a valid number",
+                                "Ticket Emporium", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    if(price != null) {
+                        pr.println("changeTicketPrice");
+                        pr.flush();
+                        pr.println(price);
+                        pr.flush();
+                    }
                 }
             });
             JButton tDesc = new JButton("Change Ticket Description");
@@ -1356,10 +1369,14 @@ public class GUIMain extends JComponent implements Runnable {
             tDesc.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    pr.println("changeTicketDescription");
-                    pr.flush();
-                    pr.println(JOptionPane.showInputDialog(panel, "Enter new description",
-                            "Ticket Emporium", JOptionPane.QUESTION_MESSAGE));
+                    String desc = JOptionPane.showInputDialog(panel, "Enter new description",
+                            "Ticket Emporium", JOptionPane.QUESTION_MESSAGE);
+                    if(desc != null) {
+                        pr.println("changeTicketDescription");
+                        pr.flush();
+                        pr.println(desc);
+                        pr.flush();
+                    }
                 }
             });
             JButton tQuant = new JButton("Change Ticket Quantity");
@@ -1367,10 +1384,20 @@ public class GUIMain extends JComponent implements Runnable {
             tQuant.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    pr.println("changeTicketQuantity");
-                    pr.flush();
-                    pr.println(JOptionPane.showInputDialog(panel, "Enter new quantity",
-                            "Ticket Emporium", JOptionPane.QUESTION_MESSAGE));
+                    String quant = JOptionPane.showInputDialog(panel, "Enter new quantity",
+                            "Ticket Emporium", JOptionPane.QUESTION_MESSAGE);
+                    try {
+                        Integer.parseInt(quant);
+                    } catch (NumberFormatException f) {
+                        JOptionPane.showMessageDialog(null, "Please enter a valid number",
+                                "Ticket Emporium", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    if(quant != null) {
+                        pr.println("changeTicketPrice");
+                        pr.flush();
+                        pr.println(quant);
+                        pr.flush();
+                    }
                 }
             });
         } catch (Exception e) {
