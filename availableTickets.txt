@@ -1,2 +1,2 @@
 
-2;hello;lala@gmail.com;hello;22.00;d;2
+2;hello;lala@gmail.com;hello;777.00;d;2

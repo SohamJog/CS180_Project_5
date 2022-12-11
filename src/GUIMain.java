@@ -26,6 +26,7 @@ public class GUIMain extends JComponent implements Runnable {
     private JPanel changeAccountMenu;
     private JPanel prodStats;
     private JPanel storeMenu;
+    private JPanel prodMenu;
 
     private JPanel sellerOrBuyer;
     private JPanel customerDash;
@@ -1281,7 +1282,7 @@ public class GUIMain extends JComponent implements Runnable {
                         pr.println("accessTicket");
                         pr.flush();
                         try {
-                            JPanel prodMenu = prodMenu(pr, br, ois, fI, storeNameP);
+                            prodMenu = prodMenu(pr, br, ois, fI, storeNameP);
                             mainPanel.add(prodMenu, "prodMenu");
                             cardLayout.show(mainPanel, "prodMenu");
                         } catch (Exception f) {
@@ -1340,6 +1341,13 @@ public class GUIMain extends JComponent implements Runnable {
                         pr.flush();
                         pr.println(name);
                         pr.flush();
+                        pr.println("goBack");
+                        pr.flush();
+                        pr.println("accessTicket");
+                        pr.flush();
+                        prodMenu = prodMenu(pr, br, ois, i, storeNameP);
+                        mainPanel.add(prodMenu, "prodMenu");
+                        cardLayout.show(mainPanel, "prodMenu");
                     }
                 }
             });
@@ -1355,12 +1363,20 @@ public class GUIMain extends JComponent implements Runnable {
                     } catch (NumberFormatException f) {
                         JOptionPane.showMessageDialog(null, "Please enter a valid number",
                                 "Ticket Emporium", JOptionPane.INFORMATION_MESSAGE);
+                        price = null;
                     }
                     if(price != null) {
                         pr.println("changeTicketPrice");
                         pr.flush();
                         pr.println(price);
                         pr.flush();
+                        pr.println("goBack");
+                        pr.flush();
+                        pr.println("accessTicket");
+                        pr.flush();
+                        prodMenu = prodMenu(pr, br, ois, i, storeNameP);
+                        mainPanel.add(prodMenu, "prodMenu");
+                        cardLayout.show(mainPanel, "prodMenu");
                     }
                 }
             });
@@ -1376,6 +1392,13 @@ public class GUIMain extends JComponent implements Runnable {
                         pr.flush();
                         pr.println(desc);
                         pr.flush();
+                        pr.println("goBack");
+                        pr.flush();
+                        pr.println("accessTicket");
+                        pr.flush();
+                        prodMenu = prodMenu(pr, br, ois, i, storeNameP);
+                        mainPanel.add(prodMenu, "prodMenu");
+                        cardLayout.show(mainPanel, "prodMenu");
                     }
                 }
             });
@@ -1391,12 +1414,20 @@ public class GUIMain extends JComponent implements Runnable {
                     } catch (NumberFormatException f) {
                         JOptionPane.showMessageDialog(null, "Please enter a valid number",
                                 "Ticket Emporium", JOptionPane.INFORMATION_MESSAGE);
+                        quant = null;
                     }
                     if(quant != null) {
                         pr.println("changeTicketPrice");
                         pr.flush();
                         pr.println(quant);
                         pr.flush();
+                        pr.println("goBack");
+                        pr.flush();
+                        pr.println("accessTicket");
+                        pr.flush();
+                        prodMenu = prodMenu(pr, br, ois, i, storeNameP);
+                        mainPanel.add(prodMenu, "prodMenu");
+                        cardLayout.show(mainPanel, "prodMenu");
                     }
                 }
             });

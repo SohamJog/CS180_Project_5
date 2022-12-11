@@ -132,10 +132,8 @@ public class ClientThread implements Runnable {
                                             ticketAction = br.readLine();
                                         }
                                     }
-                                    System.out.println("exist while loop");
                                     storeAction = br.readLine();
                                 }
-                                System.out.println("exit outter while loop");
                             } else if (action.equals("viewStoreStatistics")) {
                                 pr.println(seller.getStores().size());
                                 pr.flush();
