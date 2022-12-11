@@ -219,7 +219,7 @@ public class GUIMain extends JComponent implements Runnable {
         panel.setLayout(new GridLayout(3,2));
         JTextField nameField = new JTextField();
         JTextField emailField = new JTextField();
-        JTextField passwordField = new JTextField();
+        JPasswordField passwordField = new JPasswordField();
         panel.add(new JLabel("Name: "));
         panel.add(nameField);
         panel.add(new JLabel("Email: "));
@@ -251,7 +251,7 @@ public class GUIMain extends JComponent implements Runnable {
                 // Get the user's input from the fields
                 String name = nameField.getText();
                 String email = emailField.getText();
-                String password = passwordField.getText();
+                String password = new String(passwordField.getPassword());
 
 
                 // Check if the user's input is valid
@@ -305,7 +305,7 @@ public class GUIMain extends JComponent implements Runnable {
         panel.setLayout(new GridLayout(3,2));
         JTextField nameField = new JTextField();
         JTextField emailField = new JTextField();
-        JTextField passwordField = new JTextField();
+        JPasswordField passwordField = new JPasswordField();
         panel.add(new JLabel("Name: "));
         panel.add(nameField);
         panel.add(new JLabel("Email: "));
@@ -337,7 +337,7 @@ public class GUIMain extends JComponent implements Runnable {
                 // Get the user's input from the fields
                 String name = nameField.getText();
                 String email = emailField.getText();
-                String password = passwordField.getText();
+                String password = new String(passwordField.getPassword());
 
                 // Check if the user's input is valid
                 if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
@@ -390,7 +390,7 @@ public class GUIMain extends JComponent implements Runnable {
         JPanel result = new JPanel(new BorderLayout());
         panel.setLayout(new GridLayout(2,2));
         JTextField emailField = new JTextField();
-        JTextField passwordField = new JTextField();
+        JPasswordField passwordField = new JPasswordField();
         panel.add(new JLabel("Email: "));
         panel.add(emailField);
         panel.add(new JLabel("Password: "));
@@ -419,7 +419,7 @@ public class GUIMain extends JComponent implements Runnable {
             public void actionPerformed(ActionEvent e) {
                 // Get the user's input from the fields
                 String email = emailField.getText();
-                String password = passwordField.getText();
+                String password = new String(passwordField.getPassword());
                 emailField.setText("");
                 passwordField.setText("");
                 // Check if the user's input is valid
@@ -471,7 +471,7 @@ public class GUIMain extends JComponent implements Runnable {
         JPanel result = new JPanel(new BorderLayout());
         panel.setLayout(new GridLayout(2,2));
         JTextField emailField = new JTextField();
-        JTextField passwordField = new JTextField();
+        JPasswordField passwordField = new JPasswordField();
         panel.add(new JLabel("Email: "));
         panel.add(emailField);
         panel.add(new JLabel("Password: "));
@@ -500,7 +500,7 @@ public class GUIMain extends JComponent implements Runnable {
             public void actionPerformed(ActionEvent e) {
                 // Get the user's input from the fields
                 String email = emailField.getText();
-                String password = passwordField.getText();
+                String password = new String(passwordField.getPassword());
                 emailField.setText("");
                 passwordField.setText("");
                 // Check if the user's input is valid
