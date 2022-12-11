@@ -127,16 +127,20 @@ public class ClientThread implements Runnable {
                                                 store.deleteTickets(t.getId());
                                             } else if (ticketAction.equals("changeTicketName")) {
                                                 String newTicketName = br.readLine();
-                                                t.changeInfo(newTicketName, t.getPrice(), t.getDescription(), t.getQuantity());
+                                                t.changeInfo(newTicketName, t.getPrice(), t.getDescription(),
+                                                        t.getQuantity());
                                             } else if (ticketAction.equals("changeTicketPrice")) {
                                                 double newTicketPrice = Double.parseDouble(br.readLine());
-                                                t.changeInfo(t.getName(), newTicketPrice, t.getDescription(), t.getQuantity());
+                                                t.changeInfo(t.getName(), newTicketPrice, t.getDescription(),
+                                                        t.getQuantity());
                                             } else if (ticketAction.equals("changeTicketDescription")) {
                                                 String newTicketDescription = br.readLine();
-                                                t.changeInfo(t.getName(), t.getPrice(), newTicketDescription, t.getQuantity());
+                                                t.changeInfo(t.getName(), t.getPrice(), newTicketDescription,
+                                                        t.getQuantity());
                                             } else if (ticketAction.equals("changeTicketQuantity")) {
                                                 int newTicketQuantity = Integer.parseInt(br.readLine());
-                                                t.changeInfo(t.getName(), t.getPrice(), t.getDescription(), newTicketQuantity);
+                                                t.changeInfo(t.getName(), t.getPrice(), t.getDescription(),
+                                                        newTicketQuantity);
                                             }
                                             ticketAction = br.readLine();
                                         }
@@ -350,7 +354,8 @@ public class ClientThread implements Runnable {
             while (line != null) {
                 if (!line.equals("")) {
                     ticketInfo = line.split(";");
-                    tickets.add(new Ticket(Integer.parseInt(ticketInfo[0]), ticketInfo[1], ticketInfo[2], ticketInfo[3], Double.parseDouble(ticketInfo[4]), ticketInfo[5], Integer.parseInt(ticketInfo[6])));
+                    tickets.add(new Ticket(Integer.parseInt(ticketInfo[0]), ticketInfo[1], ticketInfo[2], ticketInfo[3],
+                            Double.parseDouble(ticketInfo[4]), ticketInfo[5], Integer.parseInt(ticketInfo[6])));
                 }
                 line = br.readLine();
             }
@@ -359,7 +364,9 @@ public class ClientThread implements Runnable {
         }
         if (!search.equals("")) {
             for (int i = 0; i < tickets.size(); i++) {
-                if (!(tickets.get(i).getName().toLowerCase().contains(search) || tickets.get(i).getStoreName().toLowerCase().contains(search) || tickets.get(i).getDescription().toLowerCase().contains(search))) {
+                if (!(tickets.get(i).getName().toLowerCase().contains(search) ||
+                        tickets.get(i).getStoreName().toLowerCase().contains(search) ||
+                        tickets.get(i).getDescription().toLowerCase().contains(search))) {
                     tickets.remove(i);
                     i--;
                 }

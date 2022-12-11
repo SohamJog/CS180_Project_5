@@ -726,7 +726,8 @@ public class GUIMain extends JComponent implements Runnable {
             String description = br.readLine();
             String price = br.readLine();
             String quantityInput = br.readLine();
-            panel.add(new JLabel(name + " " + seller + " " + store + " " + description + " " + " " + price + " " + quantityInput));
+            panel.add(new JLabel(name + " " + seller + " " + store + " " + description + " " + " " + price + " " +
+                    quantityInput));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1325,7 +1326,7 @@ public class GUIMain extends JComponent implements Runnable {
         return result;
     }
 
-    public JPanel prodMenu(PrintWriter pr, BufferedReader br, ObjectInputStream ois, int i, String storeNameP) { // continues
+    public JPanel prodMenu(PrintWriter pr, BufferedReader br, ObjectInputStream ois, int i, String storeNameP) {
         pr.println(i);
         pr.flush();
         JPanel panel = new JPanel();
