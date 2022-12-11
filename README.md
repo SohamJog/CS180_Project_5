@@ -8,7 +8,7 @@
 ## Submissions:
 - [Code]: 
 - [Report]: 
-- [Presentation]:
+- [Presentation]:Ajay Bestrapalli
 ## Class Explanations:
     
 ### GUIMain Class
