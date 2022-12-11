@@ -6,8 +6,8 @@
 - Step 3 - You will see directions printed out on the GUI once you run the GUIMain method. Simply follow the directions and choose the options you want to proceed!
 
 ## Submissions:
-- [Code]: 
-- [Report]: 
+- [Code]: Jenny Chen (Tsai-Ni Chen)
+- [Report]: Soham Jog
 - [Presentation]:Ajay Bestrapalli
 ## Class Explanations:
     
