@@ -78,3 +78,6 @@
 4;sport ticket;soham;jenny;basketball Store;20.00;sport tickets;1
 2;asdf;lala@gmail.com;jenny;lalasStore;12.00;adfs;1
 3;basketball tickets;soham;jenny;basketball Store;200.00;awesome basketball tickets;1
+2;newTicket;lala@gmail.com;jenny;lalasStore;2.00;d;33
+2;football;lala@gmail.com;jenny;newStore;30.00;football ticket;1
+3;newTicket;TestingSeller@purdue.edu;jenny;Store;44.00;d;3
