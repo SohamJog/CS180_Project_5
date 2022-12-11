@@ -8,6 +8,17 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.*;
 
+/**
+ * GUIMain class
+ * <p>
+ * This class contains the code for the main GUI of the program. It contains the functions
+ * to create each of the GUI panels, and also contains the main function to run the program
+ * and connect the panels together.
+ *
+ * @author Tsai-Ni Chen (Jenny), Soham Jog, Armanya Maheshwari, Ajay Bestrapalli, CS180 BLK
+ * @version December 10, 2022
+ */
+
 public class GUIMain extends JComponent implements Runnable {
     private String choice;
     private CardLayout cardLayout = new CardLayout();

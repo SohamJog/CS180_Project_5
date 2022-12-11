@@ -1,7 +1,16 @@
 import java.io.*;
 import java.net.Socket;
 import java.util.*;
-
+/**
+ * ClientThread class
+ * <p>
+ * This class contains the code for the client thread, which allows creation of multiple threads.
+ * This class is used to handle the client's requests. It also contains the code for the
+ * functionalities of the program by reading in user commands and sending back out information
+ *
+ * @author Tsai-Ni Chen (Jenny), Soham Jog, Armanya Maheshwari, Ajay Bestrapalli, CS180 BLK
+ * @version December 10, 2022
+ */
 public class ClientThread implements Runnable {
     Socket socket = null;
     BufferedReader br = null;
