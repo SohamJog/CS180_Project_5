@@ -53,7 +53,8 @@ public class User {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }}
+        }
+    }
 
     // summary method that can be used when writing to file
     public String summary() {
@@ -70,7 +71,8 @@ public class User {
                 return false;
             }
             return true;
-        } }
+        }
+    }
 
     // login method (returns a User object when login successfully, null otherwise)
     public static User login(String email, String password) {
@@ -91,7 +93,8 @@ public class User {
                 return null;
             }
             return null;
-        }}
+        }
+    }
 
     public static boolean signUp(String name, String email, String password) {
         synchronized (Seller.obj) {
@@ -123,7 +126,8 @@ public class User {
             } else {
                 return false;
             }
-        }}
+        }
+    }
 
     public void updateFile() {
         synchronized (Seller.obj) {
@@ -151,7 +155,8 @@ public class User {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }}
+        }
+    }
 
     public boolean addToCart(Ticket ticket, int quantity) {
         synchronized (Seller.obj) {
@@ -229,7 +234,8 @@ public class User {
             }
 
             return true;
-        } }
+        }
+    }
 
 //    // version with quantity
 //    public boolean removeFromCart(Ticket ticket, int quantity) {
@@ -405,7 +411,8 @@ public class User {
             }
 
             return true;
-        }}
+        }
+    }
 
 
     public boolean buyTicket(Ticket ticket) {
@@ -486,7 +493,8 @@ public class User {
             }
 
             return true;
-        }}
+        }
+    }
 
     public Map customerStoreDash(boolean sort, PrintWriter pr) {
         synchronized (Seller.obj) {
@@ -547,7 +555,8 @@ public class User {
                 e.printStackTrace();
             }
             return ret;
-        } }
+        }
+    }
 
 
     public String displayShoppingCart() {
@@ -602,7 +611,8 @@ public class User {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }}
+        }
+    }
 
     // getters and setters
     public String getName() {

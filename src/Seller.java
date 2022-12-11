@@ -19,36 +19,38 @@ class Seller {
     private String name;
     private String email;
     private String password;
-    public static Object obj  = new Object ();
+    public static Object obj = new Object();
+
     public Seller(String name, String email, String password) {
-       synchronized (obj) {
-           this.name = name;
-           this.email = email;
-           this.password = password;
-           storeNames = new ArrayList<>();
-           stores = new ArrayList<>();
-           File f = new File("seller.txt");
-           try (BufferedReader br = new BufferedReader(new FileReader(f))) {
-               String line = br.readLine();
-               while (line != null) {
-                   if (!line.equals("")) {
-                       String[] info = line.split(";");
-                       if (info[1].equals(email)) {
-                           if (info.length > 3) {
-                               String[] storeNamesFromFile = info[3].split(",");
-                               for (String s : storeNamesFromFile) {
-                                   storeNames.add(s);
-                                   stores.add(new Store(s));
-                               }
-                           }
-                       }
-                   }
-                   line = br.readLine();
-               }
-           } catch (Exception e) {
-               e.printStackTrace();
-           }
-       } }
+        synchronized (obj) {
+            this.name = name;
+            this.email = email;
+            this.password = password;
+            storeNames = new ArrayList<>();
+            stores = new ArrayList<>();
+            File f = new File("seller.txt");
+            try (BufferedReader br = new BufferedReader(new FileReader(f))) {
+                String line = br.readLine();
+                while (line != null) {
+                    if (!line.equals("")) {
+                        String[] info = line.split(";");
+                        if (info[1].equals(email)) {
+                            if (info.length > 3) {
+                                String[] storeNamesFromFile = info[3].split(",");
+                                for (String s : storeNamesFromFile) {
+                                    storeNames.add(s);
+                                    stores.add(new Store(s));
+                                }
+                            }
+                        }
+                    }
+                    line = br.readLine();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     // returns a boolean of wheter the seller was able to login
     public static Seller login(String email, String password) {
@@ -69,7 +71,8 @@ class Seller {
                 return null;
             }
             return null;
-        }}
+        }
+    }
 
     // Prints the items in shopping cart for a seller
     public ArrayList<String> shoppingCart() {
@@ -102,7 +105,8 @@ class Seller {
             } catch (Exception e) {
                 return null;
             }
-        } }
+        }
+    }
 
     //  Returns a boolean when a seller tries to sign up
     public static boolean signUp(String name, String email, String password) {
@@ -138,7 +142,8 @@ class Seller {
                 System.out.println("Semicolon is not allowed here.");
                 return false;
             }
-        }}
+        }
+    }
 
     public String summary() {
         String result = String.format("%s;%s;%s", name, email, password);
@@ -161,7 +166,8 @@ class Seller {
                 return false;
             }
             return true;
-        } }
+        }
+    }
 
     public void newStoreWrite(String email) {
         synchronized (obj) {
@@ -190,7 +196,8 @@ class Seller {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }}
+        }
+    }
 
     public boolean createStore(String name) {
         synchronized (obj) {
@@ -220,7 +227,8 @@ class Seller {
                 e.printStackTrace();
                 return false;
             }
-        }}
+        }
+    }
 
     // getters and sellers
 
@@ -302,7 +310,8 @@ class Seller {
                 e.printStackTrace();
             }
             return null;
-        } }
+        }
+    }
 
     public void updateFile() {
         synchronized (obj) {
@@ -330,18 +339,21 @@ class Seller {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }}
+        }
+    }
 
     public void changePassword(String newPassword) {
         synchronized (obj) {
-        this.password = newPassword;
-        updateFile();}
+            this.password = newPassword;
+            updateFile();
+        }
     }
 
     public void changeName(String name) {
         synchronized (obj) {
-        this.name = name;
-        updateFile();}
+            this.name = name;
+            updateFile();
+        }
     }
 
     public void deleteAccount() {
@@ -388,5 +400,6 @@ class Seller {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } }
+        }
+    }
 }

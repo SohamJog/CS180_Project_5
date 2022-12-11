@@ -108,7 +108,8 @@ class Ticket implements Serializable {
                 System.out.println("Semicolon is not allowed here.");
                 return false;
             }
-        } }
+        }
+    }
 
     public String toProduct() {
 
@@ -159,7 +160,8 @@ class Ticket implements Serializable {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } }
+        }
+    }
 
     public int getQuantity() {
         return quantity;

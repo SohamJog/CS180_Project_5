@@ -113,7 +113,7 @@ public class ClientThread implements Runnable {
                                         pr.flush();
 
                                         String ticketAction = br.readLine();
-                                        while(!ticketAction.equals("goBack")) {
+                                        while (!ticketAction.equals("goBack")) {
                                             if (ticketAction.equals("deleteTicket")) {
                                                 store.deleteTickets(t.getId());
                                             } else if (ticketAction.equals("changeTicketName")) {
@@ -162,7 +162,7 @@ public class ClientThread implements Runnable {
                                 String sort = br.readLine();
                                 if (sort.equals("y")) {
                                     productStats(seller.getEmail(), true, pr);
-                                } else if (sort.equals("n")){
+                                } else if (sort.equals("n")) {
                                     productStats(seller.getEmail(), false, pr);
                                 }
                             } else if (action.equals("viewProductsInCustomerShoppingCarts")) {
@@ -272,7 +272,7 @@ public class ClientThread implements Runnable {
                                                 pr.println("false");
                                                 pr.flush();
                                             }
-                                            if(ok) {
+                                            if (ok) {
                                                 if (user.addToCart(product, quantity)) {
                                                     pr.println("true");
                                                     pr.flush();
@@ -330,6 +330,7 @@ public class ClientThread implements Runnable {
             e.printStackTrace();
         }
     }
+
     public static ArrayList<Ticket> displayMarketplace(String sort, String search) {
         search = search.toLowerCase();
         File f = new File("availableTickets.txt");

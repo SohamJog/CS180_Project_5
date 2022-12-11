@@ -49,7 +49,6 @@ public class GUIMain extends JComponent implements Runnable {
     }
 
 
-
     @Override
     public void run() {
         Socket socket = null;
@@ -71,8 +70,6 @@ public class GUIMain extends JComponent implements Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        Client client = new Client();
 
         JFrame frame = new JFrame("Ticket Emporium");
 
@@ -157,6 +154,7 @@ public class GUIMain extends JComponent implements Runnable {
         result.add(panel, BorderLayout.CENTER);
         return result;
     }
+
     public JPanel sellerOrBuyer(JFrame f, PrintWriter pr, BufferedReader br) {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
@@ -183,8 +181,7 @@ public class GUIMain extends JComponent implements Runnable {
 
                 if (choice.equals("Sign up")) {
                     cardLayout.show(mainPanel, "sellerSignUp");
-                }
-                else if (choice.equals("Sign in")) {
+                } else if (choice.equals("Sign in")) {
                     cardLayout.show(mainPanel, "sellerSignIn");
                 }
             }
@@ -192,11 +189,9 @@ public class GUIMain extends JComponent implements Runnable {
         buyer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (choice.equals("Sign up"))
-                {
+                if (choice.equals("Sign up")) {
                     cardLayout.show(mainPanel, "userSignUp");
-                }
-                else if (choice.equals("Sign in")) {
+                } else if (choice.equals("Sign in")) {
                     cardLayout.show(mainPanel, "userSignIn");
                 }
             }
@@ -216,7 +211,7 @@ public class GUIMain extends JComponent implements Runnable {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
 
-        panel.setLayout(new GridLayout(3,2));
+        panel.setLayout(new GridLayout(3, 2));
         JTextField nameField = new JTextField();
         JTextField emailField = new JTextField();
         JPasswordField passwordField = new JPasswordField();
@@ -235,8 +230,8 @@ public class GUIMain extends JComponent implements Runnable {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(mainPanel, "signInUp");
-               // pr.println("quit");
-               // pr.flush();
+                // pr.println("quit");
+                // pr.flush();
             }
 
         });
@@ -302,7 +297,7 @@ public class GUIMain extends JComponent implements Runnable {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
 
-        panel.setLayout(new GridLayout(3,2));
+        panel.setLayout(new GridLayout(3, 2));
         JTextField nameField = new JTextField();
         JTextField emailField = new JTextField();
         JPasswordField passwordField = new JPasswordField();
@@ -384,11 +379,10 @@ public class GUIMain extends JComponent implements Runnable {
     }
 
 
-
     public JPanel sellerSignIn(JFrame f, PrintWriter pr, BufferedReader br, ObjectInputStream ois) {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
-        panel.setLayout(new GridLayout(2,2));
+        panel.setLayout(new GridLayout(2, 2));
         JTextField emailField = new JTextField();
         JPasswordField passwordField = new JPasswordField();
         panel.add(new JLabel("Email: "));
@@ -441,7 +435,7 @@ public class GUIMain extends JComponent implements Runnable {
                         f.printStackTrace();
                     }
 
-                    if(inp.equals("true")) {
+                    if (inp.equals("true")) {
                         currentPassword = password;
                         currentUsername = email;
 
@@ -469,7 +463,7 @@ public class GUIMain extends JComponent implements Runnable {
     public JPanel userSignIn(JFrame f, PrintWriter pr, BufferedReader br, ObjectInputStream ois) {
         JPanel panel = new JPanel();
         JPanel result = new JPanel(new BorderLayout());
-        panel.setLayout(new GridLayout(2,2));
+        panel.setLayout(new GridLayout(2, 2));
         JTextField emailField = new JTextField();
         JPasswordField passwordField = new JPasswordField();
         panel.add(new JLabel("Email: "));
@@ -524,7 +518,7 @@ public class GUIMain extends JComponent implements Runnable {
 
                     //System.out.println(inp);
 
-                    if(inp.equals("true")) {
+                    if (inp.equals("true")) {
                         currentUsername = email;
                         currentPassword = password;
 
@@ -543,7 +537,6 @@ public class GUIMain extends JComponent implements Runnable {
         result.add(bPanel, BorderLayout.SOUTH);
         return result;
     }
-
 
 
     public JPanel sellerDash(PrintWriter pr, BufferedReader br, ObjectInputStream ois) {
@@ -615,8 +608,8 @@ public class GUIMain extends JComponent implements Runnable {
         java.util.List<String> uCart = null;
         try {
             uCart = (java.util.List<String>) ois.readObject();
-            panel.setLayout(new GridLayout(uCart.size()+1, 1));
-            for(String t : uCart) {
+            panel.setLayout(new GridLayout(uCart.size() + 1, 1));
+            for (String t : uCart) {
                 panel.add(new JLabel("<html>" + t + "</html>"));
             }
         } catch (Exception e) {
@@ -664,7 +657,7 @@ public class GUIMain extends JComponent implements Runnable {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String name = JOptionPane.showInputDialog("Enter your new name");
-                if(name != null) {
+                if (name != null) {
                     pr.println("changeName");
                     pr.flush();
                     pr.println(name);
@@ -679,7 +672,7 @@ public class GUIMain extends JComponent implements Runnable {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String pswd = JOptionPane.showInputDialog("Enter your new password");
-                if(pswd != null) {
+                if (pswd != null) {
                     pr.println("changePassword");
                     pr.flush();
                     pr.println(pswd);
@@ -739,7 +732,7 @@ public class GUIMain extends JComponent implements Runnable {
                 pr.flush();
                 try {
                     String inp = br.readLine();
-                    if(inp.equals("true")) {
+                    if (inp.equals("true")) {
                         JOptionPane.showMessageDialog(null, "Added to cart!");
                     } else {
                         JOptionPane.showMessageDialog(null, "Please enter a valid quantity");
@@ -844,7 +837,7 @@ public class GUIMain extends JComponent implements Runnable {
             public void actionPerformed(ActionEvent e) {
                 String name = JOptionPane.showInputDialog("Enter the name of the new store");
                 if (name != null) {
-                    if(name.isEmpty()) {
+                    if (name.isEmpty()) {
                         JOptionPane.showMessageDialog(panel, "Store name cannot be empty");
                     } else {
                         pr.println("createNewStore");
@@ -881,9 +874,9 @@ public class GUIMain extends JComponent implements Runnable {
         try {
             int numStores = Integer.parseInt(br.readLine());
             System.out.println(numStores);
-            panel.setLayout(new GridLayout(numStores+1, 1));
+            panel.setLayout(new GridLayout(numStores + 1, 1));
             panel.add(newStore);
-            for(int i = 0; i < numStores; i++) {
+            for (int i = 0; i < numStores; i++) {
                 String storeName = br.readLine();
                 JButton store = new JButton(storeName);
                 final int fI = i;
@@ -908,8 +901,7 @@ public class GUIMain extends JComponent implements Runnable {
 //                                        br.readLine()
 //                                );
 //                            }
-                        }
-                        catch (Exception f) {
+                        } catch (Exception f) {
                             f.printStackTrace();
                         }
 
@@ -948,8 +940,7 @@ public class GUIMain extends JComponent implements Runnable {
                 pr.flush();
                 try {
                     br.readLine();
-                }
-                catch (Exception f) {
+                } catch (Exception f) {
                     f.printStackTrace();
                 }
 
@@ -1063,7 +1054,7 @@ public class GUIMain extends JComponent implements Runnable {
         JPanel result = new JPanel(new BorderLayout());
         JPanel panel = new JPanel();
         try {
-            int size  = Integer.parseInt(br.readLine());
+            int size = Integer.parseInt(br.readLine());
             panel.setLayout(new GridLayout(size, 1));
             for (int i = 0; i < size; i++) {
                 JLabel store = new JLabel(br.readLine());
@@ -1104,7 +1095,7 @@ public class GUIMain extends JComponent implements Runnable {
         JPanel result = new JPanel(new BorderLayout());
         JPanel panel = new JPanel();
         try {
-            int size  = Integer.parseInt(br.readLine());
+            int size = Integer.parseInt(br.readLine());
             panel.setLayout(new GridLayout(size, 1));
             for (int i = 0; i < size; i++) {
                 JLabel store = new JLabel(br.readLine());
@@ -1160,14 +1151,14 @@ public class GUIMain extends JComponent implements Runnable {
         try {
             int numTix = Integer.parseInt(br.readLine());
             System.out.println(numTix);
-            panel.setLayout(new GridLayout(numTix+1, 1));
+            panel.setLayout(new GridLayout(numTix + 1, 1));
             panel.add(new JLabel("Marketplace"));
-            for(int i = 0; i < numTix; i++) {
+            for (int i = 0; i < numTix; i++) {
                 String one = br.readLine();
                 String two = br.readLine();
                 String three = br.readLine();
                 String four = br.readLine();
-                JButton tix = new JButton(one+" "+two+" "+three+" "+four);
+                JButton tix = new JButton(one + " " + two + " " + three + " " + four);
                 final int fI = i;
                 tix.addActionListener(new ActionListener() {
                     @Override
@@ -1292,9 +1283,9 @@ public class GUIMain extends JComponent implements Runnable {
             pr.println(storeNameP);
             pr.flush();
             int numTickets = Integer.parseInt(br.readLine());
-            panel.setLayout(new GridLayout(numTickets+1, 1));
+            panel.setLayout(new GridLayout(numTickets + 1, 1));
             panel.add(newTix);
-            for(int i = 0; i < numTickets; i++) {
+            for (int i = 0; i < numTickets; i++) {
                 String tixName = br.readLine();
                 JButton tick = new JButton(tixName);
                 final int fI = i;
@@ -1330,19 +1321,19 @@ public class GUIMain extends JComponent implements Runnable {
         JPanel result = new JPanel(new BorderLayout());
         panel.setLayout(new GridLayout(6, 1));
         try {
-            String t= br.readLine();
+            String t = br.readLine();
             System.out.println(t);
-            if(t.contains("SStore Name")){
-                t =t.replace("SStore Name", "Store Name");
+            if (t.contains("SStore Name")) {
+                t = t.replace("SStore Name", "Store Name");
             }
-            if(t.contains("SDescription")){
-                t =t.replace("SDescription", "Description");
+            if (t.contains("SDescription")) {
+                t = t.replace("SDescription", "Description");
             }
-            if(t.contains("SPrice")){
-                t =t.replace("SPrice", "Price");
+            if (t.contains("SPrice")) {
+                t = t.replace("SPrice", "Price");
             }
-            if(t.contains("SQuantity")){
-                t =t.replace("SQuantity", "Quantity");
+            if (t.contains("SQuantity")) {
+                t = t.replace("SQuantity", "Quantity");
             }
             panel.add(new JLabel("<html>" + t + "</html>"));
             JButton dTicket = new JButton("Delete Ticket");
@@ -1360,7 +1351,7 @@ public class GUIMain extends JComponent implements Runnable {
                 public void actionPerformed(ActionEvent e) {
                     String name = JOptionPane.showInputDialog(panel, "Enter new name",
                             "Ticket Emporium", JOptionPane.QUESTION_MESSAGE);
-                    if(name != null) {
+                    if (name != null) {
                         pr.println("changeName");
                         pr.flush();
                         pr.println(name);
@@ -1389,7 +1380,7 @@ public class GUIMain extends JComponent implements Runnable {
                                 "Ticket Emporium", JOptionPane.INFORMATION_MESSAGE);
                         price = null;
                     }
-                    if(price != null) {
+                    if (price != null) {
                         pr.println("changeTicketPrice");
                         pr.flush();
                         pr.println(price);
@@ -1411,7 +1402,7 @@ public class GUIMain extends JComponent implements Runnable {
                 public void actionPerformed(ActionEvent e) {
                     String desc = JOptionPane.showInputDialog(panel, "Enter new description",
                             "Ticket Emporium", JOptionPane.QUESTION_MESSAGE);
-                    if(desc != null) {
+                    if (desc != null) {
                         pr.println("changeTicketDescription");
                         pr.flush();
                         pr.println(desc);
@@ -1440,7 +1431,7 @@ public class GUIMain extends JComponent implements Runnable {
                                 "Ticket Emporium", JOptionPane.INFORMATION_MESSAGE);
                         quant = null;
                     }
-                    if(quant != null) {
+                    if (quant != null) {
                         pr.println("changeTicketPrice");
                         pr.flush();
                         pr.println(quant);
@@ -1487,8 +1478,8 @@ public class GUIMain extends JComponent implements Runnable {
         java.util.List<Ticket> uCart = null;
         try {
             uCart = (java.util.List<Ticket>) ois.readObject();
-            panel.setLayout(new GridLayout(uCart.size()+1, 2));
-            for(int i = 0; i < uCart.size(); i++) {
+            panel.setLayout(new GridLayout(uCart.size() + 1, 2));
+            for (int i = 0; i < uCart.size(); i++) {
                 panel.add(new JLabel("<html>" + uCart.get(i) + "</html>"));
                 JButton remove = new JButton("Remove Ticket");
                 int finalI = i;
@@ -1500,7 +1491,7 @@ public class GUIMain extends JComponent implements Runnable {
                                 "Remove Item",
                                 JOptionPane.YES_NO_OPTION,
                                 JOptionPane.QUESTION_MESSAGE);
-                        if(choice == JOptionPane.YES_OPTION) {
+                        if (choice == JOptionPane.YES_OPTION) {
                             pr.println("removeItem");
                             pr.flush();
                             pr.println(finalI);
@@ -1519,8 +1510,7 @@ public class GUIMain extends JComponent implements Runnable {
                         pr.flush();
                         try {
                             br.readLine();
-                        }
-                        catch (Exception f) {
+                        } catch (Exception f) {
                             f.printStackTrace();
                         }
 
@@ -1558,7 +1548,7 @@ public class GUIMain extends JComponent implements Runnable {
 
                 pr.println("checkout");
                 pr.flush();
-                if(finalUCart.size() > 0) {
+                if (finalUCart.size() > 0) {
                     JOptionPane.showMessageDialog(panel, "Checkout successful!",
                             "Ticket Emporium", JOptionPane.INFORMATION_MESSAGE);
                     cart = cartMenu(pr, br, ois);
@@ -1582,8 +1572,7 @@ public class GUIMain extends JComponent implements Runnable {
                 pr.flush();
                 try {
                     br.readLine();
-                }
-                catch (Exception f) {
+                } catch (Exception f) {
                     f.printStackTrace();
                 }
                 customerDash = customerDash(pr, br, ois);
@@ -1621,7 +1610,7 @@ public class GUIMain extends JComponent implements Runnable {
         try {
             int rows = Integer.parseInt(br.readLine());
             panel.setLayout(new GridLayout(rows, 1));
-            for(int i = 0; i < rows; i++) {
+            for (int i = 0; i < rows; i++) {
                 panel.add(new JLabel(br.readLine()));
             }
         } catch (Exception e) {
@@ -1673,7 +1662,7 @@ public class GUIMain extends JComponent implements Runnable {
         try {
             int rows = Integer.parseInt(br.readLine());
             panel.setLayout(new GridLayout(rows, 1));
-            for(int i = 0; i < rows; i++) {
+            for (int i = 0; i < rows; i++) {
                 panel.add(new JLabel(br.readLine()));
             }
         } catch (Exception e) {
@@ -1725,7 +1714,7 @@ public class GUIMain extends JComponent implements Runnable {
         try {
             int rows = Integer.parseInt(br.readLine());
             panel.setLayout(new GridLayout(rows, 1));
-            for(int i = 0; i < rows; i++) {
+            for (int i = 0; i < rows; i++) {
                 String one = br.readLine();
                 String two = br.readLine();
                 String three = br.readLine();
@@ -1737,7 +1726,7 @@ public class GUIMain extends JComponent implements Runnable {
                         customers += ", " + br.readLine();
                     }
                 }
-                panel.add(new JLabel( one + "\n" + two + "\n" + three + "\n" + customers));
+                panel.add(new JLabel(one + "\n" + two + "\n" + three + "\n" + customers));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -1778,16 +1767,16 @@ public class GUIMain extends JComponent implements Runnable {
         java.util.List<String> uCart = null;
         try {
             uCart = (java.util.List<String>) ois.readObject();
-            panel.setLayout(new GridLayout(uCart.size()+1, 1));
-            for(String t : uCart) {
+            panel.setLayout(new GridLayout(uCart.size() + 1, 1));
+            for (String t : uCart) {
                 String[] temp = t.split("Seller:");
                 panel.add(new JLabel(temp[0]));
                 String[] temp2 = temp[1].split("Store:");
-                panel.add(new JLabel("Seller:"+ temp2[0]));
+                panel.add(new JLabel("Seller:" + temp2[0]));
                 String[] temp3 = temp2[1].split("Price:");
-                panel.add(new JLabel("Store:"   + temp3[0]));
+                panel.add(new JLabel("Store:" + temp3[0]));
                 String[] temp4 = temp3[1].split("Description:");
-                panel.add(new JLabel("Price:"  + temp4[0]));
+                panel.add(new JLabel("Price:" + temp4[0]));
                 String[] temp5 = temp4[1].split("Quantity:");
                 panel.add(new JLabel("Description:" + temp5[0]));
                 panel.add(new JLabel("Quantity:" + temp5[1]));

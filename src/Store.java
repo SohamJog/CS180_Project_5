@@ -18,32 +18,33 @@ public class Store {
     private ArrayList<Ticket> tickets;
 
     public Store(String name) {
-       synchronized (Seller.obj) {
-           this.setName(name);
-           this.tickets = new ArrayList<>();
-           File f = new File("availableTickets.txt");
-           try (BufferedReader br = new BufferedReader(new FileReader(f))) {
-               String line = br.readLine();
-               while (line != null) {
-                   if (!line.equals("")) {
-                       String[] contents = line.split(";");
-                       if (contents[3].equals(name)) {
-                           int id = Integer.parseInt(contents[0]);
-                           String productName = contents[1];
-                           String sellerName = contents[2];
-                           String storeName = contents[3];
-                           double price = Double.parseDouble(contents[4]);
-                           String description = contents[5];
-                           int quantity = Integer.parseInt(contents[6]);
-                           tickets.add(new Ticket(id, productName, sellerName, storeName, price, description, quantity));
-                       }
-                   }
-                   line = br.readLine();
-               }
-           } catch (Exception e) {
-               e.printStackTrace();
-           }
-       }  }
+        synchronized (Seller.obj) {
+            this.setName(name);
+            this.tickets = new ArrayList<>();
+            File f = new File("availableTickets.txt");
+            try (BufferedReader br = new BufferedReader(new FileReader(f))) {
+                String line = br.readLine();
+                while (line != null) {
+                    if (!line.equals("")) {
+                        String[] contents = line.split(";");
+                        if (contents[3].equals(name)) {
+                            int id = Integer.parseInt(contents[0]);
+                            String productName = contents[1];
+                            String sellerName = contents[2];
+                            String storeName = contents[3];
+                            double price = Double.parseDouble(contents[4]);
+                            String description = contents[5];
+                            int quantity = Integer.parseInt(contents[6]);
+                            tickets.add(new Ticket(id, productName, sellerName, storeName, price, description, quantity));
+                        }
+                    }
+                    line = br.readLine();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     public void newTickets(String name, String sellerName, double price, String description, int quantity) {
         synchronized (Seller.obj) {
@@ -74,7 +75,8 @@ public class Store {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }}
+        }
+    }
 
     public void deleteTickets(int id) {
         synchronized (Seller.obj) {
@@ -99,7 +101,8 @@ public class Store {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }}
+        }
+    }
 
     public static String getSeller(String storeName) {
         synchronized (Seller.obj) {
@@ -117,7 +120,8 @@ public class Store {
                 e.printStackTrace();
             }
             return "";
-        }}
+        }
+    }
 
     public double getRevenue() {
         synchronized (Seller.obj) {
@@ -140,7 +144,8 @@ public class Store {
                 e.printStackTrace();
             }
             return revenue;
-        }}
+        }
+    }
 
     public ArrayList<String> getCustomerList() {
         synchronized (Seller.obj) {
@@ -161,7 +166,8 @@ public class Store {
                 e.printStackTrace();
             }
             return customerList;
-        }}
+        }
+    }
 
     public String getName() {
         return name;
